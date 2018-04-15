@@ -6,7 +6,7 @@ html {
   overflow-x: hidden!important;
 }
 
-body {
+#portal body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #fff;
   font-size: 13px;
@@ -16,7 +16,7 @@ body {
   height: 100%;
 }
 
-#header {
+#portal #header {
   background-color: #fff;
   background-position: 50% 100%;
   background-repeat: no-repeat;
@@ -50,12 +50,12 @@ body {
   min-height: 100%;
 }
 
-.content {
+#portal .content {
   padding: 25px 40px 40px 40px;
   min-width: 320px;
 }
 
-.footer {
+#portal .footer {
   padding: 10px 18px;
   background: #ffffff;
   border-top: 1px solid @border-color;
@@ -109,14 +109,14 @@ body {
   color: @color-orange;
 }
 
-.fixed-navbar #header {
+#portal .fixed-navbar #header {
   width: 100%;
   position: fixed;
   z-index: 1000;
 
 }
 
-.fixed-navbar #wrapper {
+#portal .fixed-navbar #wrapper {
   top: 62px;
 }
 

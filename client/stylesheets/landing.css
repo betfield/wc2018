@@ -4,116 +4,86 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-body {
-    overflow-x: hidden;
-}
-
-p {
+#landing p {
     font-size: 20px;
 }
 
-p.small {
+#landing p.small {
     font-size: 16px;
 }
 
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-    color: #ff3d3d;
-    background-color: transparent;
-    border-bottom: 0;
-}
-
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
+#landing .navbar-default .navbar-nav > li > a:hover,
+#landing .navbar-default .navbar-nav > li > a:focus {
     color: #ff3d3d;
     background-color: transparent;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+#landing .navbar-default .navbar-brand:hover,
+#landing .navbar-default .navbar-brand:focus {
+    color: #ff3d3d;
+    background-color: transparent;
+}
+
+#landing h1,
+#landing h2,
+#landing h3,
+#landing h4,
+#landing h5,
+#landing h6 {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
 
-.img-centered {
+#landing .img-centered {
     margin: 0 auto;
 }
 
-.user-count {
-    z-index: 100;
-    position: absolute;
-    color: #0c1c36;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-    font-size: 40px;
-    font-weight: bold;
-    text-align: center;
-    left: 690px;
-    top: 220px;
-    width: 170px;
-    /* Safari */
-    -webkit-transform: rotate(3.5deg);
-
-    /* Firefox */
-    -moz-transform: rotate(3.5deg);
-
-    /* IE */
-    -ms-transform: rotate(3.5deg);
-
-    /* Opera */
-    -o-transform: rotate(3.5deg);
-
-}
-
-header {
+#landing header {
     text-align: left;
     color: #fff;
     background: #ff3d3d;
 }
 
-header .container {
+#landing header .container {
     padding-top: 100px;
     padding-bottom: 0px;
 }
 
-header img {
+#landing header img {
     display: block;
     margin: 0 auto 0px;
 	float: right;
 }
 
-header .login {
+#landing header .login {
     display: block;
     float: left;
     padding-top: 190px;
 }
 
-header .fa-stack {
+#landing header .fa-stack {
     width: 64px;
     padding-top: 20px;
     padding-bottom: 80px;
     margin-right: 26px;
 }
 
-.fa-lg:hover { 
+#landing .fa-lg:hover { 
     color: #fff; 
 }
 
-header a, 
-header a:hover,
-header a:focus,
-header a:active,
-header a.active {
+#landing header a, 
+#landing header a:hover,
+#landing header a:focus,
+#landing header a:active,
+#landing header a.active {
     color: #fff;
     
 }
 
 @media(min-width:768px) {
-    header .container {
+    #landing header .container {
         padding-top: 200px;
         padding-bottom: 0;
     }
@@ -121,109 +91,109 @@ header a.active {
 }
 
 @media(min-width:768px) {
-    .navbar-fixed-top {
+    #landing .navbar-fixed-top {
         padding: 25px 0;
         -webkit-transition: padding .3s;
         -moz-transition: padding .3s;
         transition: padding .3s;
     }
 
-    .navbar-fixed-top .navbar-brand {
+    #landing .navbar-fixed-top .navbar-brand {
         font-size: 2em;
         -webkit-transition: all .3s;
         -moz-transition: all .3s;
         transition: all .3s;
     }
 
-    .navbar-fixed-top.navbar-shrink {
+    #landing .navbar-fixed-top.navbar-shrink {
         padding: 10px 0;
     }
 
-    .navbar-fixed-top.navbar-shrink .navbar-brand {
+    #landing .navbar-fixed-top.navbar-shrink .navbar-brand {
         font-size: 1.5em;
     }
 }
 
-.navbar {
+#landing .navbar {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
 
-.navbar a:focus {
+#landing .navbar a:focus {
     outline: 0;
 }
 
-.navbar .navbar-nav {
+#landing .navbar .navbar-nav {
     letter-spacing: 1px;
 }
 
-.navbar .navbar-nav li a:focus {
+#landing .navbar .navbar-nav li a:focus {
     outline: 0;
 }
 
-.navbar-default,
-.navbar-inverse {
+#landing .navbar-default,
+#landing .navbar-inverse {
     border: 0;
 }
 
-section {
+#landing section {
     padding: 100px 0;
 }
 
-section h2 {
+#landing section h2 {
     margin: 0;
     font-size: 3em;
     padding-bottom: 100px;
 }
 
-section.rules {
+#landing section.rules {
     color: #fff;
     background: #ff3d3d;
     font-size: 20px;
 }
 
-section.rules a {
+#landing section.rules a {
     color: #fff;
 }
 
-section.rules a:hover,
-section.rules a:focus,
-section.rules a:active,
-section.rules a.active {
+#landing section.rules a:hover,
+#landing section.rules a:focus,
+#landing section.rules a:active,
+#landing section.rules a.active {
     outline: 0;
     color: #2c3e50;
 }
 
 @media(max-width:767px) {
-    section {
+    #landing section {
         padding: 75px 0;
     }
 
-    section.first {
+    #landing section.first {
         padding-top: 75px;
     }
 }
 
-section.how-to-play img {
+#landing section.how-to-play img {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-section.how-to-play .col-lg-4 {
+#landing section.how-to-play .col-lg-4 {
     text-align: center;
 }
 
-section.how-to-play a,
-section.how-to-play a:hover,
-section.how-to-play a:focus,
-section.how-to-play a:active,
-section.how-to-play a.active {
+#landing section.how-to-play a,
+#landing section.how-to-play a:hover,
+#landing section.how-to-play a:focus,
+#landing section.how-to-play a:active,
+#landing section.how-to-play a.active {
     color: #ff3d3d;
 }
 
-.btn-outline {
+#landing .btn-outline {
     margin-top: 15px;
     border: solid 2px #fff;
     font-size: 20px;
@@ -232,29 +202,29 @@ section.how-to-play a.active {
     transition: all .3s ease-in-out;
 }
 
-header .btn-outline {
+#landing header .btn-outline {
     margin-top: 0px;
     margin-bottom: 30px;
 }
 
-.btn-outline:hover,
-.btn-outline:focus,
-.btn-outline:active,
-.btn-outline.active {
+#landing .btn-outline:hover,
+#landing .btn-outline:focus,
+#landing .btn-outline:active,
+#landing .btn-outline.active {
     border: solid 2px #fff;
     color: #ff3d3d;
     background: #fff;
 }
 
-.floating-label-form-group {
+#landing .floating-label-form-group {
     position: relative;
     margin-bottom: 0;
     padding-bottom: .5em;
     border-bottom: 1px solid #eee;
 }
 
-.floating-label-form-group input,
-.floating-label-form-group textarea {
+#landing .floating-label-form-group input,
+#landing .floating-label-form-group textarea {
     z-index: 1;
     position: relative;
     padding-right: 0;
@@ -267,7 +237,7 @@ header .btn-outline {
     resize: none;
 }
 
-.floating-label-form-group label {
+#landing .floating-label-form-group label {
     display: block;
     z-index: 0;
     position: relative;
@@ -284,47 +254,47 @@ header .btn-outline {
     transition: top .3s ease,opacity .3s ease;
 }
 
-.floating-label-form-group::not(:first-child) {
+#landing .floating-label-form-group::not(:first-child) {
     padding-left: 14px;
     border-left: 1px solid #eee;
 }
 
-.floating-label-form-group-with-value label {
+#landing .floating-label-form-group-with-value label {
     top: 0;
     opacity: 1;
 }
 
-.floating-label-form-group-with-focus label {
+#landing .floating-label-form-group-with-focus label {
     color: #ff3d3d;
 }
 
-form .row:first-child .floating-label-form-group {
+#landing form .row:first-child .floating-label-form-group {
     border-top: 1px solid #eee;
 }
 
-footer {
+#landing footer {
     color: #fff;
 }
 
-footer h3 {
+#landing footer h3 {
     margin-bottom: 30px;
 }
 
-footer .footer-above {
+#landing footer .footer-above {
     padding-top: 50px;
     background-color: #2c3e50;
 }
 
-footer .footer-col {
+#landing footer .footer-col {
     margin-bottom: 50px;
 }
 
-footer .footer-below {
+#landing footer .footer-below {
     padding: 25px 0;
     background-color: #233140;
 }
 
-.btn-social {
+#landing .btn-social {
     display: inline-block;
     width: 50px;
     height: 50px;
@@ -335,13 +305,13 @@ footer .footer-below {
     line-height: 45px;
 }
 
-.btn:focus,
-.btn:active,
-.btn.active {
+#landing .btn:focus,
+#landing .btn:active,
+#landing .btn.active {
     outline: 0;
 }
 
-.scroll-top {
+#landing .scroll-top {
     z-index: 1049;
     position: fixed;
     right: 2%;
@@ -350,7 +320,7 @@ footer .footer-below {
     height: 50px;
 }
 
-.scroll-top .btn {
+#landing .scroll-top .btn {
     width: 50px;
     height: 50px;
     border-radius: 100%;
@@ -358,6 +328,6 @@ footer .footer-below {
     line-height: 28px;
 }
 
-.scroll-top .btn:focus {
+#landing .scroll-top .btn:focus {
     outline: 0;
 }

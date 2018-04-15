@@ -16,7 +16,7 @@ export default class LandingPage extends Component {
 
         if (this.props.ready) {
             return (
-                <div>
+                <div id="landing">
                     <Navigation userCount = {this.props.users}/>
                     <Header/>
                     <HowToPlay/>

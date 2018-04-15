@@ -5,6 +5,9 @@ import Navigation from '../../imports/portal/common/navigation';
 import Footer from '../../imports/portal/common/footer';
 
 import RulesPage from '../pages/RulesPage';
+import PredictionsPage from '../pages/PredictionsPage';
+import CalendarPage from '../pages/CalendarPage';
+import TablePage from '../pages/TablePage';
 
 fixWrapperHeight = () => {
         
@@ -42,6 +45,7 @@ setBodySmall = () => {
 export default class PortalPage extends Component {
 
     componentDidMount() {
+
         // Add special class to minimalize page elements when screen is less than 768px
         setBodySmall();
         // Wait until metisMenu, collapse effect finish and set wrapper height
@@ -69,12 +73,24 @@ export default class PortalPage extends Component {
             case "rules":
                 return <RulesPage/>;
                 break;
+            case "predictions":
+                return <RulesPage/>;
+                break;
+            case "calendar":
+                return <CalendarPage/>;
+                break;
+            case "table":
+                return <TablePage/>;
+                break;
+            default:
+                return <PredictionsPage/>;
+                break;
         }
     }
 
     render() {
         return (
-            <div>
+            <div id="portal">
                 <Header/>
                 <Navigation/>
                 <div id="wrapper">
