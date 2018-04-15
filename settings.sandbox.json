@@ -1,29 +1,24 @@
 {
 	"public" : {
 		"env": "Sandbox",
-		"BT_MERCHANT_ID": "cbx56n2hw7x4rgvx",
-		"BT_PUBLIC_KEY": "5k6v5p5kgz5bcb77",
-		"LOGGLEY_SERVER": "betfield.loggly.com",
-		"RESULTS_FEED_API": "http://api.football-data.org/v1/",
-		"RESULTS_FEED_ACTIVE_LEAGUE": "soccerseasons/424",
-		
 		"FOLDER_FLAGS": "/teams/flags/"
 	},
-		"private": {
-		"BT_PRIVATE_KEY": "ba4a41de09880c12728f5e6a10df45af",
-
-		"LOGGLEY_USER": "betfield",
-		"LOGGLEY_PASS": "B3tfield",
-		"LOGGLEY_TOKEN": "c9b2a00e-c830-403b-b1b6-260c4c3c9c0d",
-		
-		"RESULTS_FEED_KEY": "02f3ec3d0b684f0ca9d53cdbbb22d0bb",
-		
+	"private": {
 		"BF_EMAIL": "betfieldou@gmail.com",
 		"TZ_HOURS": 4,
 		
 		"INVALID_TEST_TIME": "June 11, 2016 21:01:00",
 
 		"MAIL_URL": "smtps://postmaster%40sandbox1038697df0464bc4a649b509bb2754ae.mailgun.org:438d361774c064645df07208c8b95d17-db1f97ba-42666fe5@smtp.mailgun.org:465"
-
+	},
+	"loggly": {
+		"token": "c9b2a00e-c830-403b-b1b6-260c4c3c9c0d",
+		"subdomain": "betfield.loggly.com",
+		"auth": {
+			"username": "betfield",
+			"password": "B3tfield"
+		},
+		"tags": ["wc2018"],
+		"json": "true"
 	}
 }

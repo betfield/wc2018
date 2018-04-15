@@ -15,6 +15,8 @@ meteor npm install --save-dev babel-eslint eslint-config-airbnb eslint-plugin-im
 
 meteor npm install --save react@^15.6.2 react-dom@^15.6.2
 meteor npm install --save react-addons-transition-group react-addons-css-transition-group react-addons-linked-state-mixin react-addons-create-fragment react-addons-update react-addons-pure-render-mixin react-test-renderer react-addons-perf react-addons-test-utils
-meteor npm install --save react-router history
+meteor npm install --save react-router-dom
 
 meteor add react-meteor-data
+meteor add miktam:loggly
+meteor add less

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
     
@@ -62,10 +63,10 @@ export default class Header extends Component {
                     <div className="row">
                         <div className="col-lg-12">
                             <div id="login" className="login">
-                                <a href="https://bf.fctwister.ee/" className="btn btn-lg btn-outline">
+                                <Link to="/portal" className="btn btn-lg btn-outline">
                                     SISENE ENNUSTUSLEHELE
                                     <i className="fa fa-sign-in" aria-hidden="true"></i>
-                                </a>
+                                </Link>
                             </div>
                             <img className="img-responsive" src="img/profile.png" alt="" />
                         </div>
