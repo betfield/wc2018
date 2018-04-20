@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import RulesView from '../../imports/portal/rules/RulesView';
+
 export default class RulesPage extends Component {
 
     componentDidMount() {
@@ -8,8 +10,7 @@ export default class RulesPage extends Component {
 
     render() {
         return (
-            <div id="rules">
-            </div>
+            <RulesView/>
         )
     }
 }

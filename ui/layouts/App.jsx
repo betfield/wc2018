@@ -7,7 +7,7 @@ import PortalPage from '../pages/PortalPage';
 import RulesPage from '../pages/RulesPage';
 import PredictionsPage from '../pages/PredictionsPage';
 
-import Splash from '../../imports/loading/splash';
+import Splash from '../../imports/loading/Splash';
 
 export default App = () => (
     <Router>

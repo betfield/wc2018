@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import Header from '../../imports/portal/common/header';
-import Navigation from '../../imports/portal/common/navigation';
-import Footer from '../../imports/portal/common/footer';
+import Header from '../../imports/portal/common/Header';
+import Navigation from '../../imports/portal/common/Navigation';
+import Footer from '../../imports/portal/common/Footer';
 
 import RulesPage from '../pages/RulesPage';
 import PredictionsPage from '../pages/PredictionsPage';

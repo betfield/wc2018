@@ -1,0 +1,127 @@
+// English language file
+
+{
+	"dashboard": "Home",
+	
+	"login_back_home": "Back Home",
+	"login_title": "PLEASE LOGIN TO APP",
+	"login_title_small": "This is the best app ever!",
+	"login_username": "Username",
+	"login_email": "example@gmail.com",
+	"login_email_title": "Please enter you username",
+	"login_username_small": "Your unique username to app",
+	"login_password": "Password",
+	"login_password_title": "Please enter your password",
+	"login_password_small": "Your strong password",
+	"login_password_remember": "Remember login",
+	"login_password_remember_small": "if this is a private computer",
+	"login": "Login",
+	"loging_in": "Loging in",
+	"logout": "Logout",
+	"register": "Register",
+
+	"calendar": "Calendar",      
+	"calendar_description": "All games and start times here",
+
+	"user_basic": "Basic user",
+	"user_premium": "Premium user",
+	"user_register_premium": "Upgrade to Premium",
+	"user_profile": "Your profile",
+	"user_statistics": "Statistics",
+
+	"month_jan": "January",
+	"month_feb": "February",
+	"month_mar": "March",
+	"month_apr": "April",
+	"month_may": "May",
+	"month_jun": "June",
+	"month_jul": "July",
+	"month_aug": "August",
+	"month_sep": "September",
+	"month_oct": "October",
+	"month_nov": "November",
+	"month_dec": "December",
+
+	"month_jan_s": "Jan",
+	"month_feb_s": "Feb",
+	"month_mar_s": "Mar",
+	"month_apr_s": "Apr",
+	"month_may_s": "May",
+	"month_jun_s": "Jun",
+	"month_jul_s": "Jul",
+	"month_aug_s": "Aug",
+	"month_sep_s": "Sep",
+	"month_oct_s": "Oct",
+	"month_nov_s": "Nov",
+	"month_dec_s": "Dec",
+
+	"day_mon": "Monday", 
+	"day_tue": "Tuesday", 
+	"day_wed": "Wednesday", 
+	"day_thu": "Thursday", 
+	"day_fri": "Friday", 
+	"day_sat": "Saturday", 
+	"day_sun": "Sunday",
+
+	"day_mon_s": "Mon", 
+	"day_tue_s": "Tue", 
+	"day_wed_s": "Wed", 
+	"day_thu_s": "Thu", 
+	"day_fri_s": "Fri", 
+	"day_sat_s": "Sat", 
+	"day_sun_s": "Sun",
+
+	"today": "today",
+	"month": "month",
+	"week": "week",
+	"day": "day",
+
+	
+//Password Recovery
+
+	"PASSWORD RECOVER": "PASSWORD RECOVER",
+	"fill_form_password": "Please fill the form to recover your password",
+	"recovery_email": "Enter your email address and your password will be reset and emailed to you.",
+	"Email": "Email",
+	"login_email": "example@gmail.com",
+	"recovery_email_short":"Please enter you email adress",
+	"recovery_username_name": "username",
+	"recovery_email_registered": "Your registered email address",
+	"pw_reset": "Reset password",
+	
+//Register
+
+	"register_back_home": "Back to Home",
+	"register_title": "Register your account",
+	"register_info": "Fill in the fields",
+	"register_firstname": "First name",
+	"register_lastname": "Last name",
+	"register_pw": "Password",
+	"register_pw_repeat": "Repeat Password",
+	"register_email": "Email Address",
+	"register_email_repeat": "Repeat Email Address",
+	"register_agree_terms": "I have accepted the Terms and Conditions",
+	"register_button": "REGISTER",
+	"register_cancel": "CANCEL",
+	
+	
+	
+//ErrorOne
+
+	"error_back_home": "Back to Home",
+	"error_404": "404",
+	"error_pnf": "Page Not Found",
+	"error_pnf_info": "Sorry, but the page you are looking for has not been found. Try checking the URL for error, then hit the refresh button on your browser or try found something else in our app.",
+	"error_back_home_bot": "Back to Home",
+
+//ErrorTwo
+
+	"error_back_home": "Back to Home",
+	"error_500": "500",
+	"error_ise": "Internal Server Error",
+	"error_ise_info": "The server encountered something unexpected that didn't allow it to complete the request. We apologize.",
+	"error_back_home_bot": "Back to Home",
+	
+	
+	"copyright": "2015 Copyright Company Name"
+}

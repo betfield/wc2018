@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import TableView from '../../imports/portal/table/TableView';
+
 export default class TablePage extends Component {
 
     componentDidMount() {
@@ -8,8 +10,7 @@ export default class TablePage extends Component {
 
     render() {
         return (
-            <div id="table">
-            </div>
+            <TableView/>
         )
     }
 }

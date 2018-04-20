@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-import Navigation from '../../imports/landing/navigation';
-import Header from '../../imports/landing/header';
-import HowToPlay from '../../imports/landing/howToPlay';
-import Rules from '../../imports/landing/rules';
-import Contact from '../../imports/landing/contact';
-import Footer from '../../imports/landing/footer';
-import ScrollTop from '../../imports/landing/scrollTop';
+import Navigation from '../../imports/landing/Navigation';
+import Header from '../../imports/landing/Header';
+import HowToPlay from '../../imports/landing/HowToPlay';
+import Rules from '../../imports/landing/Rules';
+import Contact from '../../imports/landing/Contact';
+import Footer from '../../imports/landing/Footer';
+import ScrollTop from '../../imports/landing/ScrollTop';
 
-import Splash from '../../imports/loading/splash';
+import Splash from '../../imports/loading/Splash';
 
 export default class LandingPage extends Component {
 

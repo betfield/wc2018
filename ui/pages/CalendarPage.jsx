@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import CalendarView from '../../imports/portal/calendar/CalendarView';
+
 export default class CalendarPage extends Component {
 
     componentDidMount() {
@@ -8,8 +10,7 @@ export default class CalendarPage extends Component {
 
     render() {
         return (
-            <div id="calendar">
-            </div>
+            <CalendarView/>
         )
     }
 }

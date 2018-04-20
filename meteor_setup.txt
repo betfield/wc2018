@@ -20,3 +20,7 @@ meteor npm install --save react-router-dom
 meteor add react-meteor-data
 meteor add miktam:loggly
 meteor add less
+
+meteor npm install react-transition-group --save
+
+meteor add tap:i18n
