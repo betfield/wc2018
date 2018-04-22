@@ -74,7 +74,7 @@ export default class PortalPage extends Component {
                 return <RulesPage/>;
                 break;
             case "predictions":
-                return <RulesPage/>;
+                return <PredictionsPage/>;
                 break;
             case "calendar":
                 return <CalendarPage/>;

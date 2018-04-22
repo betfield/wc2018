@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 
 import View from '../common/View';
-import Table from './Table';
+import Predictions from './Predictions';
 
-export default class TableView extends Component {
+export default class PredictionsView extends Component {
 
     render() {
         return (
-            <View title="Edetabel">    
-                <Table/>
+            <View title="Ennustused">    
+                <Predictions/>
             </View>
         )
     }

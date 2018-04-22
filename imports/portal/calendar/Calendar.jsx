@@ -15,6 +15,8 @@ export default class Calendar extends Component {
   	}
 
 	componentDidMount() {
+		console.log(TAPi18n.getLanguages() );
+
 		$('.splash').css('display', 'none');
 
 		// Initialize i-check plugin
@@ -171,11 +173,7 @@ export default class Calendar extends Component {
         return (
 			<div className="row">
 				<div className="col-md-12 text-center">
-                    <div className="hpanel">
-                        <div className="panel-body login-panel">
 							<div id="calendar"></div>
-                    	</div>
-                	</div>
             	</div>
 			</div>	
 		)

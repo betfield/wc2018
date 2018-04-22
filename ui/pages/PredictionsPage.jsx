@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PredictionsView from "../../imports/portal/predictions/PredictionsView";
+
 export default class PredictionsPage extends Component {
 
     componentDidMount() {
@@ -8,8 +10,7 @@ export default class PredictionsPage extends Component {
 
     render() {
         return (
-            <div id="predictions">
-            </div>
+            <PredictionsView/>
         )
     }
 }

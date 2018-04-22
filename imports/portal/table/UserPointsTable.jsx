@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
+import ReactDOM from 'react-dom';
+
 export default class UserPointsTable extends Component {
 
     componentDidMount() {
         // Initialize Predictions table
 
         //jQuery nussib ära Animation delay
-       // $('#userPoints').footable();
+        $(ReactDOM.findDOMNode(this.refs.userPoints)).footable();
     }
 
     render() {
@@ -17,7 +19,7 @@ export default class UserPointsTable extends Component {
         }
 
         return (
-            <table id="userPoints" className="footable table table-stripped" data-page-size="100">
+            <table id="userPoints" ref="userPoints" className="footable table table-stripped" data-page-size="100">
                 <thead>
                     <tr>
                         <th data-className="bf-table-points" data-sort-ignore="true" className="bf-center">Pos</th>
