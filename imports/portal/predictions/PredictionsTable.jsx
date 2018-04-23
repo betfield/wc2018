@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 
 export default class PredictionsTable extends Component {
 
@@ -9,6 +10,7 @@ export default class PredictionsTable extends Component {
 	}
 
     render() {
+
 
         const columns = [{
             text: 'Aeg',
@@ -23,8 +25,6 @@ export default class PredictionsTable extends Component {
           }, {
             text: '',
             dataField: 'vs',
-            sort: true,
-            headerAlign: 'center'
           }, {
             text: 'Võõrsil',
             dataField: 'away_team',
@@ -54,7 +54,8 @@ export default class PredictionsTable extends Component {
                 away_team: "tiim2",
                 group: "A",
                 round: "1",
-                result: "2:4"
+                result: "2:4",
+                id: "key1"
             },
             {
                 time: "22 juuni 15:26",
@@ -62,19 +63,23 @@ export default class PredictionsTable extends Component {
                 away_team: "tiim7",
                 group: "B",
                 round: "1",
-                result: "7:4"
+                result: "7:4",
+                id: "key2"
             },
         ]
        
         return (
-            <BootstrapTable 
-                keyField='id' 
-                data={ data } 
-                columns={ columns } 
-                striped
-                hover
-                condensed
-            />
+            <div className='bf-table'>
+                <BootstrapTable 
+                    keyField='id' 
+                    data={ data } 
+                    columns={ columns } 
+                    striped
+                    hover
+                    condensed
+                    pagination={ paginationFactory( {} ) }
+                />
+            </div>
         )
     }
 }

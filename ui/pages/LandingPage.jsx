@@ -31,8 +31,3 @@ export default class LandingPage extends Component {
         }
     }
 }
-
-LandingPage.propTypes = {
-    ready: React.PropTypes.bool,
-    users: React.PropTypes.number
-};

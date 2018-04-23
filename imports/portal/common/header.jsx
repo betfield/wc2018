@@ -43,7 +43,7 @@ export default class Header extends Component {
                             <i className="fa fa-chevron-down"></i>
                         </button>
                         <div className="collapse mobile-navbar" id="mobile-collapse">
-                            {this._getUserNavBar}
+                            {this._getUserNavBar()}
                         </div>
                     </div>
                     <div className="navbar-right">

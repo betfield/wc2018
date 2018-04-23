@@ -13,7 +13,7 @@ meteor add email
 meteor npm install --save jquery@2.2.4 moment
 meteor npm install --save-dev babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-meteor eslint-plugin-react eslint-plugin-jsx-a11y eslint-import-resolver-meteor eslint @meteorjs/eslint-config-meteor
 
-meteor npm install --save react@^15.6.2 react-dom@^15.6.2
+meteor npm install --save react react-dom
 meteor npm install --save react-addons-transition-group react-addons-css-transition-group react-addons-linked-state-mixin react-addons-create-fragment react-addons-update react-addons-pure-render-mixin react-test-renderer react-addons-perf react-addons-test-utils
 meteor npm install --save react-router-dom
 
@@ -23,6 +23,7 @@ meteor add less
 
 meteor npm install react-transition-group --save
 meteor npm install react-bootstrap-table-next --save
+meteor npm install react-bootstrap-table2-paginator --save
 
 meteor add tap:i18n
 meteor add jss:fullcalendar-react

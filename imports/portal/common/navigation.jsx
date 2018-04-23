@@ -59,7 +59,7 @@ export default class Navigation extends Component {
                                 
     _getLoggedInUserData = () => {
         //if (currentUser)
-        if (true) {
+        if (false) {
             return (
                 <div className="profile-picture">
                     <Link to="/portal">
@@ -70,17 +70,17 @@ export default class Navigation extends Component {
                         <span className="font-extra-bold font-uppercase">{currentUser.profile.name}</span>
                         <div className="dropdown">
                             <Link className="dropdown-toggle" to="#" data-toggle="dropdown">
-                                {this._getDropDownUserRole}
+                                {this._getDropDownUserRole()}
                             </Link>
                             <ul className="dropdown-menu animated flipInX m-t-xs">
-                                {this._getDropDownData}
+                                {this._getDropDownData()}
                             <li className="divider"></li>
                                 <li><Link to="/logout">Logi välja</Link></li>
                             </ul>
                         </div>
                     </div>
 
-                    {this._getLastPredictions}
+                    {this._getLastPredictions()}
 
                 </div>    
             )
@@ -100,18 +100,18 @@ export default class Navigation extends Component {
             <aside id="menu">
                 <div id="navigation">
                     
-                    {this._getLoggedInUserData}
+                    {this._getLoggedInUserData()}
                 
                     <br/>
                 
-                    {getTicker}
+                    {getTicker()}
                 
                     <ul className="nav" id="side-menu">
                         <li className="{isActiveRoute regex='predictions'}"><Link to="/predictions">Ennustused</Link></li>
                         <li className="{isActiveRoute regex='table'}"><Link to="/table">Edetabel</Link></li>
                         <li className="{isActiveRoute regex='calendar'}"><Link to="/calendar">Kalender</Link></li>
                         <li className="{isActiveRoute regex='rules'}"><Link to="/rules">Reeglid</Link></li>
-                        { this._getActivateLink }
+                        { this._getActivateLink() }
                     </ul>
                 </div>
             </aside>
