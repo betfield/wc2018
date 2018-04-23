@@ -22,5 +22,8 @@ meteor add miktam:loggly
 meteor add less
 
 meteor npm install react-transition-group --save
+meteor npm install react-bootstrap-table-next --save
 
 meteor add tap:i18n
+meteor add jss:fullcalendar-react
+

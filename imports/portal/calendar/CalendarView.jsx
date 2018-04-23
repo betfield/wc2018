@@ -4,31 +4,24 @@ import { Meteor } from 'meteor/meteor';
 import View from '../common/View';
 import Calendar from './Calendar';
 
-export default class RulesView extends Component {
+import Splash from '../../loading/Splash';
+
+export default class CalendarView extends Component {
 
     render() {
-        const transition = {
-            appear: 'animate_animated',
-            appearActive: 'animate_bounceInUp',
-        };
-
-        return (
-            <View title="Kalender">    
-                <Calendar/>
-            </View>
-        )
+        if (this.props.ready) {
+            return (
+                <View title="Kalender">    
+                    <Calendar/>
+                </View>
+            )
+        } else {
+            return <Splash/>
+        }
     }
 
 }
 
-
-
-/*
-Template.rules.events({
-    'click #rules-login' : function(event) {
-        // Prevent default browser form submit
-        event.preventDefault();
-        Router.go('login');
-    }
-});
-*/
+CalendarView.propTypes = {
+    ready: React.PropTypes.bool
+};

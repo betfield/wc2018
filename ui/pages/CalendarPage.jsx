@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
-
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 import CalendarView from '../../imports/portal/calendar/CalendarView';
 
-export default class CalendarPage extends Component {
+export default CalendarPage = withTracker(() => {
+    const fixturesHandle = Meteor.subscribe('fixtures');
+    const ready = fixturesHandle.ready();
 
-    componentDidMount() {
-        
-    }
-
-    render() {
-        return (
-            <CalendarView/>
-        )
-    }
-}
+    return {
+        ready
+    };
+})(CalendarView);

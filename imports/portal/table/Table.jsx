@@ -6,17 +6,7 @@ export default class Table extends Component {
 
     render() {
         return (
-            <div className="row">
-                <div className="col-md-12 text-center">
-                    <div className="hpanel">
-                        <div className="panel-body login-panel">
-    
-                            <UserPointsTable/>
-
-                        </div>
-                    </div>
-                </div>     
-            </div>
+            <UserPointsTable/>
         )
     }
 }

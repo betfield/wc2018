@@ -1,48 +1,10 @@
 import React, { Component } from 'react';
 
+import { FullCalendar } from 'meteor/jss:fullcalendar-react';
+
 export default class Calendar extends Component {
 
-	_getTitle = () => {
-		return TAPi18n.__('calendar');
-	}
-
-	_getDescription = () => {
-    	return TAPi18n.__('calendar_description');
-	}
-	  
-	_getCategory  = () => {
-    	return TAPi18n.__('calendar_category');
-  	}
-
-	componentDidMount() {
-		console.log(TAPi18n.getLanguages() );
-
-		$('.splash').css('display', 'none');
-
-		// Initialize i-check plugin
-		$('.i-checks').iCheck({
-			checkboxClass: 'icheckbox_square-green',
-			radioClass: 'iradio_square-green'
-		});
-
-		// Initialize the external events
-		$('#external-events div.external-event').each(function() {
-
-			// store data so the calendar knows to render an event upon drop
-			$(this).data('event', {
-				title: $.trim($(this).text()), // use the element's text as the event title
-				stick: true // maintain when user navigates (see docs on the renderEvent method)
-			});
-
-			// make the event draggable using jQuery UI
-			$(this).draggable({
-				zIndex: 1111999,
-				revert: true,      // will cause the event to go back to its
-				revertDuration: 0  //  original position after the drag
-			});
-
-		});
-				
+    render() {
 		var tsStart, tsEnd, firstFixtureDate;
 		var fixtures = Fixtures.find();
 		var calendar_fixtures = [];
@@ -85,7 +47,8 @@ export default class Calendar extends Component {
 			firstFixtureDate = new Date();
 		};
 
-		$('#calendar').fullCalendar({
+		const calendarOptions = {
+			schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
 			header: {
 				left: 'prev,next today',
 				center: 'title',
@@ -105,6 +68,7 @@ export default class Calendar extends Component {
 					titleFormat: 'D MMMM YYYY'
 				}
 			},
+			eventTextColor: 'white',
 			editable: false,
 			droppable: false, // this allows things to be dropped onto the calendar
 			events: calendar_fixtures,
@@ -166,16 +130,10 @@ export default class Calendar extends Component {
 				week: TAPi18n.__('week'),
 				day: TAPi18n.__('day')
 			}
-		});
-	}
+		}
 
-    render() {
         return (
-			<div className="row">
-				<div className="col-md-12 text-center">
-							<div id="calendar"></div>
-            	</div>
-			</div>	
+			<FullCalendar options={calendarOptions} />	
 		)
 	}
 }
