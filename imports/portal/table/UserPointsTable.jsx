@@ -6,8 +6,6 @@ export default class UserPointsTable extends Component {
 
     componentDidMount() {
 
-
-
     }
 
     render() {

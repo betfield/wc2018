@@ -10,19 +10,7 @@ export default class Predictions extends Component {
 
     render() {
         return (
-			<div>
-                <div className="fc-right">
-                    <div className="group-select fc-button-group">
-                        <button id="A" type="button" data-template="A" className="fc-button fc-state-default fc-corner-left fc-state-active">A</button>
-                        <button id="B" type="button" data-template="B" className="fc-button fc-state-default">B</button>
-                        <button id="C" type="button" data-template="C" className="fc-button fc-state-default">C</button>
-                        <button id="D" type="button" data-template="D" className="fc-button fc-state-default">D</button>
-                        <button id="E" type="button" data-template="E" className="fc-button fc-state-default">E</button>
-                        <button id="F" type="button" data-template="F" className="fc-button fc-state-default">F</button>
-                    </div>
-                </div>
-				<PredictionsTable data="predictionsData"/>
-			</div>
+		    <PredictionsTable data="predictionsData"/>
 		)
 	}
 }

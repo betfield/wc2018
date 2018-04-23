@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import BootstrapTable from 'react-bootstrap-table-next';
+
 export default class PredictionsTable extends Component {
 
 	componentDidMount() {
@@ -8,81 +10,71 @@ export default class PredictionsTable extends Component {
 
     render() {
 
-        let position = round1 = round2 = round3 = round4 = round5 = round6 = round7 = total = 0;
-        let fixture = {
-            date: "20.06",
-            time: "19:26",
-            home_team: {
-                name: "tiim",
-                imgSrc: ""
+        const columns = [{
+            text: 'Aeg',
+            dataField: 'time',
+            sort: true,
+            headerAlign: 'center'
+          }, {
+            text: 'Kodu',
+            dataField: 'home_team',
+            sort: true,
+            headerAlign: 'center'
+          }, {
+            text: '',
+            dataField: 'vs',
+            sort: true,
+            headerAlign: 'center'
+          }, {
+            text: 'Võõrsil',
+            dataField: 'away_team',
+            sort: true,
+            headerAlign: 'center'
+          }, {
+            text: 'Grupp',
+            dataField: 'group',
+            sort: true,
+            headerAlign: 'center'
+          }, {
+            text: 'Voor',
+            dataField: 'round',
+            sort: true,
+            headerAlign: 'center'
+          }, {
+            text: 'Tulemus',
+            dataField: 'result',
+            sort: true,
+            headerAlign: 'center'
+          }]
+        
+        const data = [
+            {
+                time: "20 juuni 19:26",
+                home_team: "tiim",
+                away_team: "tiim2",
+                group: "A",
+                round: "1",
+                result: "2:4"
             },
-            away_team: {
-                name: "tiim",
-                imgSrc: ""
+            {
+                time: "22 juuni 15:26",
+                home_team: "tiim4",
+                away_team: "tiim7",
+                group: "B",
+                round: "1",
+                result: "7:4"
             },
-            group: "A",
-            round: "1",
-            _id: "123",
-            result: {
-                homeGoals: "1",
-                awayGoals: "2",
-            },
-            status: "NS"
-        }
+        ]
+       
         return (
-            <form id="predictions-form">  
-                <table id="predictions" className="footable table table-stripped" data-page-size="100">
-                    <thead>
-                        <tr>
-                            <th data-class="bf-table-date" data-hide= "phone, tablet" className="bf-center">Aeg</th>
-                            <th data-class="bf-table-home" data-sort-ignore="true" data-hide="phone" className="bf-center">Kodu</th>
-                            <th data-class="bf-table-vs" data-sort-ignore="true" className="bf-center"></th>
-                            <th data-class="bf-table-away" data-sort-ignore="true" data-hide="phone" className="bf-center">Võõrsil</th>
-                            <th data-class="bf-table-group" data-hide="phone, tablet" data-ignore="true" className="bf-center">Grupp</th>
-                            <th data-class="bf-table-round" data-hide="phone, tablet" className="bf-center">Voor</th>
-                            <th data-class="bf-table-score" data-sort-ignore="true" className="bf-center">Tulemus</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td align="middle">
-                                <button id="pred-submit" type="submit" className="btn btn-success bf-table-submit">Salvesta</button>
-                            </td>
-                        </tr>
-                    </tfoot>
-                    <tbody id="pred-body">
-                        <tr className="bf-table-row">
-                            <td className="bf-table-date">{fixture.date} {fixture.time}</td>
-                            <td className="bf-table-home">{fixture.home_team.name}</td>
-                        
-                            <td className="bf-table-vs">
-                            <div id= "testcolumn">
-                                <img src={fixture.home_team.imgSrc} />
-                                <span> vs </span>
-                                <img src={fixture.away_team.imgSrc} />
-                            </div>
-                            </td>
-                            <td className="bf-table-away">{fixture.away_team.name}</td>
-                            <td className="bf-table-group">{fixture.group}</td>
-                            <td className="bf-table-group">{fixture.round}</td>
-                            <td className="bf-table-score">
-                                <div id= "testscore"> 
-                                    <input id="fixture-id" type="hidden" value={fixture._id}/>
-                                    <input id="home-score" maxlength="2" type="number" min="0" max="99" className="input-no-spinner" value={fixture.result.homeGoals} status={fixture.status}/>
-                                    <span> : </span>
-                                    <input id="away-score" maxlength="2" type="number" min="0" max="99" className="input-no-spinner" value={fixture.result.awayGoals} status={fixture.status}/>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>	
-                </table>
-            </form>
+            <BootstrapTable 
+                keyField='id' 
+                data={ data } 
+                columns={ columns } 
+                striped
+                hover
+                condensed
+            />
         )
     }
 }
