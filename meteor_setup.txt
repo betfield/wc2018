@@ -26,5 +26,3 @@ meteor npm install react-bootstrap-table-next --save
 meteor npm install react-bootstrap-table2-paginator --save
 
 meteor add tap:i18n
-meteor add jss:fullcalendar-react
-

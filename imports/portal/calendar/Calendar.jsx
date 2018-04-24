@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-import { FullCalendar } from 'meteor/jss:fullcalendar-react';
-
 export default class Calendar extends Component {
 
-    render() {
+	componentDidMount() {
 		var tsStart, tsEnd, firstFixtureDate;
 		var fixtures = Fixtures.find();
 		var calendar_fixtures = [];
@@ -14,7 +12,8 @@ export default class Calendar extends Component {
 
 				tsStart = new Date(fixture.ts);		
 				tsEnd = new Date(fixture.ts);
-				tsEnd.setHours(tsStart.getHours()+2); // set fixture end date 2h later 
+				tsStart.setHours(tsStart.getHours()+2); // set fixture start date 2h later (UTC+2)
+				tsEnd.setHours(tsStart.getHours()+2); // set fixture end date 2h later than start
 				
 				var title;
 				var score;
@@ -47,7 +46,7 @@ export default class Calendar extends Component {
 			firstFixtureDate = new Date();
 		};
 
-		const calendarOptions = {
+		$('#calendar').fullCalendar({
 			schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
 			header: {
 				left: 'prev,next today',
@@ -72,7 +71,7 @@ export default class Calendar extends Component {
 			editable: false,
 			droppable: false, // this allows things to be dropped onto the calendar
 			events: calendar_fixtures,
-			minTime: '16:00:00',
+			minTime: '12:00:00',
 			aspectRatio: 'auto', // ratio of width-to-height - larger numbers make smaller heights
 			timeFormat: 'HH:mm', // uppercase H for 24-hour clock
 			timezone: 'local',
@@ -130,10 +129,13 @@ export default class Calendar extends Component {
 				week: TAPi18n.__('week'),
 				day: TAPi18n.__('day')
 			}
-		}
+		});
+	}
 
+    render() {
+		
         return (
-			<FullCalendar options={calendarOptions} />	
+			<div id="calendar"></div>
 		)
 	}
 }
