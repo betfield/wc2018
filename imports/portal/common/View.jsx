@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Filter from './Filter';
 
 export default class View extends Component {
 
@@ -18,7 +19,8 @@ export default class View extends Component {
                                                 <div className="fc-toolbar">
                                                     <div className="fc-left">
                                                         <h1>{this.props.title}</h1>
-                                                    </div>   
+                                                    </div>
+                                                    <Filter filter={this.props.filter}/>   
                                                 </div>
                                             </div>
                                         </div>

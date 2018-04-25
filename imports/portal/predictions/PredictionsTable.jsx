@@ -11,6 +11,9 @@ export default class PredictionsTable extends Component {
 
     render() {
 
+        const options = {
+            hidePageListOnlyOnePage: true
+        }
 
         const columns = [{
             text: 'Aeg',
@@ -77,7 +80,7 @@ export default class PredictionsTable extends Component {
                     striped
                     hover
                     condensed
-                    pagination={ paginationFactory( {} ) }
+                    pagination={ paginationFactory(options) }
                 />
             </div>
         )

@@ -8,7 +8,7 @@ export default class PredictionsView extends Component {
 
     render() {
         return (
-            <View title="Ennustused">    
+            <View title="Ennustused" filter="group">    
                 <Predictions/>
             </View>
         )

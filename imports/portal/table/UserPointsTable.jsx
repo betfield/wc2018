@@ -11,6 +11,10 @@ export default class UserPointsTable extends Component {
 
     render() {
 
+      const options = {
+          hidePageListOnlyOnePage: true
+      }
+
         const columns = [{
             text: 'Pos',
             dataField: 'pos',
@@ -204,7 +208,7 @@ export default class UserPointsTable extends Component {
                 striped
                 hover
                 condensed
-                pagination={ paginationFactory( {} ) }
+                pagination={ paginationFactory( options ) }
             />
           </div>
         )
