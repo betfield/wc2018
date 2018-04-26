@@ -26,6 +26,9 @@ export default App = () => (
             <Route exact path="/table" render={(props) => (
                 <PortalPage {...props} content="table" />
             )}/>
+            <Route exact path="/login" render={(props) => (
+                <PortalPage {...props} content="login" />
+            )}/>
         </Switch>
     </Router>
 );

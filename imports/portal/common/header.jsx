@@ -4,9 +4,31 @@ import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
 
+    hideMenu = (e) => {
+        e.preventDefault();
+
+        if ($(window).width() < 769) {
+            $("body").toggleClass("show-sidebar");
+        } else {
+            $("body").toggleClass("hide-sidebar");
+        }
+    }
+
+    logout = (e) => {
+        e.preventDefault();
+
+        Meteor.logout(function(err){
+            if (err) {
+                throw new Meteor.Error("Logout failed");
+            }
+        });
+
+        this.props.history.push("/login");
+
+    }
+
     _getUserNavBar = () => {
-        //if (currentUser) {
-        if (true) {    
+        if (Meteor.userId()) {    
             return (
                 <ul className="nav navbar-nav">
                     <li>
@@ -34,7 +56,7 @@ export default class Header extends Component {
                     </div>
                 </Link>
                 <nav role="navigation">
-                    <div className="header-link hide-menu"><i className="fa fa-bars"></i></div>
+                    <div className="header-link hide-menu" onClick={this.hideMenu}><i className="fa fa-bars"></i></div>
                     <div className="small-logo">
                         <span className="text-primary">MM 2018</span>
                     </div>
@@ -48,10 +70,10 @@ export default class Header extends Component {
                     </div>
                     <div className="navbar-right">
                         <ul className="nav navbar-nav no-borders">
-                            <li className="dropdown">
-                                <Link to="/logout">
+                            <li className="dropdown" onClick={this.logout}>
+                                <a href="#">
                                     <i className="pe-7s-upload pe-rotate-90"></i>
-                                </Link>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -60,26 +82,3 @@ export default class Header extends Component {
         )
     }
 }
-
-
-/*Template.header.events({
-
-    'click .hide-menu': function (event) {
-
-        event.preventDefault();
-
-        if ($(window).width() < 769) {
-            $("body").toggleClass("show-sidebar");
-        } else {
-            $("body").toggleClass("hide-sidebar");
-        }
-    },
-
-    'click .right-sidebar-toggle': function (event) {
-        event.preventDefault();
-        $('#right-sidebar').toggleClass('sidebar-open');
-    }
-
-
-});
-*/

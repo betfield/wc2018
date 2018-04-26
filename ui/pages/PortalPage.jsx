@@ -8,6 +8,7 @@ import RulesPage from '../pages/RulesPage';
 import PredictionsPage from '../pages/PredictionsPage';
 import CalendarPage from '../pages/CalendarPage';
 import TablePage from '../pages/TablePage';
+import LoginPage from '../pages/LoginPage';
 
 fixWrapperHeight = () => {
         
@@ -82,6 +83,9 @@ export default class PortalPage extends Component {
             case "table":
                 return <TablePage/>;
                 break;
+            case "login":
+                return <LoginPage history={this.props.history}/>;
+                break;
             default:
                 return <PredictionsPage/>;
                 break;
@@ -91,7 +95,7 @@ export default class PortalPage extends Component {
     render() {
         return (
             <div id="portal">
-                <Header/>
+                <Header history={this.props.history}/>
                 <Navigation/>
                 <div id="wrapper">
                     {this._getContent(this.props.content)}
