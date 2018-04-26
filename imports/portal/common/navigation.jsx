@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 getTicker = () => {};
 
-const currentUser = {};
-
 export default class Navigation extends Component {
     
     componentDidMount() {
@@ -15,23 +13,25 @@ export default class Navigation extends Component {
         var instance = this;
     }
 
-    _getDropDownUserRole = () => {
-        if (currentUser.role === 'registered-user') {
+    _getDropDownUserRole = (currentUser) => {
+        const userRoleName = Roles.getRolesForUser(Meteor.userId());
+        
+        if (currentUser.role === 'Registreeritud') {
             return (
-                <small className="text-muted">{{userRoleName}}<b className="caret"></b></small>
+                <small className="text-muted">{userRoleName}<b className="caret"></b></small>
             )
-        } else if (currentUser.role === 'administrator') {
+        } else if (currentUser.role === 'Administraator') {
             return (
-                <small className="text-admin">{{userRoleName}}<b className="caret"></b></small>
+                <small className="text-admin">{userRoleName}<b className="caret"></b></small>
             )
         } else {
             return (
-                <small className="text-activate">{{userRoleName}}<b className="caret"></b></small>
+                <small className="text-activate">{userRoleName}<b className="caret"></b></small>
             )
         }
     }
 
-    _getDropDownData = () => {
+    _getDropDownData = (currentUser) => {
         if (currentUser.role === 'regular-user') {
             return (
                 <li><Link to="/payments">Aktiveeri ennustus</Link></li>
@@ -43,7 +43,7 @@ export default class Navigation extends Component {
         }
     }
 
-    _getLastPredictions = () => {
+    _getLastPredictions = (currentUser) => {
         if (currentUser.role === 'regular-user') {
             return (
                 <div>
@@ -57,50 +57,55 @@ export default class Navigation extends Component {
         }     
     }
                                 
-    _getLoggedInUserData = () => {
-        //if (currentUser)
-        if (false) {
+    _getLoggedInUserData = (currentUser) => {
+        
+        if (currentUser) {
             return (
                 <div className="profile-picture">
                     <Link to="/portal">
-                        <img src="{currentUser.profile.picture}" alt="{currentUser.profile.name}" className="img-circle m-b"/>
+                        <img src={currentUser.profile.picture} alt={currentUser.profile.name} className="img-circle m-b"/>
                     </Link>
 
                     <div className="stats-label text-color">
                         <span className="font-extra-bold font-uppercase">{currentUser.profile.name}</span>
                         <div className="dropdown">
                             <Link className="dropdown-toggle" to="#" data-toggle="dropdown">
-                                {this._getDropDownUserRole()}
+                                {this._getDropDownUserRole(currentUser)}
                             </Link>
                             <ul className="dropdown-menu animated flipInX m-t-xs">
-                                {this._getDropDownData()}
+                                {this._getDropDownData(currentUser)}
                             <li className="divider"></li>
                                 <li><Link to="/logout">Logi välja</Link></li>
                             </ul>
                         </div>
                     </div>
 
-                    {this._getLastPredictions()}
+                    {this._getLastPredictions(currentUser)}
 
                 </div>    
             )
         }
     }
 
-    _getActivateLink = () => {
+    _getActivateLink = (currentUser) => {
+        /*
         if (currentUser.role === 'regular-user') {
             return (
                 <li className="{isActiveRoute regex='payments'} text-activate"><Link to="/payments">Aktiveeri</Link></li>
             )
         }
+        */
     }
 
     render() {
+
+        const currentUser = Meteor.user();
+
         return (
             <aside id="menu">
                 <div id="navigation">
                     
-                    {this._getLoggedInUserData()}
+                    {this._getLoggedInUserData(currentUser)}
                 
                     <br/>
                 
@@ -111,7 +116,7 @@ export default class Navigation extends Component {
                         <li className="{isActiveRoute regex='table'}"><Link to="/table">Edetabel</Link></li>
                         <li className="{isActiveRoute regex='calendar'}"><Link to="/calendar">Kalender</Link></li>
                         <li className="{isActiveRoute regex='rules'}"><Link to="/rules">Reeglid</Link></li>
-                        { this._getActivateLink() }
+                        { this._getActivateLink(currentUser) }
                     </ul>
                 </div>
             </aside>

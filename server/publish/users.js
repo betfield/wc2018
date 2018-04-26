@@ -4,7 +4,7 @@ Meteor.publish('users', function(filter) {
     //Delay the publication to test loading spinner
     //Meteor._sleepForMs(2000);
 
-    var subHandle = Users.find(filter || {}).observeChanges({
+    var subHandle = Meteor.users.find(filter || {}).observeChanges({
         added: function(id, fields) {
             self.added("users", id, fields);
         },

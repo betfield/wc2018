@@ -28,5 +28,9 @@ meteor npm install react-bootstrap-table2-paginator --save
 meteor add tap:i18n
 
 meteor add accounts-password accounts-facebook service-configuration
+meteor add accounts-google accounts-twitter
 
 meteor npm install --save bcrypt
+
+meteor add alanning:roles
+meteor add matb33:collection-hooks

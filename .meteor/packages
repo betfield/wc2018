@@ -29,3 +29,7 @@ tap:i18n
 accounts-password
 accounts-facebook
 service-configuration
+accounts-google
+accounts-twitter
+alanning:roles
+matb33:collection-hooks
