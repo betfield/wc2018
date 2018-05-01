@@ -15,24 +15,21 @@ export default class Navigation extends Component {
 
     _getDropDownUserRole = (currentUser) => {
         const userRoleName = Roles.getRolesForUser(Meteor.userId());
-        
-        if (currentUser.role === 'Registreeritud') {
-            return (
-                <small className="text-muted">{userRoleName}<b className="caret"></b></small>
-            )
-        } else if (currentUser.role === 'Administraator') {
-            return (
-                <small className="text-admin">{userRoleName}<b className="caret"></b></small>
-            )
-        } else {
-            return (
-                <small className="text-activate">{userRoleName}<b className="caret"></b></small>
-            )
-        }
+        let className = "text-activate";
+
+        if (Roles.userIsInRole(currentUser,'Registreeritud')) {
+            className = "text-muted";
+        } else if (Roles.userIsInRole(currentUser,'Administraator')) {
+            className = "text-admin";
+        } 
+
+        return (
+            <small className={className}>{userRoleName}<b className="caret"></b></small>
+        )
     }
 
     _getDropDownData = (currentUser) => {
-        if (currentUser.role === 'regular-user') {
+        if (Roles.userIsInRole(currentUser,'Registreerimata')) {
             return (
                 <li><Link to="/payments">Aktiveeri ennustus</Link></li>
             )
@@ -44,7 +41,7 @@ export default class Navigation extends Component {
     }
 
     _getLastPredictions = (currentUser) => {
-        if (currentUser.role === 'regular-user') {
+        if (Roles.userIsInRole(currentUser,'Registreeritud')) {
             return (
                 <div>
                     <h4 className="font-extra-bold m-b-xs">
@@ -88,13 +85,14 @@ export default class Navigation extends Component {
     }
 
     _getActivateLink = (currentUser) => {
-        /*
-        if (currentUser.role === 'regular-user') {
-            return (
-                <li className="{isActiveRoute regex='payments'} text-activate"><Link to="/payments">Aktiveeri</Link></li>
-            )
+
+        if (currentUser) {
+            if (Roles.userIsInRole(currentUser,'Registreerimata')) {
+                return (
+                    <li className="text-activate"><Link to="/payments">Aktiveeri</Link></li>
+                )
+            }
         }
-        */
     }
 
     render() {
@@ -112,10 +110,10 @@ export default class Navigation extends Component {
                     {getTicker()}
                 
                     <ul className="nav" id="side-menu">
-                        <li className="{isActiveRoute regex='predictions'}"><Link to="/predictions">Ennustused</Link></li>
-                        <li className="{isActiveRoute regex='table'}"><Link to="/table">Edetabel</Link></li>
-                        <li className="{isActiveRoute regex='calendar'}"><Link to="/calendar">Kalender</Link></li>
-                        <li className="{isActiveRoute regex='rules'}"><Link to="/rules">Reeglid</Link></li>
+                        <li className=""><Link to="/predictions">Ennustused</Link></li>
+                        <li className=""><Link to="/table">Edetabel</Link></li>
+                        <li className=""><Link to="/calendar">Kalender</Link></li>
+                        <li className=""><Link to="/rules">Reeglid</Link></li>
                         { this._getActivateLink(currentUser) }
                     </ul>
                 </div>

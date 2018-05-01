@@ -1,12 +1,14 @@
-import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
-import CalendarView from '../../imports/portal/calendar/CalendarView';
+import React, { Component } from 'react';
 
-export default CalendarPage = withTracker(() => {
-    const fixturesHandle = Meteor.subscribe('fixtures');
-    const ready = fixturesHandle.ready();
+import PortalPage from './PortalPage';
+import CalendarContainer from '../../imports/portal/calendar/CalendarContainer';
 
-    return {
-        ready
-    };
-})(CalendarView);
+export default class CalendarPage extends Component {
+    render() {
+        return (
+            <PortalPage>
+                <CalendarContainer/>
+            </PortalPage>
+        )
+    }
+}
