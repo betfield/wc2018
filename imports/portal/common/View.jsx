@@ -3,7 +3,17 @@ import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Filter from './Filter';
 
+import Splash from '../../loading/Splash';
+
 export default class View extends Component {
+
+    _getContent() {
+        if (this.props.ready || this.props.ready == null) {
+            return this.props.children;
+        } else {
+            return <Splash/>;
+        }
+    }
 
     render() {
         return (
@@ -24,8 +34,8 @@ export default class View extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                        
-                                        {this.props.children}                    
+
+                                        {this._getContent()}
 
                                     </div>
                                 </div>

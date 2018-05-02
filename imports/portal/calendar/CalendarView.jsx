@@ -9,15 +9,10 @@ import Splash from '../../loading/Splash';
 export default class CalendarView extends Component {
 
     render() {
-        if (this.props.ready) {
-            return (
-                <View title="Kalender">    
-                    <Calendar/>
-                </View>
-            )
-        } else {
-            return <Splash/>
-        }
+        return (
+            <View title="Kalender" ready={this.props.ready}>    
+                <Calendar/>
+            </View>
+        )
     }
-
 }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import PortalPage from './PortalPage';
-import PredictionsView from '../../imports/portal/predictions/PredictionsView';
+import PredictionsContainer from '../../imports/portal/predictions/PredictionsContainer';
 
 export default class PredictionsPage extends Component {
     render() {
         return (
             <PortalPage>
-                <PredictionsView/>
+                <PredictionsContainer/>
             </PortalPage>
         )
     }

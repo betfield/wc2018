@@ -7,9 +7,36 @@ export default class PredictionsTable extends Component {
 
 	componentDidMount() {
 
-	}
+    }
+    
+    _submit = (e) => {
+        // Prevent default browser form submit
+        e.preventDefault();
+    
+        // Get value from form element
+        let scores = [].slice.call(event.target.getElementsByClassName("bf-table-score"));
+        let userId = Meteor.userId();
+        
+        scores.forEach(function(score){
+            let result = score.getElementsByTagName("input");
+            
+            let fixture = result[0].value;
+            let homeScore = result[1].value;
+            let awayScore = result[2].value;
+            
+            Meteor.call( "updateUserPredictions", fixture, homeScore, awayScore, userId, function( error, response ) {
+                if ( error ) {
+                    Bert.alert( "Ennustuste uuendamine ebaõnnestus!", "success" );
+                } else {
+                    Bert.alert( "Ennustused uuendatud!", "success" );
+                }
+            });
+        });
+    }
 
     render() {
+
+        //console.log(this.props.data);
 
         const options = {
             hidePageListOnlyOnePage: true
@@ -52,9 +79,9 @@ export default class PredictionsTable extends Component {
         
         const data = [
             {
-                time: "20 juuni 19:26",
-                home_team: "tiim",
-                away_team: "tiim2",
+                time: this.props.data[0].time,
+                home_team: this.props.data[0].fixture.home_team.imgSrc,
+                away_team: this.props.data[0].fixture.away_team.imgSrc,
                 group: "A",
                 round: "1",
                 result: "2:4",
@@ -86,42 +113,3 @@ export default class PredictionsTable extends Component {
         )
     }
 }
-
-/*
-
-Template.predictionsTable.onRendered(function(){
-    // Initialize Predictions table
-    $('#predictions').footable();
-    
-});
-
-Template.predictionsTable.events({
-    'submit #predictions-form' : function(event, template) {
-        // Prevent default browser form submit
-        event.preventDefault();
-    
-        // Get value from form element
-        var scores = [].slice.call(event.target.getElementsByClassName("bf-table-score"));
-        var userId = Meteor.userId();
-        
-        scores.forEach(function(score){
-            var result = score.getElementsByTagName("input");
-            
-            var fixture = result[0].value;
-            var homeScore = result[1].value;
-            var awayScore = result[2].value;
-            
-            Meteor.call( "updateUserPredictions", fixture, homeScore, awayScore, userId, function( error, response ) {
-                if ( error ) {
-                    Bert.alert( "Ennustuste uuendamine ebaõnnestus!", "success" );
-                } else {
-                    Bert.alert( "Ennustused uuendatud!", "success" );
-                }
-            });
-        });
-    },
-});
-
-
-
-*/

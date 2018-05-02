@@ -7,9 +7,10 @@ import Predictions from './Predictions';
 export default class PredictionsView extends Component {
 
     render() {
+
         return (
-            <View title="Ennustused" filter="group">    
-                <Predictions/>
+            <View ready={this.props.ready} title="Ennustused" filter="group">    
+                <Predictions predictions={this.props.predictions}/>
             </View>
         )
     }
