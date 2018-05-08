@@ -34,6 +34,54 @@ export default class PredictionsTable extends Component {
         });
     }
 
+    teamFormatter = (cell, row) => {
+        return (
+            <span className="bf-table-vs">
+                <img src={cell.home_flag}/>
+                <span> vs </span>
+                <img src={cell.away_flag}/>
+            </span>
+        );
+    }
+
+    resultFormatter = (cell, row) => {
+        return (
+            <span className="bf-table-score">
+                <input id="fixture-id" type="hidden" value={cell.id}/>
+                <input id="home-score" maxLength="2" type="number" min="0" max="99" className="input-no-spinner" value={cell.home_goals}/>
+                <span> : </span>
+                <input id="away-score" maxLength="2" type="number" min="0" max="99" className="input-no-spinner" value={cell.away_goals}/>
+            </span>
+        );
+    }
+    
+    formatPredictionData = (data) => {
+        let predictionsData = [];
+
+        data.forEach((e) => {
+            let prediction = {
+                time: e.date,
+                vs: {
+                    home_flag: e.fixture.home_team.imgSrc,
+                    away_flag: e.fixture.away_team.imgSrc
+                },
+                home_team: e.fixture.home_team.name,
+                away_team: e.fixture.away_team.name,
+                group: e.fixture.group,
+                result: {
+                    id: e.fixture._id,
+                    home_goals: e.fixture.result.homeGoals,
+                    away_goals: e.fixture.result.awayGoals
+                },
+                id: e.fixture._id
+            }
+
+            predictionsData.push(prediction);
+        })
+
+        return predictionsData;
+    }
+
     render() {
 
         //console.log(this.props.data);
@@ -47,63 +95,52 @@ export default class PredictionsTable extends Component {
             dataField: 'time',
             sort: true,
             headerAlign: 'center'
-          }, {
+          }, 
+          {
             text: 'Kodu',
             dataField: 'home_team',
-            sort: true,
             headerAlign: 'center'
-          }, {
+          }, 
+          {
             text: '',
             dataField: 'vs',
-          }, {
+            headerAlign: 'center',
+            formatter: this.teamFormatter
+          }, 
+          {
             text: 'Võõrsil',
             dataField: 'away_team',
-            sort: true,
             headerAlign: 'center'
-          }, {
+          }, 
+          {
             text: 'Grupp',
             dataField: 'group',
             sort: true,
             headerAlign: 'center'
-          }, {
+          }, 
+          /*
+          {
             text: 'Voor',
             dataField: 'round',
             sort: true,
             headerAlign: 'center'
-          }, {
+          }, 
+          */
+          {
             text: 'Tulemus',
             dataField: 'result',
             sort: true,
-            headerAlign: 'center'
+            headerAlign: 'center',
+            formatter: this.resultFormatter
           }]
-        
-        const data = [
-            {
-                time: this.props.data[0].time,
-                home_team: this.props.data[0].fixture.home_team.imgSrc,
-                away_team: this.props.data[0].fixture.away_team.imgSrc,
-                group: "A",
-                round: "1",
-                result: "2:4",
-                id: "key1"
-            },
-            {
-                time: "22 juuni 15:26",
-                home_team: "tiim4",
-                away_team: "tiim7",
-                group: "B",
-                round: "1",
-                result: "7:4",
-                id: "key2"
-            },
-        ]
-       
+
         return (
             <div className='bf-table'>
                 <BootstrapTable 
                     keyField='id' 
-                    data={ data } 
-                    columns={ columns } 
+                    data={ this.formatPredictionData(this.props.data) } 
+                    columns={ columns }
+                    bordered={ false } 
                     striped
                     hover
                     condensed
