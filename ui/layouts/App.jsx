@@ -12,6 +12,15 @@ import LoginPage from '../pages/LoginPage';
 
 import Splash from '../../imports/loading/Splash';
 
+const LogoutPage = (props) => {
+    return (
+      <LoginPage 
+        logout={true}
+        {...props}
+      />
+    );
+}
+
 export default App = () => (
     <Router>
         <Switch>
@@ -22,6 +31,7 @@ export default App = () => (
             <Route exact path="/calendar" component={CalendarPage}/>
             <Route exact path="/table" component={TablePage}/>
             <Route exact path="/login" component={LoginPage}/>
+            <Route exact path="/logout" component={LogoutPage}/>
         </Switch>
     </Router>
 );

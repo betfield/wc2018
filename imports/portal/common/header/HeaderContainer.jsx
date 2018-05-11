@@ -5,6 +5,7 @@ import Header from './Header';
 export default HeaderContainer = withTracker(() => {
   const usersHandle = Meteor.subscribe('users');
   const ready = usersHandle.ready();
+  
   return {
     ready
   };

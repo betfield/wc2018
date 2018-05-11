@@ -64,9 +64,10 @@ export default class PortalPage extends Component {
     }
 
     render() {
+
         return (
             <div id="portal">
-                <HeaderContainer history={this.props.history}/>
+                <HeaderContainer/>
                 <NavigationContainer/>
                 <div id="wrapper">
                     {this.props.children}                    

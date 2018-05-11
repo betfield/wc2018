@@ -14,19 +14,6 @@ export default class Header extends Component {
         }
     }
 
-    logout = (e) => {
-        e.preventDefault();
-
-        Meteor.logout(function(err){
-            if (err) {
-                throw new Meteor.Error("Logout failed");
-            }
-        });
-
-        this.props.history.push("/login");
-
-    }
-
     _getUserNavBar = () => {
         if (Meteor.userId()) {    
             return (
@@ -70,10 +57,10 @@ export default class Header extends Component {
                     </div>
                     <div className="navbar-right">
                         <ul className="nav navbar-nav no-borders">
-                            <li className="dropdown" onClick={this.logout}>
-                                <a href="#">
+                            <li className="dropdown">
+                                <Link to="/logout">
                                     <i className="pe-7s-upload pe-rotate-90"></i>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>

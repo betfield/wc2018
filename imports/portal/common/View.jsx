@@ -22,7 +22,7 @@ export default class View extends Component {
         this.selectGroup({ groupSelected: group });
     }
 
-    _getContent() {
+    getContent() {
         if (this.props.ready || this.props.ready == null) {
             return this.props.children;
         } else {
@@ -50,7 +50,7 @@ export default class View extends Component {
                                             </div>
                                         </div>
 
-                                        {this._getContent()}
+                                        {this.getContent()}
 
                                     </div>
                                 </div>
