@@ -5,16 +5,10 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 
 import PredictionsFooter from './PredictionsFooter';
 
-import decimalToRoman from '../../helpers/roman';
-
 import NumericInput from 'react-numeric-input';
 
 export default class Predictions extends Component {
 
-	componentDidMount() {
-
-    }
-    
     _getPredictionsData = (group) => {
         //let fixtures = Predictions.find({"fixture.group": Template.instance().pred.get("groupSelected")}).fetch();
         /*
@@ -27,8 +21,14 @@ export default class Predictions extends Component {
         }    
         */
         
-        let filteredPredictions = this.props.predictions.filter(prediction => prediction.fixture.group === group);
+        let filteredPredictions = [];
         let i = 0;
+
+        if (['I','II','III'].indexOf(group) > -1) {
+            filteredPredictions = this.props.predictions.filter(prediction => prediction.fixture.roundRoman === group);
+        } else if (['A','B','C','D','E','F'].indexOf(group) > -1) {
+            filteredPredictions = this.props.predictions.filter(prediction => prediction.fixture.group === group);
+        }
 
         filteredPredictions.forEach(function(f) {
             
@@ -38,9 +38,6 @@ export default class Predictions extends Component {
             filteredPredictions[i].fixture.home_team.imgSrc = Meteor.settings.public.FOLDER_FLAGS + homeTeamCode + ".png";
             filteredPredictions[i].fixture.away_team.imgSrc = Meteor.settings.public.FOLDER_FLAGS + awayTeamCode + ".png";
             
-            // Convert round to Roman number
-            filteredPredictions[i].fixture.round = decimalToRoman(f.fixture.round);
-
             //fixtures[i].fixture.status = Fixtures.findOne({"_id": f.fixture._id}).status;
             i++;
         });
@@ -97,7 +94,7 @@ export default class Predictions extends Component {
                 homeTeam: e.fixture.home_team.name,
                 awayTeam: e.fixture.away_team.name,
                 group: e.fixture.group,
-                round: e.fixture.round,
+                round: e.fixture.roundRoman,
                 result: {
                     id: e.fixture._id,
                     homeGoals: e.fixture.result.homeGoals,
@@ -163,7 +160,7 @@ export default class Predictions extends Component {
         const columns = [{
             text: 'Aeg',
             dataField: 'time',
-            sort: true,
+            sort: false,
             headerAlign: 'center'
           }, 
           {
@@ -186,19 +183,19 @@ export default class Predictions extends Component {
           {
             text: 'Grupp',
             dataField: 'group',
-            sort: true,
+            sort: false,
             headerAlign: 'center'
           }, 
           {
             text: 'Voor',
             dataField: 'round',
-            sort: true,
+            sort: false,
             headerAlign: 'center'
           }, 
           {
             text: 'Tulemus',
             dataField: 'result',
-            sort: true,
+            sort: false,
             headerAlign: 'center',
             formatter: this.resultFormatter
           }]

@@ -1,3 +1,5 @@
+import decimalToRoman from '../helpers/roman';
+
 Meteor.publish('predictions', function(filter) {
 	var self = this;
 	var userId = this.userId;
@@ -36,6 +38,8 @@ Meteor.methods({
 		return fixtures.forEach(function(fixture) {
 			fixture["result"] = {"homeGoals": "", "awayGoals": ""};
 			fixture["userPoints"] = 0;
+			fixture["roundRoman"] = decimalToRoman(fixture["round"]);
+
 			var prediction = {"userId": userId, "fixture": fixture};
 			Predictions.insert( prediction );
 		});

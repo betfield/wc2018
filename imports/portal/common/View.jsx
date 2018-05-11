@@ -13,7 +13,9 @@ export default class View extends Component {
             groupSelected: this.props.groupSelected
         };
         
-        this.selectGroup = this.props.selectGroup.bind(this);
+        if(this.props.selectGroup) {
+            this.selectGroup = this.props.selectGroup.bind(this);
+        }
     }
 
     selectGroup(group) {

@@ -17,17 +17,10 @@ export default class PredictionsView extends Component {
 
     selectGroup(group) {
         this.setState({ groupSelected: group });
-
-        /*
-        if (group === "ALL") {
-            '$in: ["A","B","C","D","E","F"]'
-        } else {
-            group
-        */
     }
 
     render() {
-        console.log(this.state.groupSelected);        
+
         return (
             <View ready={this.props.ready} title="Ennustused" filter="group" selectGroup={this.selectGroup} groupSelected={this.state.groupSelected}>    
                 <Predictions predictions={this.props.predictions} groupSelected={this.state.groupSelected}/>
