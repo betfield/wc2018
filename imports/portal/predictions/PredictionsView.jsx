@@ -30,7 +30,7 @@ export default class PredictionsView extends Component {
         console.log(this.state.groupSelected);        
         return (
             <View ready={this.props.ready} title="Ennustused" filter="group" selectGroup={this.selectGroup} groupSelected={this.state.groupSelected}>    
-                <Predictions predictions={this.props.predictions} />
+                <Predictions predictions={this.props.predictions} groupSelected={this.state.groupSelected}/>
             </View>
         )
     }

@@ -15,7 +15,7 @@ export default class Predictions extends Component {
 
     }
     
-    _getPredictionsData = () => {
+    _getPredictionsData = (group) => {
         //let fixtures = Predictions.find({"fixture.group": Template.instance().pred.get("groupSelected")}).fetch();
         /*
         let fixtureSelected = Template.instance().data;
@@ -27,25 +27,25 @@ export default class Predictions extends Component {
         }    
         */
         
-        let predictions = this.props.predictions;
+        let filteredPredictions = this.props.predictions.filter(prediction => prediction.fixture.group === group);
         let i = 0;
-        
-        predictions.forEach(function(f) {
+
+        filteredPredictions.forEach(function(f) {
             
             let homeTeamCode = String(f.fixture.home_team.code).toLowerCase();
             let awayTeamCode = String(f.fixture.away_team.code).toLowerCase();
 
-            predictions[i].fixture.home_team.imgSrc = Meteor.settings.public.FOLDER_FLAGS + homeTeamCode + ".png";
-            predictions[i].fixture.away_team.imgSrc = Meteor.settings.public.FOLDER_FLAGS + awayTeamCode + ".png";
+            filteredPredictions[i].fixture.home_team.imgSrc = Meteor.settings.public.FOLDER_FLAGS + homeTeamCode + ".png";
+            filteredPredictions[i].fixture.away_team.imgSrc = Meteor.settings.public.FOLDER_FLAGS + awayTeamCode + ".png";
             
             // Convert round to Roman number
-            predictions[i].fixture.round = decimalToRoman(f.fixture.round);
+            filteredPredictions[i].fixture.round = decimalToRoman(f.fixture.round);
 
             //fixtures[i].fixture.status = Fixtures.findOne({"_id": f.fixture._id}).status;
             i++;
         });
         
-        return predictions;
+        return filteredPredictions;
     }
 
     /*
@@ -97,6 +97,7 @@ export default class Predictions extends Component {
                 homeTeam: e.fixture.home_team.name,
                 awayTeam: e.fixture.away_team.name,
                 group: e.fixture.group,
+                round: e.fixture.round,
                 result: {
                     id: e.fixture._id,
                     homeGoals: e.fixture.result.homeGoals,
@@ -188,14 +189,12 @@ export default class Predictions extends Component {
             sort: true,
             headerAlign: 'center'
           }, 
-          /*
           {
             text: 'Voor',
             dataField: 'round',
             sort: true,
             headerAlign: 'center'
           }, 
-          */
           {
             text: 'Tulemus',
             dataField: 'result',
@@ -209,7 +208,7 @@ export default class Predictions extends Component {
                 <form id="predictions-form">
                     <BootstrapTable 
                         keyField='id' 
-                        data={ this.formatPredictionData(this._getPredictionsData()) } 
+                        data={ this.formatPredictionData(this._getPredictionsData(this.props.groupSelected)) } 
                         columns={ columns }
                         bordered={ true }
                         striped
