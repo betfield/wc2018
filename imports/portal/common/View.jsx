@@ -7,6 +7,19 @@ import Splash from '../../loading/Splash';
 
 export default class View extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            groupSelected: this.props.groupSelected
+        };
+        
+        this.selectGroup = this.props.selectGroup.bind(this);
+    }
+
+    selectGroup(group) {
+        this.selectGroup({ groupSelected: group });
+    }
+
     _getContent() {
         if (this.props.ready || this.props.ready == null) {
             return this.props.children;
@@ -30,7 +43,7 @@ export default class View extends Component {
                                                     <div className="fc-left">
                                                         <h1>{this.props.title}</h1>
                                                     </div>
-                                                    <Filter filter={this.props.filter}/>   
+                                                    <Filter filter={this.props.filter} selectGroup={this.selectGroup}/>   
                                                 </div>
                                             </div>
                                         </div>

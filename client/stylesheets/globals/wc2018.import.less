@@ -26,11 +26,41 @@ span {
     padding-bottom: 100px;
 }
 
+.fc-button {
+    outline-color: @outline-color;
+}
+
+#pred-submit {
+    background-color: @color-red;
+    border-color: @color-red;
+    outline-color: @outline-color;
+}
+
+
+#predictions-form > div > table,
+#predictions-form > div > table > thead > tr > th,
+#predictions-form > div > table > tbody > tr > td {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+#predictions-form > div > table > thead {
+    border-bottom: 1px solid;
+}
+
+#predictions-form > div > table {
+    margin-bottom: -1px;
+}
+
 .bf-center {
     text-align:center;
 }
 
 .bf-right {
+    border-top: 1px solid;
+    padding-top: 20px;
+    padding-right: 3ex;
     text-align:right;
 }
 
@@ -39,18 +69,6 @@ span {
 }
 
 // Table style for Predictions
-
-.bf-table-date {
-    width: auto; 
-    text-align:center;
-    height: auto;
-}
-
-.bf-table-home {
-    width: auto; 
-    text-align: center;
-    height: auto;
-}
 
 .bf-table-vs {
     width: auto;
@@ -63,43 +81,6 @@ span {
     padding-right: 10px;
 }
 
-.bf-table-away {
-    width: auto; 
-    text-align: center;
-    height: auto;
-}
-
-.bf-table-group,
-.bf-table-round {
-    width: auto; 
-    text-align:center;
-    height: auto;
-}
-
-.bf-table-user {
-    width: auto; 
-    text-align: center;
-    height: auto;
-}
-
-.bf-table-team {
-    text-align: left;
-}
-
-.bf-table-score {
-    text-align:center;
-}
-
-.bf-table-score input {
-    width: auto;
-    text-align: center;
-}
-
-.bf-table-points {
-    width: auto; 
-    text-align: center;
-    height: auto;
-}
 #testcolumn {
     min-width: 200px;
     max-height: 64px;

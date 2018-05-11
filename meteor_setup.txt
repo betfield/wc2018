@@ -34,3 +34,5 @@ meteor npm install --save bcrypt
 
 meteor add alanning:roles
 meteor add matb33:collection-hooks
+
+npm install react-numeric-input --save
