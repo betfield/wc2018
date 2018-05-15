@@ -3,13 +3,11 @@ import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 
-import PredictionsFooter from './PredictionsFooter';
-
 import NumericInput from 'react-numeric-input';
 
 export default class Predictions extends Component {
 
-    _getPredictionsData = (group) => {
+    getPredictionsData = (group) => {
         //let fixtures = Predictions.find({"fixture.group": Template.instance().pred.get("groupSelected")}).fetch();
         /*
         let fixtureSelected = Template.instance().data;
@@ -46,7 +44,7 @@ export default class Predictions extends Component {
     }
 
     /*
-    _getAdminData = () => {
+    getAdminData = () => {
         let fixtures;
         let fixtureSelected = Template.instance().data;
         
@@ -109,29 +107,32 @@ export default class Predictions extends Component {
         return predictionsData;
     }
 
-    _submit = (e) => {
+    handleSubmit = (event) => {
         // Prevent default browser form submit
-        e.preventDefault();
+        event.preventDefault();
     
         // Get value from form element
         let scores = [].slice.call(event.target.getElementsByClassName("bf-table-score"));
         let userId = Meteor.userId();
-        
-        scores.forEach(function(score){
+
+        scores.forEach((score, i) => {
             let result = score.getElementsByTagName("input");
             
             let fixture = result[0].value;
             let homeScore = result[1].value;
             let awayScore = result[2].value;
-            
+
+
+            //TODO: Make function update all predictions at once
             Meteor.call( "updateUserPredictions", fixture, homeScore, awayScore, userId, function( error, response ) {
                 if ( error ) {
-                    Bert.alert( "Ennustuste uuendamine ebaõnnestus!", "success" );
-                } else {
-                    Bert.alert( "Ennustused uuendatud!", "success" );
+                    Bert.alert( "Ennustuste uuendamine ebaõnnestus!", "danger" );
                 }
             });
         });
+
+
+        Bert.alert( "Ennustused uuendatud!", "success" );
     }
 
     vsFormatter = (cell, row) => {
@@ -157,62 +158,66 @@ export default class Predictions extends Component {
     
     render() {
 
-        const columns = [{
-            text: 'Aeg',
-            dataField: 'time',
-            sort: false,
-            headerAlign: 'center'
-          }, 
-          {
-            text: 'Kodu',
-            dataField: 'homeTeam',
-            headerAlign: 'center',
-            formatter: this.teamFormatter
-          }, 
-          {
-            text: '',
-            dataField: 'vs',
-            headerAlign: 'center',
-            formatter: this.vsFormatter
-          }, 
-          {
-            text: 'Võõrsil',
-            dataField: 'awayTeam',
-            headerAlign: 'center'
-          }, 
-          {
-            text: 'Grupp',
-            dataField: 'group',
-            sort: false,
-            headerAlign: 'center'
-          }, 
-          {
-            text: 'Voor',
-            dataField: 'round',
-            sort: false,
-            headerAlign: 'center'
-          }, 
-          {
-            text: 'Tulemus',
-            dataField: 'result',
-            sort: false,
-            headerAlign: 'center',
-            formatter: this.resultFormatter
-          }]
+        const columnHeaders = [
+            {
+                text: 'Aeg',
+                dataField: 'time',
+                sort: false,
+                headerAlign: 'center'
+            }, 
+            {
+                text: 'Kodu',
+                dataField: 'homeTeam',
+                headerAlign: 'center',
+                formatter: this.teamFormatter
+            }, 
+            {
+                text: '',
+                dataField: 'vs',
+                headerAlign: 'center',
+                formatter: this.vsFormatter
+            }, 
+            {
+                text: 'Võõrsil',
+                dataField: 'awayTeam',
+                headerAlign: 'center'
+            }, 
+            {
+                text: 'Grupp',
+                dataField: 'group',
+                sort: false,
+                headerAlign: 'center'
+            }, 
+            {
+                text: 'Voor',
+                dataField: 'round',
+                sort: false,
+                headerAlign: 'center'
+            }, 
+            {
+                text: 'Tulemus',
+                dataField: 'result',
+                sort: false,
+                headerAlign: 'center',
+                formatter: this.resultFormatter
+            }
+        ]
 
         return (
             <div className='bf-table'>
-                <form id="predictions-form">
+                <form id="predictions-form" onSubmit={this.handleSubmit}>
                     <BootstrapTable 
                         keyField='id' 
-                        data={ this.formatPredictionData(this._getPredictionsData(this.props.groupSelected)) } 
-                        columns={ columns }
+                        data={ this.formatPredictionData(this.getPredictionsData(this.props.groupSelected)) } 
+                        columns={ columnHeaders }
                         bordered={ true }
                         striped
                         hover
                         condensed
                     />
-                    <PredictionsFooter/>
+                    <div className='bf-right'>    
+                        <button id="pred-submit" type="submit" className="btn btn-success bf-table-submit">Salvesta</button>
+                    </div>
                 </form>
             </div>
         )
