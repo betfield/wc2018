@@ -11,7 +11,7 @@ export default class PredictionsPage extends Component {
         if (!Meteor.userId()) {
             Bert.alert( 'Ennustuste vaatamiseks pead sisse logima', 'danger' );
             this.props.history.push('/login');
-        }
+        } 
         //If user  exist then proceed with the normal login flow
     }
 

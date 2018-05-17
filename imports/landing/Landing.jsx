@@ -17,7 +17,7 @@ export default class Landing extends Component {
         if (this.props.ready) {
             return (
                 <div id="landing">
-                    <Navigation userCount = {this.props.users}/>
+                    <Navigation userCount = {this.props.usersCount}/>
                     <Header/>
                     <HowToPlay/>
                     <Rules/>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
+import Splash from '../../../loading/Splash';
 
 getTicker = () => {};
 
@@ -55,33 +55,31 @@ export default class Navigation extends Component {
     }
                                 
     _getLoggedInUserData = (currentUser) => {
-        
-        if (currentUser) {
-            return (
-                <div className="profile-picture">
-                    <Link to="/portal">
-                        <img src={currentUser.profile.picture} alt={currentUser.profile.name} className="img-circle m-b"/>
-                    </Link>
+        return (
+            <div className="profile-picture">
+                <Link to="/portal">
+                    <img src={currentUser && currentUser.userProfile.picture} 
+                        alt={currentUser && currentUser.userProfile.name} className="img-circle m-b"/>
+                </Link>
 
-                    <div className="stats-label text-color">
-                        <span className="font-extra-bold font-uppercase">{currentUser.profile.name}</span>
-                        <div className="dropdown">
-                            <Link className="dropdown-toggle" to="#" data-toggle="dropdown">
-                                {this._getDropDownUserRole(currentUser)}
-                            </Link>
-                            <ul className="dropdown-menu animated flipInX m-t-xs">
-                                {this._getDropDownData(currentUser)}
-                            <li className="divider"></li>
-                                <li><Link to="/logout">Logi välja</Link></li>
-                            </ul>
-                        </div>
+                <div className="stats-label text-color">
+                    <span className="font-extra-bold font-uppercase">{currentUser && currentUser.userProfile.name}</span>
+                    <div className="dropdown">
+                        <Link className="dropdown-toggle" to="#" data-toggle="dropdown">
+                            {this._getDropDownUserRole(currentUser)}
+                        </Link>
+                        <ul className="dropdown-menu animated flipInX m-t-xs">
+                            {this._getDropDownData(currentUser)}
+                        <li className="divider"></li>
+                            <li><Link to="/logout">Logi välja</Link></li>
+                        </ul>
                     </div>
+                </div>
 
-                    {this._getLastPredictions(currentUser)}
+                {this._getLastPredictions(currentUser)}
 
-                </div>    
-            )
-        }
+            </div>    
+        )
     }
 
     _getActivateLink = (currentUser) => {
@@ -96,14 +94,14 @@ export default class Navigation extends Component {
     }
 
     render() {
-
-        const currentUser = Meteor.user();
+        //It works because in JavaScript, true && expression always evaluates to expression, 
+        //and false && expression always evaluates to false.
 
         return (
             <aside id="menu">
                 <div id="navigation">
                     
-                    {this._getLoggedInUserData(currentUser)}
+                    { this._getLoggedInUserData(this.props.currentUser) }
                 
                     <br/>
                 
@@ -114,7 +112,7 @@ export default class Navigation extends Component {
                         <li className=""><Link to="/table">Edetabel</Link></li>
                         <li className=""><Link to="/calendar">Kalender</Link></li>
                         <li className=""><Link to="/rules">Reeglid</Link></li>
-                        { this._getActivateLink(currentUser) }
+                        { this._getActivateLink(this.props.currentUser) }
                     </ul>
                 </div>
             </aside>

@@ -1,10 +1,39 @@
-Meteor.publish('users', function(filter) {
+Meteor.publish('registeredUsers', function(filter) {
+    return Meteor.users.find({roles: { "$in" : ["Registreeritud"]}}, 
+        { fields: { "roles": 1 } } 
+    );
+});
+
+Meteor.publish('tableUsers', function(filter) {
+	var self = this;
+    
+    var subHandle = Meteor.users.find(
+        filter || {}, 
+        { 
+            fields: {  
+                "userProfile.team": 1,
+            }
+        } 
+    );
+       
+    self.ready();
+});
+
+Meteor.publish('currentUser', function(filter) {
 	var self = this;
     
     //Delay the publication to test loading spinner
     //Meteor._sleepForMs(2000);
 
-    var subHandle = Meteor.users.find(filter || {}).observeChanges({
+    var subHandle = Meteor.users.find({_id: self.userId}, 
+        { 
+            fields: {  
+                "userProfile.team": 1,
+                "userProfile.picture": 1,
+                "userProfile.name": 1
+            }
+        } 
+    ).observeChanges({
         added: function(id, fields) {
             self.added("users", id, fields);
         },
