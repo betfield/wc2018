@@ -51,7 +51,7 @@ Meteor.methods({
 		check( userId, String );
 		
 		// Check if logged in as admin and update the actual fixture result if so
-		if (Roles.userIsInRole(userId, ['administrator'])) {
+		if (Roles.userIsInRole(userId, ['Administraator'])) {
 			Fixtures.update({"_id": fixture}, {$set: {"result.homeGoals": homeScore, "result.awayGoals": awayScore}});
 			return Meteor.call("updateAllUsersPredictionPoints", fixture, function(error, result){
 				if (error) {

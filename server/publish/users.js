@@ -1,6 +1,13 @@
 Meteor.publish('registeredUsers', function(filter) {
     return Meteor.users.find({roles: { "$in" : ["Registreeritud"]}}, 
-        { fields: { "roles": 1 } } 
+        {   
+            fields: {  
+                "userProfile.team": 1,
+                "userProfile.picture": 1,
+                "userProfile.name": 1,
+                "roles": 1
+            } 
+        } 
     );
 });
 
@@ -12,6 +19,9 @@ Meteor.publish('tableUsers', function(filter) {
         { 
             fields: {  
                 "userProfile.team": 1,
+                "userProfile.picture": 1,
+                "userProfile.name": 1,
+                "roles": 1
             }
         } 
     );
@@ -30,7 +40,8 @@ Meteor.publish('currentUser', function(filter) {
             fields: {  
                 "userProfile.team": 1,
                 "userProfile.picture": 1,
-                "userProfile.name": 1
+                "userProfile.name": 1,
+                "roles": 1
             }
         } 
     ).observeChanges({
@@ -50,4 +61,17 @@ Meteor.publish('currentUser', function(filter) {
     self.onStop(function () {
         subHandle.stop();
     });
+});
+
+Meteor.publish('allUsers', function(filter) {
+	return Meteor.users.find(filter || {}, 
+        { 
+            fields: {  
+                "userProfile.team": 1,
+                "userProfile.picture": 1,
+                "userProfile.name": 1,
+                "roles": 1
+            }
+        } 
+    );
 });

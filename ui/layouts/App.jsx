@@ -9,6 +9,7 @@ import PredictionsPage from '../pages/PredictionsPage';
 import CalendarPage from '../pages/CalendarPage';
 import TablePage from '../pages/TablePage';
 import LoginPage from '../pages/LoginPage';
+import UsersPage from '../pages/UsersPage';
 
 import Splash from '../../imports/loading/Splash';
 
@@ -32,6 +33,7 @@ export default App = () => (
             <Route exact path="/table" component={TablePage}/>
             <Route exact path="/login" component={LoginPage}/>
             <Route exact path="/logout" component={LogoutPage}/>
+            <Route exact path="/users" component={UsersPage}/>
         </Switch>
     </Router>
 );

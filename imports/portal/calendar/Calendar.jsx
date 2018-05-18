@@ -4,10 +4,10 @@ export default class Calendar extends Component {
 
 	componentDidMount() {
 		var tsStart, tsEnd, firstFixtureDate;
-		var fixtures = Fixtures.find();
+		var fixtures = this.props.fixtures;
 		var calendar_fixtures = [];
 		
-		if (fixtures.count() !== 0) {
+		if (fixtures.length !== 0) {
 			fixtures.forEach(function (fixture){
 
 				tsStart = new Date(fixture.ts);		

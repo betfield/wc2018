@@ -89,14 +89,15 @@ export default class Navigation extends Component {
                 return (
                     <li className="text-activate"><Link to="/payments">Aktiveeri</Link></li>
                 )
+            } else if (Roles.userIsInRole(currentUser,'Administraator')) {
+                return (
+                    <li className="text-activate"><Link to="/users">Kasutajad</Link></li>
+                )
             }
         }
     }
 
     render() {
-        //It works because in JavaScript, true && expression always evaluates to expression, 
-        //and false && expression always evaluates to false.
-
         return (
             <aside id="menu">
                 <div id="navigation">

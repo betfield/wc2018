@@ -5,8 +5,10 @@ import CalendarView from './CalendarView';
 export default CalendarContainer = withTracker(() => {
     const fixturesHandle = Meteor.subscribe('fixtures');
     const ready = fixturesHandle.ready();
+    const fixtures = Fixtures.find().fetch();
 
     return {
-        ready
+        ready,
+        fixtures
     };
 })(CalendarView);

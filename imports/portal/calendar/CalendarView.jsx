@@ -11,7 +11,7 @@ export default class CalendarView extends Component {
     render() {
         return (
             <View title="Kalender" ready={this.props.ready}>    
-                <Calendar/>
+                <Calendar fixtures={this.props.fixtures} />
             </View>
         )
     }
