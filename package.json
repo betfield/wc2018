@@ -10,7 +10,7 @@
     "codemirror": "^5.36.0",
     "jquery": "^2.2.4",
     "meteor-node-stubs": "^0.3.2",
-    "moment": "^2.21.0",
+    "moment": "^2.22.1",
     "react": "^16.3.2",
     "react-addons-create-fragment": "^15.6.2",
     "react-addons-css-transition-group": "^15.6.2",
