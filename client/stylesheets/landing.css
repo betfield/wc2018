@@ -99,7 +99,7 @@
     }
 
     #landing .navbar-fixed-top .navbar-brand {
-        font-size: 2em;
+        font-size: 30px;
         -webkit-transition: all .3s;
         -moz-transition: all .3s;
         transition: all .3s;
@@ -110,7 +110,7 @@
     }
 
     #landing .navbar-fixed-top.navbar-shrink .navbar-brand {
-        font-size: 1.5em;
+        font-size: 22.5px;
     }
 }
 
@@ -126,6 +126,7 @@
 
 #landing .navbar .navbar-nav {
     letter-spacing: 1px;
+    font-size: 15px;
 }
 
 #landing .navbar .navbar-nav li a:focus {
@@ -143,7 +144,7 @@
 
 #landing section h2 {
     margin: 0;
-    font-size: 3em;
+    font-size: 45px;
     padding-bottom: 100px;
 }
 
@@ -151,6 +152,7 @@
     color: #fff;
     background: #ff3d3d;
     font-size: 20px;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #landing section.rules a {
@@ -162,7 +164,7 @@
 #landing section.rules a:active,
 #landing section.rules a.active {
     outline: 0;
-    color: #2c3e50;
+    color: #ff3d3d;
 }
 
 @media(max-width:767px) {
@@ -181,8 +183,16 @@
     margin-right: auto;
 }
 
+#landing section.how-to-play .col-lg-12,
+#landing section.contact .col-lg-12 {
+    text-align: center;
+    color: #2c3e50;
+}
+
 #landing section.how-to-play .col-lg-4 {
     text-align: center;
+    color: #2c3e50;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #landing section.how-to-play a,

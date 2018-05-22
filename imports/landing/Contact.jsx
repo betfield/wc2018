@@ -26,11 +26,11 @@ export default class Contact extends Component {
 
     render() {
         return (            
-            <section id="contact">
+            <section id="contact" className="contact">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 text-center">
-                            <h2>Võta meiega ühendust</h2>
+                            <h2>Küsimuste korral kirjuta</h2>
                         </div>
                     </div>
                     <div className="row">
