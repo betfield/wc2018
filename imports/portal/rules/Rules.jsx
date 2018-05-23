@@ -19,10 +19,13 @@ export default class Rules extends Component {
                                         Peale esimest sisselogimist registreeritakse sind mitteaktiivse kasutajana. See tähendab, et sul on ligipääs enamustele süsteemi osadele, kuid sinu ennustused mängus veel arvesse ei lähe.
                                     </li>
                                     <li>
-                                        Et sinu ennustus arvesse läheks, tuleb sul oma kasutaja aktiveerida, kasutades vastavaid viiteid navigatsiooni ribalt. Kasutaja aktiveerimiseks tuleb tasuda osavõtutasu €20, mida saab teha jälgides juhiseid 'Aktiveeri ennustused' leheküljelt ning kasutades omale meelepärast maksevahendit. Toetatud on kõik suuremad krediitkaardid ning ka otsemaksed Paypali kontolt.
+                                        Et sinu ennustus arvesse läheks, tuleb sul oma kasutaja aktiveerida. Selle jaoks tuleb tasuda osavõtutasu <strong>€25</strong> Mittetulundusühing FC Twister pangaarvele EE282200221030434946 hiljemalt <strong>13. juuni 2018 kl 23:59</strong>.
                                     </li>
                                     <li>
-                                        Kui oled osavõtutasu ära maksnud, aktiveeritakse sinu kasutaja automaatselt ning osaled mängus. 
+                                        Osavõtutasust läheb <strong>€20</strong> ennustusmängu auhinnafondi ning <strong>€5</strong> korraldamisega seotud kulude katteks.
+                                    </li>
+                                    <li>
+                                        Hiljemalt 24h peale osavõtutasu laekumist aktiveeritakse sinu kasutaja ning osaled mängus. 
                                     </li>
                                 </ul>
                                 <br/>
@@ -30,16 +33,16 @@ export default class Rules extends Component {
                                 <br/>
                                 <ul>
                                     <li>
-                                        Osaleda võib iga spordisõber, kellel eksisteerib kehtiv sotsiaalmeedia (Facebook, Google või Twitter) konto.
+                                        Mängus saavad kaasa lüüa kõik jalgpallisõbrad, kellel vanust üle 21 eluaasta ning olemas kehtiv sotsiaalmeedia konto (Facebook, Google või Twitter).
                                     </li>
                                     <li>
-                                        Üks mängija võib omada mitut ennustust, st võid registreerida läbi kõigi enda nimel eksisteerivate kontode. Mida rohkem ennustusi sisestad, seda suuremad shansid on teoorias ka võita.  
+                                        Üks mängija võib omada mitut ennustust, mis tähendab, et soovi korral võib registreerida läbi kõigi enda nimel eksisteerivate kontode. Iga ennustuse eest on vajalik tasuda eraldi osavõtutasu. 
                                     </li>
                                     <li>
-                                        Ennustusmängu korraldajad kinnitavad, et ühegi kasutaja andmeid süsteemiväliselt ei levitada ega muul otstarbel ei kasutata.
+                                        Ennustusmängu korraldajad kinnitavad, et ühegi kasutaja andmeid süsteemiväliselt ei levitata ega muul otstarbel ei kasutata. Täpsema info kohta, milliseid isikuga seotud andmeid süsteem kasutab, palume ühendust võtta emaili teel: info [at] fctwister . ee
                                     </li>
                                     <li>
-                                        Iga kasutaja vastutab oma osaluse ja mängu pandava raha eest ise. Kui kardad, et osavõtumaksu tasumine tekitab sulle finantsilisi probleeme, siis parem ära mängi!
+                                        <strong>Iga mängija vastutab oma ennustusvõistluse osaluse eest ise. Kui sul vanust vähem kui 21 või tunned, et osavõtumaksu tasumine tekitab finantsilisi probleeme, siis ära mängi!</strong>
                                     </li>
                                 </ul>
                             </div>
@@ -52,7 +55,7 @@ export default class Rules extends Component {
                                         Ennustatakse turniiri iga mängu normaalaja skoori.
                                     </li>
                                     <li>
-                                        Mäng on jagatud seitsmeks (7) vooruks, vastavalt sellele kui palju mänge peab üks meeskond mängima, et tulla Euroopa meistriks. Need voorud koosnevad järgmistest osadest:
+                                        Ennustusvõistlus on jagatud seitsmeks (7) vooruks, vastavalt sellele kui palju mänge peab üks meeskond mängima, et tulla maailmameistriks. Need voorud koosnevad järgmistest osadest:
                                         <ul>
                                             <li>I voor - iga meeskonna 1. alagrupimäng</li>
                                             <li>II voor - iga meeskonna 2. alagrupimäng</li>
@@ -60,7 +63,7 @@ export default class Rules extends Component {
                                             <li>IV voor - kaheksandikfinaalid</li>
                                             <li>V voor - veerandfinaalid</li>
                                             <li>VI voor - poolfinaalid</li>
-                                            <li>VII voor - finaal</li>
+                                            <li>VII voor - finaal ja 3. koha mäng</li>
                                         </ul>
                                     </li>
                                     <li>
@@ -70,10 +73,10 @@ export default class Rules extends Component {
                                         Vooru arvesse minemiseks peab olema eelnevalt kantud ka kasutaja aktiveerimistasu. See tähendab, kui kasutaja pole aktiveeritud 1h enne 1. vooru algust, siis selle vooru tulemused arvesse ei lähe. Kui sama kasutaja aktiveerib oma kasutaja peale 1. vooru algust, aga ennem 2. vooru lukustumist, siis tema ennustused alates 2. voorust lähevad arvesse. Sama loogika kehtib ka hilisemate aktiveerimistega, mis tähendab, et mänguga võib liituda igal ajal.
                                     </li>
                                     <li>
-                                        Alagrupivoorude tulemusi on võimalik ette täita ka enne eelmise vooru lukustamist. Finaalide ennustuste sisestamine muutub võimalikuks peale vastava kohtumise meeskondade selgumist.
+                                        Alagrupivoorude tulemusi on võimalik ette täita ka enne eelmise vooru lukustumist. Finaalide ennustuste sisestamine muutub võimalikuks peale vastavate kohtumiste meeskondade selgumist.
                                     </li>
                                     <li>
-                                        Kokku osaleb ennustuses 51 mängu, st kõik turniiri kohtumised lähevad arvesse.
+                                        Kokku koosneb ennustus 64 mängust, st kõik maailmameistrivõistluste finaalturniiri kohtumised lähevad arvesse.
                                     </li>
                                     <li>
                                         Kui mõni mäng peaks minema lisaajale, siis lisaaja tulemused käesolevat ennustusmängu kuidagi ei mõjuta.
@@ -88,12 +91,13 @@ export default class Rules extends Component {
                                     <li>
                                         Iga ennustuse eest on võimalik punkte saada allolevate kriteeriumite järgi:
                                         <ul>
-                                            <li>Täpse normaalaja skoori õigesti ennustamine annab kokku 5 punkti</li>
-                                            <li>Õige normaalaja tulemuse (õige võitja või viik, kuid vale skoor) ennustamine annab 2 punkti. Sealjuures õige väravatevahe ennustamine (k.a. viik) annab lisaks juurde 1 punkti.</li>
+                                            <li>Täpse normaalaja skoori õigesti ennustamine annab kokku <strong>5 punkti</strong>.</li>
+                                            <li>Vale skoori kuid õige mängu võitja ennustamine annab <strong>2 punkti</strong>. Sealjuures õige väravatevahe ennustamine annab lisaks juurde <strong>1 punkti</strong>.</li>
+                                            <li>Vale skoori kuid viigi õigesti ennustamine annab <strong>3 punkti</strong>.</li>
                                         </ul>
                                     </li>
                                     <li>
-                                        Kokku on seega võimalik teenida maksimaalselt 51 x 5 = 255 punkti.
+                                        Kokku on seega võimalik teenida maksimaalselt 64 x 5 = 320 punkti.
                                     </li>
                                     <li>
                                         Mängu paremusjärjestus moodustatakse mängijate ennustuste pealt teenitud punktide kogusumma alusel (suurem summa tagab kõrgema koha).
@@ -108,10 +112,13 @@ export default class Rules extends Component {
                                         </ul>
                                     </li>
                                     <li>
-                                        Lisaks lõplikule paremusjärjestusele on võimalik saada ka "eripreemia" järgnevate voorude võitude eest: I, II, III ning (IV - VII summa). Lahti seletades tähendab see seda, et selgitame eraldi välja iga alagrupivooru ning ka finaalmängude parima ennustaja, kellest igaüks saab enda sisseostu tagasi (üks mängija võib saada ka mitu võitu). 
+                                        Lisaks lõplikule paremusjärjestusele on võimalik saada ka "eriauhind" järgnevate voorude võitude eest: I, II, III ning (IV - VII summa). Lahti seletades tähendab see, et selgitame välja 4 eriauhinda, üks iga alagrupivooru ning üks finaalmängude parima ennustaja jaoks, mille väärtuseks on ennustusmängu sisseostu summa. Üks mängija võib saada ka mitu eriauhinda. 
                                     </li>
                                     <li>
-                                        Peale eripreemiate mahaarvestamist toimub ülejäänud auhinnafondi jagamine järgnevalt:
+                                        Peale eriauhindade ja korralduskulude mahaarvestamist toimub ülejäänud auhinnafondi jagamine ennustusmängu paremate vahel vastavalt laialt levinud turniiripokkeri väljamakse skeemile, mille leiab <a href="http://www.wsop.com/how-to-play-poker/mtt-tournament-payouts/">siit</a>.
+                                    </li>
+                                    <li>
+                                        Näide: 31-40 osaleja puhul jaguneks auhinnafond antud tabeli järgi järgmiselt: 
                                     </li>
                                     <br/>
                                     <ul>
@@ -123,7 +130,7 @@ export default class Rules extends Component {
                                                 </tr>
                                                 <tr>
                                                     <td>I</td>
-                                                    <td>50%</td>
+                                                    <td>40%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>II</td>
@@ -131,11 +138,11 @@ export default class Rules extends Component {
                                                 </tr>
                                                 <tr>
                                                     <td>III</td>
-                                                    <td>15%</td>
+                                                    <td>20%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>IV</td>
-                                                    <td>10%</td>
+                                                    <td>15%</td>
                                                 </tr>
                                             </tbody>
                                         </table>

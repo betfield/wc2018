@@ -61,6 +61,19 @@ export default class Header extends Component {
         });
     }
     
+    getPortalLink() {
+        if(Meteor.settings.public.env === "Sandbox") {
+            return null
+        } else {
+            return (
+                <Link to="/portal" className="btn btn-lg btn-outline">
+                    SISENE ENNUSTUSLEHELE 
+                    <i className="fa fa-sign-in" aria-hidden="true"></i>
+                </Link>
+            )
+        }
+    }
+
     render() {
         return (
             <header>
@@ -68,10 +81,7 @@ export default class Header extends Component {
                     <div className="row">
                         <div className="col-lg-12">
                             <div id="login" className="login">
-                                <Link to="/portal" className="btn btn-lg btn-outline">
-                                    SISENE ENNUSTUSLEHELE 
-                                    <i className="fa fa-sign-in" aria-hidden="true"></i>
-                                </Link>
+                                {this.getPortalLink()}
                             </div>
                             <img className="img-responsive" src="img/profile.png" alt="" />
                         </div>

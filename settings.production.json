@@ -1,0 +1,22 @@
+{
+	"public" : {
+		"env": "Production",
+		"FOLDER_FLAGS": "/teams/flags/"
+	},
+	"private": {
+		"BF_EMAIL": "betfieldou@gmail.com",
+		"TZ_HOURS": 4,
+		
+		"MAIL_URL": "smtps://postmaster%40sandbox1038697df0464bc4a649b509bb2754ae.mailgun.org:438d361774c064645df07208c8b95d17-db1f97ba-42666fe5@smtp.mailgun.org:465"
+	},
+	"loggly": {
+		"token": "c9b2a00e-c830-403b-b1b6-260c4c3c9c0d",
+		"subdomain": "betfield.loggly.com",
+		"auth": {
+			"username": "betfield",
+			"password": "B3tfield"
+		},
+		"tags": ["wc2018"],
+		"json": "true"
+	}
+}

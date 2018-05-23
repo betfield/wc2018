@@ -10,27 +10,8 @@ export default class RulesView extends Component {
         return (
             <View title="Reeglid">    
                 <Rules/>
-                
-                <div className="row">
-                    <div className="col-md-12 text-center">
-                        <button id="rules-login" type="submit" className="btn btn-success">Logi sisse ja alusta mängimist</button>
-                    </div>
-                </div>
-
             </View>
         )
     }
 
 }
-
-
-
-/*
-Template.rules.events({
-    'click #rules-login' : function(event) {
-        // Prevent default browser form submit
-        event.preventDefault();
-        Router.go('login');
-    }
-});
-*/

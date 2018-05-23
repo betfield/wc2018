@@ -22,18 +22,35 @@ const LogoutPage = (props) => {
     );
 }
 
+getRoutes = () => {
+    if (Meteor.settings.public.env === "Sandbox") {
+        return (
+            <Router>
+                <Switch>
+                    <Route exact path="/" component={LandingPage}/>
+                    <Route exact path="/rules" component={RulesPage}/>
+                </Switch>
+            </Router>
+        )
+    } else {
+        return (
+            <Router>
+                <Switch>
+                    <Route exact path="/" component={LandingPage}/>
+                    <Route exact path="/rules" component={RulesPage}/>
+                    <Route exact path="/portal" component={PredictionsPage}/>
+                    <Route exact path="/predictions" component={PredictionsPage}/>
+                    <Route exact path="/calendar" component={CalendarPage}/>
+                    <Route exact path="/table" component={TablePage}/>
+                    <Route exact path="/login" component={LoginPage}/>
+                    <Route exact path="/logout" component={LogoutPage}/>
+                    <Route exact path="/users" component={UsersPage}/>
+                </Switch>
+            </Router>
+        )
+    }
+}
+
 export default App = () => (
-    <Router>
-        <Switch>
-            <Route exact path="/" component={LandingPage}/>
-            <Route exact path="/portal" component={PredictionsPage}/>
-            <Route exact path="/rules" component={RulesPage}/>
-            <Route exact path="/predictions" component={PredictionsPage}/>
-            <Route exact path="/calendar" component={CalendarPage}/>
-            <Route exact path="/table" component={TablePage}/>
-            <Route exact path="/login" component={LoginPage}/>
-            <Route exact path="/logout" component={LogoutPage}/>
-            <Route exact path="/users" component={UsersPage}/>
-        </Switch>
-    </Router>
+    getRoutes()    
 );

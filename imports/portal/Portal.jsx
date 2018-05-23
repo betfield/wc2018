@@ -65,12 +65,22 @@ export default class PortalPage extends Component {
         $('body').addClass('fixed-navbar');
     }
 
+    getPortalLink() {
+        if(Meteor.settings.public.env === "Sandbox") {
+            return null
+        } else if (this.props.ready) {
+            return <Navigation currentUser={this.props.currentUser}/>
+        } else {
+            return <Splash/>
+        }
+    }
+
     render() {
 
         return (
             <div id="portal">
                 <HeaderContainer/>
-                {this.props.ready ? <Navigation currentUser={this.props.currentUser}/> : <Splash/>}
+                {this.getPortalLink()}
                 <div id="wrapper">
                     {this.props.children}                    
                     <Footer/>

@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 
 export default class Navigation extends Component {
 
+    getNavbarBrand() {
+        if(Meteor.settings.public.env === "Sandbox") {
+            return <a className="navbar-brand" href="#page-top">MM 2018 ENNUSTUSMÄNG</a>
+        } else {
+            return <a className="navbar-brand" href="#page-top">Registreerunuid: {this.props.userCount}</a>
+        }
+    }
+
     render() {
         return (        
             <nav className="navbar navbar-default navbar-fixed-top">
@@ -13,7 +21,7 @@ export default class Navigation extends Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a className="navbar-brand" href="#page-top">Registreerunuid: {this.props.userCount}</a>
+                        {this.getNavbarBrand()}
                     </div>
 
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
