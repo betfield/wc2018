@@ -8,14 +8,14 @@ export default class Rules extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 text-center">
-                            <h2>Reeglid</h2>
+                            <h2>Reeglid lühidalt</h2>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-4 col-lg-offset-2">
                             <ul>
                                 <li>
-                                    Ennustatakse MM finaalturniiri iga mängu normaalaja täpset skoori.
+                                    Ennustatakse MM finaalturniiri iga mängu <u>normaalaja</u> täpset skoori.
                                 </li>
                                 <li>
                                     Ennustus on jagatud seitsmeks (7) vooruks, vastavalt sellele kui palju mänge peab üks meeskond läbima, et tulla maailmameistriks.
@@ -27,12 +27,12 @@ export default class Rules extends Component {
                         </div>
                         <div className="col-lg-4">
                             <ul>
-                                <li>Täpse normaalaja skoori õigesti ennustamine annab kokku 5 punkti. Kui skoorile pihta ei saanud, siis mängu võitja õigesti ennustamine annab 2 punkti ning õige väravatevahe sellele lisaks 1 punkti juurde. Viigi õigesti ennustamine annab 3p.</li>
+                                <li>Täpse skoori õigesti ennustamine annab kokku 5p. Mängu võitja õigesti ennustamise eest saab 2p ning õige väravatevahe lisaks 1p. Viigi õigesti ennustamine annab 3p.</li>
                                 <li>
                                     Kokku on seega võimalik teenida maksimaalselt 64 x 5 = 320 punkti.
                                 </li>
                                 <li>
-                                    Auhinnafond jaotatakse vastavalt üldisele paremusjärjestusele. Lisaks on võimalik võita ka eriauhindu üksikute voorude võitude eest.  
+                                    Auhinnafond jaotatakse vastavalt üldisele paremusjärjestusele. Lisaks eriauhinnad üksikute voorude võitjatele.  
                                 </li>
                             </ul>
                         </div>
@@ -41,8 +41,8 @@ export default class Rules extends Component {
                         <br/>
                         <div className="col-lg-8 col-lg-offset-2 text-center page-scroll">
                             <h3>Tekkis huvi?</h3>
-                            <a href="/register" className="btn btn-lg btn-outline">
-                                Registreeri end siin
+                            <a href="/rules" className="btn btn-lg btn-outline">
+                                Reeglitest pikemalt siin
                             </a>
                         </div>
                     </div>

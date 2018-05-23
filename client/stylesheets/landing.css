@@ -13,15 +13,10 @@
 }
 
 #landing .navbar-default .navbar-nav > li > a:hover,
-#landing .navbar-default .navbar-nav > li > a:focus {
-    color: #ff3d3d;
-    background-color: transparent;
-}
-
 #landing .navbar-default .navbar-brand:hover,
+#landing .navbar-default .navbar-nav > li > a:focus, 
 #landing .navbar-default .navbar-brand:focus {
     color: #ff3d3d;
-    background-color: transparent;
 }
 
 #landing h1,
@@ -165,6 +160,10 @@
 #landing section.rules a.active {
     outline: 0;
     color: #ff3d3d;
+}
+
+#landing section.rules .col-lg-4 li {
+    padding-bottom: 15px;
 }
 
 @media(max-width:767px) {

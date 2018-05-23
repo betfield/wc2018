@@ -15,10 +15,10 @@ export default class HowToPlay extends Component {
                     
                     <div className="row mt centered">
                         <div className="col-lg-4">
-                            <img src="img/fb.png" width="180" alt="" />
+                            <img src="img/social.gif" width="180" alt="" />
                             <br/>
                             <h4>1 - Registreeri end</h4>
-                            <p>Võid sisselogimiseks kasutada ka oma <strong>Facebook</strong>'i kontot.</p>
+                            <p>Selleks kasuta endale sobivat sotsiaalmeedia kontot: <strong>Facebook</strong>, <strong>Google</strong> või <strong>Twitter</strong>.</p>
                         </div>
 
                         <div className="col-lg-4">
@@ -33,7 +33,7 @@ export default class HowToPlay extends Component {
                             <img src="img/check.png" width="180" alt=""/>
                             <br/>
                             <h4>3 - Kinnita oma osalus</h4>
-                            <p>Selleks tuleb ära kanda osavõtu tasu <strong>€20</strong>. Ja nii lihtne see ongi!</p>
+                            <p>Selleks tuleb üle kanda osavõtu tasu <strong>€25</strong> reeglites näidatud tingimustel. Ja nii lihtne see ongi!</p>
                         </div>
                     </div>
                 </div>

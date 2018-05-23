@@ -51,7 +51,11 @@ export default class Header extends Component {
 
                 $('html, body').stop().animate({
                     scrollTop: $($anchor.attr('href')).offset().top
-                }, 1500, 'easeInOutExpo');
+                }, 1500, 'easeInOutExpo', () => {
+                    $('li.page-scroll.active a:focus').blur();
+                    $('div.navbar-header.page-scroll a:focus').blur();
+                });
+                
                 event.preventDefault();
             });
         });
@@ -65,7 +69,7 @@ export default class Header extends Component {
                         <div className="col-lg-12">
                             <div id="login" className="login">
                                 <Link to="/portal" className="btn btn-lg btn-outline">
-                                    SISENE ENNUSTUSLEHELE
+                                    SISENE ENNUSTUSLEHELE 
                                     <i className="fa fa-sign-in" aria-hidden="true"></i>
                                 </Link>
                             </div>

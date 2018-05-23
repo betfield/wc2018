@@ -30,7 +30,7 @@ export default class Contact extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 text-center">
-                            <h2>Küsimuste korral kirjuta</h2>
+                            <h2>Kirjuta meile</h2>
                         </div>
                     </div>
                     <div className="row">
