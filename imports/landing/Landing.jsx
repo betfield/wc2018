@@ -13,7 +13,7 @@ import Splash from '../loading/Splash';
 export default class Landing extends Component {
 
     render() {
-
+	
         if (this.props.ready) {
             return (
                 <div id="landing">
