@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Rules extends Component {
 
@@ -41,9 +42,7 @@ export default class Rules extends Component {
                         <br/>
                         <div className="col-lg-8 col-lg-offset-2 text-center page-scroll">
                             <h3>Tekkis huvi?</h3>
-                            <a href="/rules" className="btn btn-lg btn-outline">
-                                Reeglitest pikemalt siin
-                            </a>
+                            <Link to="/rules" className="btn btn-lg btn-outline">Reeglitest pikemalt siin</Link>
                         </div>
                     </div>
                 </div>

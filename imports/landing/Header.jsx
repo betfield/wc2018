@@ -47,6 +47,7 @@ export default class Header extends Component {
         // jQuery for page scrolling feature - requires jQuery Easing plugin
         $(function() {
             $('body').on('click', '.page-scroll a', function(event) {
+                Meteor.call("clientLog", "page-scroll link clicked");
                 var $anchor = $(this);
 
                 $('html, body').stop().animate({

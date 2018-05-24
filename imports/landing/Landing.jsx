@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 
 import Navigation from './Navigation';
@@ -13,8 +14,10 @@ import Splash from '../loading/Splash';
 export default class Landing extends Component {
 
     render() {
-	
+
         if (this.props.ready) {
+            Meteor.call("clientLog", "LandingPage props ready");
+
             return (
                 <div id="landing">
                     <Navigation userCount = {this.props.usersCount}/>
@@ -27,6 +30,7 @@ export default class Landing extends Component {
                 </div>
             )
         } else {
+            Meteor.call("clientLog", "LandingPage props loading..");
             return <Splash/>
         }
     }
