@@ -62,7 +62,12 @@ export default class PortalPage extends Component {
         });
     
         // FIXED NAVBAR
-        $('body').addClass('fixed-navbar');
+
+        if(Meteor.settings.public.env === "Sandbox") {
+            $('body').addClass('fixed-navbar hide-sidebar');
+        } else {
+            $('body').addClass('fixed-navbar');
+        }
     }
 
     getPortalLink() {
