@@ -43,9 +43,9 @@ const logger = {
             console.log(err.stack);
         }
     },
-    data: (message, obj) => {
+    data: (message, tag, obj) => {
         try {
-            console.log("[data]: " + message);
+            console.log(tag + ": " + message);
             Logger.trace({
                 "message": message, 
                 "object": obj

@@ -1,14 +1,14 @@
 Meteor.methods({
     clientLog: function (message) {
         check(message, String);
-        Log.tag(message, ['wc2018-client']);
+        Log.tag(message, ['client']);
     },
-    clientError: function (message, errorObj) {
+    clientError: function (message, obj) {
         check(message, String);
-        check(errorObj, Object);
+        check(obj, Object);
 
-        errorObj.tag = ['wc2018-client'];
+        const tag = '[error-client]';
 
-        Log.data(message, errorObj);
+        Log.data(message, tag, obj);
     }
 });
