@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import PortalPage from './PortalPage';
-import Table from '../../components/table/Table';
+import TableContainer from '../../components/table/TableContainer';
 
 export default class TablePage extends Component {
 
@@ -18,7 +18,7 @@ export default class TablePage extends Component {
     render() {
         return (
             <PortalPage title="Edetabel">
-                <Table/>
+                <TableContainer/>
             </PortalPage>
         )
     }

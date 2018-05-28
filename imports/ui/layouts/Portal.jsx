@@ -74,10 +74,8 @@ export default class PortalPage extends Component {
     getPortalLink() {
         if(Meteor.settings.public.env === "Sandbox") {
             return null
-        } else if (this.props.ready) {
-            return <Navigation currentUser={this.props.currentUser}/>
         } else {
-            return <Splash/>
+            return <Navigation currentUser={this.props.currentUser}/>
         }
     }
 

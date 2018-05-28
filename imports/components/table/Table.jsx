@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
 
-import UserPointsTable from './UserPointsTable';
-
-export default class Table extends Component {
+export default class UserPoints extends Component {
 
     render() {
         return (
-            <UserPointsTable/>
+            null
         )
     }
 }
 
 /*
-
-
-                        {{#if isInRole 'administrator'}}
-                            {{> Template.dynamic template="userTable" data=userData}}
-                        {{/if}}
 
 Template.table.helpers({
     userPointsData: function() {
