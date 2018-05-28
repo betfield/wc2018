@@ -4,11 +4,11 @@ import Splash from '../loading/Splash';
 
 export default class Calendar extends Component {
 
-	componentDidMount() {
-		var tsStart, tsEnd, firstFixtureDate;
-		var fixtures = this.props.fixtures;
-		var calendar_fixtures = [];
-		
+	getCalendarFixtures = () => {
+		let tsStart, tsEnd, firstFixtureDate;
+		let fixtures = this.props.fixtures;
+		let calendar_fixtures = [];
+
 		if (fixtures.length !== 0) {
 			fixtures.forEach(function (fixture){
 
@@ -17,8 +17,8 @@ export default class Calendar extends Component {
 				tsStart.setHours(tsStart.getHours()+2); // set fixture start date 2h later (UTC+2)
 				tsEnd.setHours(tsStart.getHours()+2); // set fixture end date 2h later than start
 				
-				var title;
-				var score;
+				let title;
+				let score;
 				
 				if (fixture.result && fixture.result.homeGoals && fixture.result.awayGoals) {
 					score = " " + fixture.result.homeGoals + ":" + fixture.result.awayGoals;
@@ -31,7 +31,7 @@ export default class Calendar extends Component {
 				} else {
 					title = fixture.home_team.name + " vs " + fixture.away_team.name + score;
 				}
-				
+
 				calendar_fixtures.push({
 					id: fixture._id,
 					title: title,
@@ -42,11 +42,21 @@ export default class Calendar extends Component {
 				});
 
 			}); // end of for
-		
-			firstFixtureDate = calendar_fixtures[0].start;
+		}
+
+		return calendar_fixtures;
+	}
+	
+	getFirstFixtureDate = (date) => {
+		if (date) {
+			return date;
 		} else {
-			firstFixtureDate = new Date();
-		};
+			return new Date();
+		}
+	}
+
+	componentDidUpdate() {
+		const calendar_fixtures = this.getCalendarFixtures();
 
 		$('#calendar').fullCalendar({
 			schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
@@ -78,7 +88,7 @@ export default class Calendar extends Component {
 			timeFormat: 'HH:mm', // uppercase H for 24-hour clock
 			timezone: 'local',
 			firstDay: 1,
-			defaultDate: firstFixtureDate,
+			defaultDate: this.getFirstFixtureDate(calendar_fixtures[0].start),
 			monthNames: [
 					TAPi18n.__('month_jan'),
 					TAPi18n.__('month_feb'),

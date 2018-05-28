@@ -18,14 +18,6 @@ export default class View extends Component {
         this.setState({ groupSelected: group });
     }
 
-    getContent() {
-        if (this.props.ready || this.props.ready == null) {
-            return this.props.children;
-        } else {
-            return <Splash/>;
-        }
-    }
-
     render() {
         return (
             <div className="animate-panel" >
@@ -46,7 +38,7 @@ export default class View extends Component {
                                             </div>
                                         </div>
 
-                                        {this.getContent()}
+                                        {this.props.children}
 
                                     </div>
                                 </div>
