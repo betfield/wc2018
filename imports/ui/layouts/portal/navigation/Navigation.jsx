@@ -17,7 +17,7 @@ export default class Navigation extends Component {
         const userRoleName = Roles.getRolesForUser(Meteor.userId());
         let className = "text-activate";
 
-        if (Roles.userIsInRole(currentUser,'Registreeritud')) {
+        if (Roles.userIsInRole(currentUser,'Aktiveeritud')) {
             className = "text-muted";
         } else if (Roles.userIsInRole(currentUser,'Administraator')) {
             className = "text-admin";
@@ -29,9 +29,9 @@ export default class Navigation extends Component {
     }
 
     getDropDownData = (currentUser) => {
-        if (Roles.userIsInRole(currentUser,'Registreerimata')) {
+        if (Roles.userIsInRole(currentUser,'Aktiveerimata')) {
             return (
-                <li><Link to="/payments">Aktiveeri ennustus</Link></li>
+                <li><Link to="/activate">Aktiveeri ennustus</Link></li>
             )
         } else {
             return (
@@ -41,7 +41,7 @@ export default class Navigation extends Component {
     }
 
     getLastPredictions = (currentUser) => {
-        if (Roles.userIsInRole(currentUser,'Registreeritud')) {
+        if (Roles.userIsInRole(currentUser,'Aktiveeritud')) {
             return (
                 <div>
                     <h4 className="font-extra-bold m-b-xs">
@@ -55,7 +55,7 @@ export default class Navigation extends Component {
     }
                                 
     getLoggedInUserData = (currentUser) => {
-        if (currentUser !== undefined && currentUser.userProfile !== undefined) {
+        if (currentUser !== undefined && currentUser !== null && currentUser.userProfile !== undefined) {
 
             return (
                 <div className="profile-picture">
@@ -65,7 +65,7 @@ export default class Navigation extends Component {
                     </Link>
 
                     <div className="stats-label text-color">
-                        <span className="font-extra-bold font-uppercase">{currentUser && currentUser.userProfile.name}</span>
+                        <span className="font-extra-bold font-uppercase">{currentUser.userProfile.name}</span>
                         <div className="dropdown">
                             <Link className="dropdown-toggle" to="#" data-toggle="dropdown">
                                 {this.getDropDownUserRole(currentUser)}
@@ -88,9 +88,9 @@ export default class Navigation extends Component {
     getActivateLink = (currentUser) => {
 
         if (currentUser !== undefined) {
-            if (Roles.userIsInRole(currentUser,'Registreerimata')) {
+            if (Roles.userIsInRole(currentUser,'Aktiveerimata')) {
                 return (
-                    <li className="text-activate"><Link to="/payments">Aktiveeri</Link></li>
+                    <li className="text-activate"><Link to="/activate">Aktiveeri</Link></li>
                 )
             } else if (Roles.userIsInRole(currentUser,'Administraator')) {
                 return (
@@ -115,6 +115,7 @@ export default class Navigation extends Component {
                         <li className=""><Link to="/predictions">Ennustused</Link></li>
                         <li className=""><Link to="/table">Edetabel</Link></li>
                         <li className=""><Link to="/calendar">Kalender</Link></li>
+                        <li className=""><Link to="/fixtures">Tulemused</Link></li>
                         <li className=""><Link to="/rules">Reeglid</Link></li>
                         { this.getActivateLink(this.props.currentUser) }
                     </ul>

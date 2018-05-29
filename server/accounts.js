@@ -1,7 +1,7 @@
 UserRoles = {
 	admin: 'Administraator',
-	regular: 'Registreerimata',
-	registered: 'Registreeritud'
+	regular: 'Aktiveerimata',
+	registered: 'Aktiveeritud'
 };
 
 

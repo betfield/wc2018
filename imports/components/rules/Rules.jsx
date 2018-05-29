@@ -19,13 +19,13 @@ export default class Rules extends Component {
                                         Peale esimest sisselogimist registreeritakse sind mitteaktiivse kasutajana. See tähendab, et sul on ligipääs enamustele süsteemi osadele, kuid sinu ennustused mängus veel arvesse ei lähe.
                                     </li>
                                     <li>
-                                        Et sinu ennustus arvesse läheks, tuleb sul oma kasutaja aktiveerida. Selle jaoks tuleb tasuda osavõtutasu <strong>€25</strong> Mittetulundusühing FC Twister pangaarvele EE282200221030434946 hiljemalt <strong>13. juuni 2018 kl 23:59</strong>.
+                                        Et sinu ennustus arvesse läheks, tuleb sul oma kasutaja aktiveerida. Selle jaoks on vaja tasuda <strong>€25</strong> vastavalt juhistele, millele saad ligi peale sisselogimist, kasutades linki <strong>Aktiveeri</strong>.
                                     </li>
                                     <li>
                                         Osavõtutasust läheb <strong>€20</strong> ennustusmängu auhinnafondi ning <strong>€5</strong> korraldamisega seotud kulude katteks.
                                     </li>
                                     <li>
-                                        Hiljemalt 24h peale osavõtutasu laekumist aktiveeritakse sinu kasutaja ning osaled mängus. 
+                                        Hiljemalt 24h peale osavõtutasu laekumist aktiveeritakse sinu ennustus ning osaled mängus. Ennustuse staatus on näidatud profiilinime all olevas tekstis. 
                                     </li>
                                 </ul>
                                 <br/>

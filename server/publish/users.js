@@ -1,6 +1,6 @@
 Meteor.publish('registeredUsers', function(filter) {
 	console.log("Registered users publish funciotn");
-    return Meteor.users.find({roles: { "$in" : ["Registreeritud"]}}, 
+    return Meteor.users.find({roles: { "$in" : ["Aktiveeritud"]}}, 
         {   
             fields: {  
                 "userProfile.team": 1,

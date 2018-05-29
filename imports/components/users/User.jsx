@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class User extends Component {
 
     submitButton = (user) => {
-        if (Roles.userIsInRole(user,'Registreerimata')) {
+        if (Roles.userIsInRole(user,'Aktiveerimata')) {
             return <button id="user-activate-submit" type="submit" className="btn btn-success" onClick={this.submitHandler}>Aktiveeri</button>
         }
     }
@@ -15,7 +15,7 @@ export default class User extends Component {
 
 		Meteor.call("updateUserToRegistered", value);
 
-        Bert.alert( 'Kasutaja ' + this.props.user.userProfile.name + ' registreeritud', 'success' );
+        Bert.alert( 'Kasutaja ' + this.props.user.userProfile.name + ' aktiveeritud', 'success' );
     }
 
     render() {

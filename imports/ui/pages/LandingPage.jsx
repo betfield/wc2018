@@ -6,7 +6,7 @@ export default LandingPage = withTracker(() => {
   const usersHandle = Meteor.subscribe('registeredUsers');
   const currentUserHandle = Meteor.subscribe('currentUser');
   
-  const usersCount = Meteor.users.find({roles: { "$in" : ["Registreeritud"]}}).count();
+  const usersCount = Meteor.users.find({roles: { "$in" : ["Aktiveeritud"]}}).count();
   const currentUser = Meteor.user();
   
   const ready = usersHandle.ready();

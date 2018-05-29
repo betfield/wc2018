@@ -19,11 +19,11 @@ Meteor.methods({
 			points = initialPoints;
 			points["user"] = user.userProfile;
 			points.user["_id"] = user._id;
+			points.user["pos"] = "-";
 			Points.insert(points);
 		} 
 	},
 
-	/*
 	updateUserPoints: function(user) {
 		check( user, String );
 		
@@ -41,9 +41,6 @@ Meteor.methods({
 			total += p;
 		});
 
-		console.log(points);
-		console.log(total);
-		
 		Points.update({"user._id": user}, {$set: {"round1": points[0], "round2": points[1], "round3": points[2], "round4": points[3], "round5": points[4], "round6": points[5], "round7": points[6], "total": total}});
 	},
 	updateAllUsersPredictionPoints: function(fixtureId) {
@@ -74,12 +71,11 @@ Meteor.methods({
 
 	},
 
-	*/
 	updateUserToRegistered: function(userId) {
 		check(userId, String);
 
-		Roles.addUsersToRoles(userId, ['Registreeritud']);
-		Roles.removeUsersFromRoles(userId, 'Registreerimata');
+		Roles.addUsersToRoles(userId, ['Aktiveeritud']);
+		Roles.removeUsersFromRoles(userId, 'Aktiveerimata');
 
 		let user = Meteor.users.findOne({"_id": userId});
 		console.log(user);
@@ -89,9 +85,9 @@ Meteor.methods({
 		console.log("Updated to registered: ", user.userProfile.name);
 	}
 });	
-/*
+
 function updateTablePositions() {
-	let users = Meteor.users.find({"roles": "registered-user"});
+	let users = Meteor.users.find({"roles": "Aktiveeritud"});
 	let points = [];
 
 	users.forEach(function(user){
@@ -167,5 +163,3 @@ function userFixturePoints(userResult, fixtureResult) {
 
 	return points;
 }
-
-*/

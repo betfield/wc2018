@@ -1,3 +1,5 @@
+import decimalToRoman from './helpers/roman';
+
 Meteor.startup(function () {
 
 var fixtures = [{"competition":"WC2018","group":"A","round":1,"day":"N","date":"14.juuni","time":"18:00","ts":"2018-06-14T16:00:00","city":"Moscow","stadium":"","home_team":{"name_eng":"Russia","name":"Venemaa","code":"rus","group":"A"},"away_team":{"name_eng":"Saudi Arabia","name":"Saudi Araabia","code":"ksa","group":"A"}},
@@ -79,11 +81,16 @@ var fixtures = [{"competition":"WC2018","group":"A","round":1,"day":"N","date":"
 				city:fixture.city,
 				group:fixture.group,
 				round:fixture.round,
-				status: "disabled"
+				roundRoman: decimalToRoman(fixture.round),
+				result: {
+					home_goals: "",
+					away_goals: ""
+				},
+				status: "NS"
 			});
 		}); // end of foreach Fixtures
 		
-		console.log("Startup Fixtures: "+Fixtures.find().count());
+		console.log("Startup Fixtures: " + Fixtures.find().count());
 	
 	} // end of if
 	
