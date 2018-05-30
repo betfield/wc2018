@@ -70,7 +70,7 @@ export default class Rules extends Component {
                                         Iga voor lukustub 1h enne vooru esimese mängu algust, mis tähendab, et enne seda aega on võimalik veel antud vooru tulemusi muuta. Kui vooru lukustamise tähtaeg on kätte jõudnud, siis selle vooru tulemusi enam muuta pole võimalik ning kehtima jäävad need ennustused, mis on selleks ajaks kasutaja poolt sisestatud ja andmebaasi salvestatud.
                                     </li>
                                     <li>
-                                        Vooru arvesse minemiseks peab olema eelnevalt kantud ka kasutaja aktiveerimistasu. See tähendab, kui kasutaja pole aktiveeritud 1h enne 1. vooru algust, siis selle vooru tulemused arvesse ei lähe. Kui sama kasutaja aktiveerib oma kasutaja peale 1. vooru algust, aga ennem 2. vooru lukustumist, siis tema ennustused alates 2. voorust lähevad arvesse. Sama loogika kehtib ka hilisemate aktiveerimistega, mis tähendab, et mänguga võib liituda igal ajal.
+                                        Ennustuse arvesse minemiseks peab olema eelnevalt kantud ka osavõtutasu, vastavalt aktiveerimise juhendile. See tähendab, kui ennustus pole aktiveeritud juhendis toodud tähtajaks, siis antud kasutaja tulemused arvesse ei lähe ning kasutaja eemaldatakse süsteemist. Samuti tähendab see, et peale ennustuse aktiveerimise tähtaja möödumist, mänguga liituda enam ei saa!
                                     </li>
                                     <li>
                                         Alagrupivoorude tulemusi on võimalik ette täita ka enne eelmise vooru lukustumist. Finaalide ennustuste sisestamine muutub võimalikuks peale vastavate kohtumiste meeskondade selgumist.
