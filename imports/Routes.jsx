@@ -32,6 +32,7 @@ getRoutes = () => {
                 <Switch>
                     <Route exact path="/" component={LandingPage}/>
                     <Route exact path="/rules" component={RulesPage}/>
+                    <Route exact path="/calendar" component={CalendarPage}/>
                 </Switch>
             </Router>
         )
