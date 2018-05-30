@@ -9,6 +9,8 @@ export default class FixturesList extends Component {
     formatFixtureData = (data) => {
         let fixturesData = [];
 
+        console.log(data);
+
         data.forEach((e) => {
             let homeTeamCode = String(e.home_team.code).toLowerCase();
             let awayTeamCode = String(e.away_team.code).toLowerCase();

@@ -1,0 +1,5 @@
+//View all active subscriptions
+Meteor.default_connection._subscriptions
+
+//View current user object
+Meteor.user()

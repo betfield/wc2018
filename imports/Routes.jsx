@@ -11,6 +11,7 @@ import CalendarPage from './ui/pages/CalendarPage';
 import TablePage from './ui/pages/TablePage';
 import LoginPage from './ui/pages/LoginPage';
 import ActivatePage from './ui/pages/ActivatePage';
+import ProfilePage from './ui/pages/ProfilePage';
 import UsersPage from './ui/pages/UsersPage';
 
 import Splash from './components/loading/Splash';
@@ -48,7 +49,9 @@ getRoutes = () => {
                     <Route exact path="/login" component={LoginPage}/>
                     <Route exact path="/logout" component={LogoutPage}/>
                     <Route exact path="/activate" component={ActivatePage}/>
+                    <Route exact path="/profile" component={ProfilePage}/>
                     <Route exact path="/users" component={UsersPage}/>
+                    <Route path="/fixtures/:fixtureId" component={FixturesPage}/>
                 </Switch>
             </Router>
         )

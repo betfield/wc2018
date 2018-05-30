@@ -59,7 +59,7 @@ export default class Navigation extends Component {
 
             return (
                 <div className="profile-picture">
-                    <Link to="/portal">
+                    <Link to="/profile">
                         <img src={currentUser.userProfile.picture} 
                             alt={currentUser.userProfile.name} className="img-circle m-b"/>
                     </Link>
@@ -72,6 +72,7 @@ export default class Navigation extends Component {
                             </Link>
                             <ul className="dropdown-menu animated flipInX m-t-xs">
                                 {this.getDropDownData(currentUser)}
+                                <li><Link to="/profile">Minu profiil</Link></li>
                             <li className="divider"></li>
                                 <li><Link to="/logout">Logi välja</Link></li>
                             </ul>
