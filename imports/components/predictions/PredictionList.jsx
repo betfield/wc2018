@@ -18,27 +18,44 @@ export default class PredictionList extends Component {
             fixtures = Predictions.find({"fixture.group": Template.instance().pred.get("groupSelected")}).fetch();
         }    
         */
-        
+
         let filteredPredictions = [];
-        let i = 0;
 
-        if (['I','II','III'].indexOf(group) > -1) {
-            filteredPredictions = this.props.predictions.filter(prediction => prediction.fixture.roundRoman === group);
-        } else if (['A','B','C','D','E','F'].indexOf(group) > -1) {
-            filteredPredictions = this.props.predictions.filter(prediction => prediction.fixture.group === group);
+        if (this.props.fixturesReady && this.props.predictionsReady) {
+            
+            let i = 0;
+
+            const fixtures = this.props.fixtures;
+            const predictions = this.props.predictions;
+
+            if (['I','II','III'].indexOf(group) > -1) {
+                filteredPredictions = fixtures.filter(fixture => fixture.roundRoman === group);
+            } else if (['A','B','C','D','E','F'].indexOf(group) > -1) {
+                filteredPredictions = fixtures.filter(fixture => fixture.group === group);
+            }
+
+            filteredPredictions.forEach(function(f) {
+                
+                const obj = predictions.find(prediction => prediction.fixture._id === f._id);
+                if (obj && obj.fixture) {
+                    filteredPredictions[i].prediction = { 
+                        result: obj.fixture.result
+                    };
+                } else {
+                    Meteor.call("clientError", "Prediction object does not exist for fixture", f )
+                    Bert.alert( "Ennustuse tulemusi ei leitud. Palun pöördu administraatori poole!", "danger" );
+                    filteredPredictions[i].prediction = { 
+                        result: {
+                            homeGoals: "N/A",
+                            awayGoals: "N/A"
+                        }
+                    };
+                }
+
+                //fixtures[i].fixture.status = Fixtures.findOne({"_id": f.fixture._id}).status;
+                i++;
+            });
         }
-
-        filteredPredictions.forEach(function(f) {
-            
-            let homeTeamCode = String(f.fixture.home_team.code).toLowerCase();
-            let awayTeamCode = String(f.fixture.away_team.code).toLowerCase();
-
-            filteredPredictions[i].fixture.home_team.imgSrc = Meteor.settings.public.FOLDER_FLAGS + homeTeamCode + ".png";
-            filteredPredictions[i].fixture.away_team.imgSrc = Meteor.settings.public.FOLDER_FLAGS + awayTeamCode + ".png";
-            
-            //fixtures[i].fixture.status = Fixtures.findOne({"_id": f.fixture._id}).status;
-            i++;
-        });
         
         return filteredPredictions;
     }
@@ -84,21 +101,20 @@ export default class PredictionList extends Component {
 
         data.forEach((e) => {
             let prediction = {
-                time: e.fixture.date + " " + e.fixture.time,
+                time: e.date + " " + e.time,
                 vs: {
-                    homeFlag: e.fixture.home_team.imgSrc,
-                    awayFlag: e.fixture.away_team.imgSrc
+                    homeFlag: e.home_team.imgSrc,
+                    awayFlag: e.away_team.imgSrc
                 },
-                homeTeam: e.fixture.home_team.name,
-                awayTeam: e.fixture.away_team.name,
-                group: e.fixture.group,
-                round: e.fixture.roundRoman,
+                homeTeam: e.home_team.name,
+                awayTeam: e.away_team.name,
+                group: e.group,
+                round: e.roundRoman,
                 result: {
-                    id: e.fixture._id,
-                    homeGoals: e.fixture.result.homeGoals,
-                    awayGoals: e.fixture.result.awayGoals
+                    id: e._id,
+                    homeGoals: e.prediction.result.homeGoals,
+                    awayGoals: e.prediction.result.awayGoals
                 },
-                id: e.fixture._id
             }
 
             predictionsData.push(prediction);
@@ -207,7 +223,7 @@ export default class PredictionList extends Component {
             <div className='bf-table'>
                 <form id="predictions-form" onSubmit={this.handleSubmit}>
                     <BootstrapTable 
-                        keyField='id' 
+                        keyField='result.id' 
                         data={ this.formatPredictionData(this.getPredictionsData(this.props.groupSelected)) } 
                         columns={ columnHeaders }
                         bordered={ true }

@@ -12,6 +12,7 @@ export default class FixturesList extends Component {
         console.log(data);
 
         data.forEach((e) => {
+
             let homeTeamCode = String(e.home_team.code).toLowerCase();
             let awayTeamCode = String(e.away_team.code).toLowerCase();
 
@@ -59,6 +60,11 @@ export default class FixturesList extends Component {
     }
 
     render() {
+
+        if (this.props.fixtureId) {
+            console.log(this.props.predictions);
+        }
+
         const options = {
             hidePageListOnlyOnePage: true
         }

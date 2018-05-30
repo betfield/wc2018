@@ -3,19 +3,27 @@ import { withTracker } from 'meteor/react-meteor-data';
 import FixturesList from './FixturesList';
 
 export default FixturesContainer = withTracker(( {fixtureId} ) => {
-    const fixturesHandle = Meteor.subscribe('fixtures');
-    const ready = fixturesHandle.ready();
-
-    let fixtures = null;
+    let ready = false; 
+    let fixtures = [];
+    let predictions = [];
 
     if (fixtureId) {
-        fixtures = Fixtures.find({"_id": fixtureId}).fetch();
+        const predictionsHandle = Meteor.subscribe('fixturePredictions', fixtureId);
+        ready = predictionsHandle.ready();
+
+        predictions = Predictions.find({"fixture._id": fixtureId}).fetch();
     } else {
+        const fixturesHandle = Meteor.subscribe('fixtures');
+
+        ready = fixturesHandle.ready();
         fixtures = Fixtures.find({}).fetch();
     }
     
+    console.log(ready);
+
     return {
         ready,
-        fixtures
+        fixtures,
+        predictions
     };
 })(FixturesList);

@@ -4,11 +4,17 @@ import PredictionList from './PredictionList';
 
 export default PredictionsContainer = withTracker(() => {
     const predictionsHandle = Meteor.subscribe('predictions');
-    const ready = predictionsHandle.ready();
+    const predictionsReady = predictionsHandle.ready();
     const predictions = Predictions.find({}).fetch();
 
+    const fixturesHandle = Meteor.subscribe('fixtures');
+    const fixturesReady = fixturesHandle.ready();
+    const fixtures = Fixtures.find({}).fetch();
+
     return {
-        ready,
-        predictions
+        predictionsReady,
+        predictions,
+        fixturesReady,
+        fixtures
     };
 })(PredictionList);

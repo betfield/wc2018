@@ -69,7 +69,7 @@ var fixtures = [{"competition":"WC2018","group":"A","round":1,"day":"N","date":"
 
 	if (Fixtures.find({competition:'WC2018'}).count() != 64){
 		fixtures.forEach(function(fixture){
-			Fixtures.insert({
+			let f = {
 				competition:fixture.competition,
 				day:fixture.day,
 				date:fixture.date,
@@ -87,7 +87,13 @@ var fixtures = [{"competition":"WC2018","group":"A","round":1,"day":"N","date":"
 					away_goals: ""
 				},
 				status: "NS"
-			});
+			}
+
+			//Add team flag image locations
+			f.home_team.imgSrc = getFlagImage(f.home_team.code);
+			f.away_team.imgSrc = getFlagImage(f.away_team.code);
+
+			Fixtures.insert(f);
 		}); // end of foreach Fixtures
 		
 		console.log("Startup Fixtures: " + Fixtures.find().count());
@@ -96,3 +102,6 @@ var fixtures = [{"competition":"WC2018","group":"A","round":1,"day":"N","date":"
 	
 });
 
+getFlagImage = (teamCode) => {
+	return Meteor.settings.public.FOLDER_FLAGS + String(teamCode).toLowerCase() + ".png";
+}

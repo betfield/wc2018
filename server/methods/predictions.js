@@ -23,6 +23,27 @@ Meteor.publish('predictions', function(filter) {
 	} 
 });
 
+Meteor.publish('fixturePredictions', function(fixtureId) {
+	let self = this;
+	let subHandle = Predictions.find({"fixture._id": fixtureId}).observeChanges({
+		added: function(id, fields) {
+			self.added("predictions", id, fields);
+		},
+		changed: function(id, fields) {
+			self.changed("predictions", id, fields);
+		},
+		removed: function(id) {
+			self.removed("predictions", id);
+		}
+	});
+		
+	self.ready();
+	
+	self.onStop(function () {
+		subHandle.stop();
+	});
+});
+
 Meteor.publish('fixtureStatuses', function() {
     return Fixtures.find({}, {fields: {"_id": 1, "status": 1}});
 });
@@ -31,10 +52,11 @@ Meteor.methods({
 	createUserPredictions: function( userId ) {
 		check( userId, String );
 		
-		var fixtures = Fixtures.find().fetch();
+		var fixtures = Fixtures.find({}, {fields: {"_id": 1}}).fetch();
 		
 		return fixtures.forEach(function(fixture) {
 			fixture["userPoints"] = 0;
+			fixture["result"] = { home_goals: "", away_goals: "" }
 
 			var prediction = {"userId": userId, "fixture": fixture};
 			Predictions.insert( prediction );
