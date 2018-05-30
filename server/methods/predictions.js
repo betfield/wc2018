@@ -70,14 +70,20 @@ Meteor.methods({
 		
 		// Check if logged in as admin and update the actual fixture result if so
 		if (Roles.userIsInRole(userId, ['Administraator'])) {
-			Fixtures.update({"_id": fixture}, {$set: {"result.homeGoals": homeScore, "result.awayGoals": awayScore}});
-			return Meteor.call("updateAllUsersPredictionPoints", fixture, function(error, result){
-				if (error) {
-					console.log("Update of points failed for user: " + userId);
-				} 
-			});
+
+			console.log(isNaN(parseInt(homeScore)));
+
+			if (!isNaN(parseInt(homeScore)) && !isNaN(parseInt(awayScore))) {
+				Fixtures.update({"_id": fixture}, {$set: {"result.home_goals": homeScore, "result.away_goals": awayScore, "status": "FT"}});
+				return Meteor.call("updateAllUsersPredictionPoints", fixture, function(error, result){
+					if (error) {
+						console.log("Update of points failed for user: " + userId);
+					} 
+				});
+			}
+			return;
 		} else { // If not admin, update user's prediction result
-			return Predictions.update({"userId": userId, "fixture._id": fixture}, {$set: {"fixture.result.homeGoals": homeScore, "fixture.result.awayGoals": awayScore}});
+			return Predictions.update({"userId": userId, "fixture._id": fixture}, {$set: {"fixture.result.home_goals": homeScore, "fixture.result.away_goals": awayScore}});
 		}
 	},
 	checkRoundEnabled: function(fixture) {

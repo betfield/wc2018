@@ -7,18 +7,7 @@ import NumericInput from 'react-numeric-input';
 
 export default class PredictionList extends Component {
 
-    getPredictionsData = (group) => {
-        //let fixtures = Predictions.find({"fixture.group": Template.instance().pred.get("groupSelected")}).fetch();
-        /*
-        let fixtureSelected = Template.instance().data;
-        
-        if (fixtureSelected) {
-            fixtures = Predictions.find({"fixture._id": fixtureSelected}).fetch();
-        } else {
-            fixtures = Predictions.find({"fixture.group": Template.instance().pred.get("groupSelected")}).fetch();
-        }    
-        */
-
+    getPredictionsData = (group, user) => {
         let filteredPredictions = [];
 
         if (this.props.fixturesReady && this.props.predictionsReady) {
@@ -34,67 +23,33 @@ export default class PredictionList extends Component {
                 filteredPredictions = fixtures.filter(fixture => fixture.group === group);
             }
 
-            filteredPredictions.forEach(function(f) {
+            //If not Adminstrator then attach user's prediction to the Fixture
+            if (!Roles.userIsInRole(Meteor.user(),'Administraator')) {
+                filteredPredictions.forEach(function(f) {
                 
-                const obj = predictions.find(prediction => prediction.fixture._id === f._id);
-                if (obj && obj.fixture) {
-                    filteredPredictions[i].prediction = { 
-                        result: obj.fixture.result
-                    };
-                } else {
-                    Meteor.call("clientError", "Prediction object does not exist for fixture", f )
-                    Bert.alert( "Ennustuse tulemusi ei leitud. Palun pöördu administraatori poole!", "danger" );
-                    filteredPredictions[i].prediction = { 
-                        result: {
-                            homeGoals: "N/A",
-                            awayGoals: "N/A"
-                        }
-                    };
-                }
-
-                //fixtures[i].fixture.status = Fixtures.findOne({"_id": f.fixture._id}).status;
-                i++;
-            });
+                    const obj = predictions.find(prediction => prediction.fixture._id === f._id);
+                    if (obj && obj.fixture) {
+                        filteredPredictions[i].prediction = { 
+                            result: obj.fixture.result
+                        };
+                    } else {
+                        Meteor.call("clientError", "Prediction object does not exist for fixture", f )
+                        Bert.alert( "Ennustuse tulemusi ei leitud. Palun pöördu administraatori poole!", "danger" );
+                        filteredPredictions[i].prediction = { 
+                            result: {
+                                home_goals: "N/A",
+                                away_goals: "N/A"
+                            }
+                        };
+                    }
+    
+                    i++;
+                });                
+            }
         }
         
         return filteredPredictions;
     }
-
-    /*
-    getAdminData = () => {
-        let fixtures;
-        let fixtureSelected = Template.instance().data;
-        
-        if (fixtureSelected) {
-            fixtures = Fixtures.find({"_id": fixtureSelected}).fetch();
-        } else {
-            fixtures = Fixtures.find({"group": Template.instance().pred.get("groupSelected")}).fetch();
-        }    
-
-        let i = 0;
-        
-        fixtures.forEach((f) => {
-            
-            fixtures[i].fixture = f;
-            
-            let homeTeamCode = String(f.fixture.home_team.code).toLowerCase();
-            let awayTeamCode = String(f.fixture.away_team.code).toLowerCase();
-
-            fixtures[i].fixture.home_team.imgSrc = Meteor.settings.public.FOLDER_FLAGS + homeTeamCode + ".png";
-            fixtures[i].fixture.away_team.imgSrc = Meteor.settings.public.FOLDER_FLAGS + awayTeamCode + ".png";
-
-            // TODO: This is an ugly hack to display correct time for the fixture. Needs fixing in the DB schema
-            let tempDate = new Date(f.fixture.ts);
-            fixtures[i].fixture.time = tempDate.getHours() + ":00";
-
-            fixtures[i].fixture.status = "";
-
-            i++;
-        });
-
-        return fixtures;
-    }
-    */
 
     formatPredictionData = (data) => {
         let predictionsData = [];
@@ -110,11 +65,22 @@ export default class PredictionList extends Component {
                 awayTeam: e.away_team.name,
                 group: e.group,
                 round: e.roundRoman,
-                result: {
+            }
+
+            //If administrator, use fixture object's result to set the actual match result
+            if (Roles.userIsInRole(Meteor.user(),'Administraator')) {
+                prediction.result = {
                     id: e._id,
-                    homeGoals: e.prediction.result.homeGoals,
-                    awayGoals: e.prediction.result.awayGoals
-                },
+                    homeGoals: e.result.home_goals,
+                    awayGoals: e.result.away_goals
+                }
+            //else, use the prediction instead to set the user's result
+            } else {
+                prediction.result = {
+                    id: e._id,
+                    homeGoals: e.prediction.result.home_goals,
+                    awayGoals: e.prediction.result.away_goals
+                }
             }
 
             predictionsData.push(prediction);
@@ -138,15 +104,15 @@ export default class PredictionList extends Component {
             let homeScore = result[1].value;
             let awayScore = result[2].value;
 
-
             //TODO: Make function update all predictions at once
             Meteor.call( "updateUserPredictions", fixture, homeScore, awayScore, userId, function( error, response ) {
                 if ( error ) {
-                    Bert.alert( "Ennustuste uuendamine ebaõnnestus!", "danger" );
+                    const msg = "Ennustuste uuendamine ebaõnnestus!";
+                    Bert.alert( msg, "danger" );
+                    Meteor.call("clientError", msg, error )
                 }
             });
         });
-
 
         Bert.alert( "Ennustused uuendatud!", "success" );
     }
@@ -224,7 +190,7 @@ export default class PredictionList extends Component {
                 <form id="predictions-form" onSubmit={this.handleSubmit}>
                     <BootstrapTable 
                         keyField='result.id' 
-                        data={ this.formatPredictionData(this.getPredictionsData(this.props.groupSelected)) } 
+                        data={ this.formatPredictionData(this.getPredictionsData(this.props.groupSelected, this.props.currentUser)) } 
                         columns={ columnHeaders }
                         bordered={ true }
                         striped

@@ -22,18 +22,6 @@ Meteor.publish('fixtures', function(filter) {
 });
 
 /*
-Meteor.publish('fixturePredictions', function(fixture) {
-    check( fixture, String );
-    if (Meteor.call("checkRoundEnabled", fixture)) {
-	    return Predictions.find({"fixture._id": fixture});
-    } else {
-        return this.ready();
-    }
-});
-
-Meteor.publish("registeredUsers", function () {
-    return Meteor.users.find({$or: [{"roles": "regular-user"}, {"roles": "registered-user"}]}, {fields: {"profile": 1, "roles": 1}});
-});
 
 function getActiveMatchday() {
 	var firstRoundFixtureDates = [
