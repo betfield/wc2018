@@ -86,7 +86,8 @@ var fixtures = [{"competition":"WC2018","group":"A","round":1,"day":"N","date":"
 					home_goals: "",
 					away_goals: ""
 				},
-				status: "NS"
+				status: "NS",
+				locked: false
 			}
 
 			//Add team flag image locations

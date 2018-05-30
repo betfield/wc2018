@@ -83,7 +83,16 @@ Meteor.methods({
 			}
 			return;
 		} else { // If not admin, update user's prediction result
-			return Predictions.update({"userId": userId, "fixture._id": fixture}, {$set: {"fixture.result.home_goals": homeScore, "fixture.result.away_goals": awayScore}});
+			
+			//Check if fixture is locked and only update prediction if not
+			const locked = Fixtures.findOne({"_id": fixture}, {fields: {"locked": 1}}).locked;
+		
+			if (!locked) {
+				return Predictions.update({"userId": userId, "fixture._id": fixture}, {$set: {"fixture.result.home_goals": homeScore, "fixture.result.away_goals": awayScore}});
+			} else {
+				console.log("Fixture " + fixture + " locked! Cannot update prediction for user " + userId);
+				return;
+			}
 		}
 	},
 	checkRoundEnabled: function(fixture) {
