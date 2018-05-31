@@ -63,7 +63,7 @@ export default class Header extends Component {
     }
     
     getPortalLink() {
-        if(Meteor.settings.public.env === "Sandbox") {
+        if(Meteor.settings.public.env === "Preview") {
             return null
         } else {
             return (

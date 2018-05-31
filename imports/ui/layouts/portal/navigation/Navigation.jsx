@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Splash from '../../../../components/loading/Splash';
 
-getTicker = () => {};
-
 export default class Navigation extends Component {
     
     componentDidMount() {
@@ -101,6 +99,69 @@ export default class Navigation extends Component {
         }
     }
 
+    getTicker = () => {
+        //TODO: Implement method call for getting the dates from server instead
+        //The table below has all fixture 1h earlier than the actual fixture start
+        let firstRoundFixtureDates = [
+            {"ts": "2018-06-14T14:00:00Z", "round": 1},
+            {"ts": "2018-06-19T17:00:00Z", "round": 2},
+            {"ts": "2018-06-25T13:00:00Z", "round": 3},
+            {"ts": "2018-06-30T13:00:00Z", "round": 4},
+            {"ts": "2018-07-06T13:00:00Z", "round": 5},
+            {"ts": "2018-07-10T17:00:00Z", "round": 6},
+            {"ts": "2018-07-14T13:00:00Z", "round": 7}
+        ];
+
+        let currentDate = new Date();
+
+        //Allow setting a fake date for testing purposes
+        if (Meteor.settings.public.env === "Sandbox" && Meteor.settings.public.INVALID_TEST_TIME) {
+            currentDate = new Date(Meteor.settings.public.INVALID_TEST_TIME);
+        } 
+
+        let roundElem = {};
+
+        firstRoundFixtureDates.some(elem => {
+            roundElem = elem;
+            return currentDate.toISOString() < elem.ts
+        });
+
+        let roundDate = new Date(roundElem.ts);
+
+        let diff = roundDate.getTime() - currentDate.getTime();
+        let prevRoundElem = this.getPreviousRound(roundElem, firstRoundFixtureDates);
+        let prevDiff = 0;
+       
+        if (prevRoundElem) {
+            prevRoundDate = new Date(prevRoundElem.ts);
+            prevDiff = currentDate.getTime() - prevRoundDate.getTime();
+        }
+
+        //Show ticker if there is less than 24h left until round end
+        if (diff > 0 && diff < (24*60*60*1000)) {
+            
+            let url = "https://freesecure.timeanddate.com/countdown/i58fl2g4/cf11/cm0/cu4/ct1/cs0/ca0/co1/cr0/ss0/cac8d0808/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac966c6f/tpc966c6f/iso" + roundElem.ts;
+            return <iframe src={url} frameBorder="0" width="136" height="32"/>
+        
+        //Show round closed during 1h after the deadline
+        } else if (prevDiff > 0 && prevDiff < (1*60*60*1000)) {
+            return <span>{prevRoundElem.round}. voor suletud!</span>
+        //If last round then use current diff value
+        } else if (roundElem.round === firstRoundFixtureDates.length && Math.abs(diff) < (1*60*60*1000)) {
+            return <span>{roundElem.round}. voor suletud!</span>
+        } else {
+            return null;
+        }
+    };
+
+    getPreviousRound = (current, rounds) => {
+        if (current.round > 1) {
+            //Return array element with previous index
+            //Need -2 as round itself starts with 1 and array index with 0
+            return rounds[current.round - 2];
+        } 
+    }
+
     render() {
         return (
             <aside id="menu">
@@ -109,9 +170,9 @@ export default class Navigation extends Component {
                     { this.getLoggedInUserData(this.props.currentUser) }
                 
                     <br/>
-                
-                    {getTicker()}
-                
+                    <div className="predictions-close-ticker">
+                        {this.getTicker()}
+                    </div>
                     <ul className="nav" id="side-menu">
                         <li className=""><Link to="/predictions">Ennustused</Link></li>
                         <li className=""><Link to="/table">Edetabel</Link></li>
@@ -192,54 +253,7 @@ Template.navigation.helpers({
         return Template.instance().userPoints.get();
     },
     getTicker: function() {
-        var firstRoundFixtureDates = [
-            {"ts": "2016-06-10T19:00:00", "round": 1},
-            {"ts": "2016-06-15T13:00:00", "round": 2},
-            {"ts": "2016-06-19T19:00:00", "round": 3},
-            {"ts": "2016-06-25T13:00:00", "round": 4},
-            {"ts": "2016-06-30T19:00:00", "round": 5},
-            {"ts": "2016-07-06T19:00:00", "round": 6},
-            {"ts": "2016-07-10T19:00:00", "round": 7}
-        ];
-
-        var currentDate = new Date();
-        // adjust current date to -1h from now
-        currentDate.setTime(currentDate.getTime() + (1*60*60*1000));
-        
-        var roundDate;
-
-        for (i = 0; i < 7; i++) {
-            roundDate = firstRoundFixtureDates[i];
-            if (currentDate.toISOString() < roundDate.ts) {
-                i = 7;
-            }
-        };
-
-        switch(roundDate.round) {
-            case 1:
-                // 1. round ticker
-                return '<iframe src="https://freesecure.timeanddate.com/countdown/i58fl2g4/n242/cf11/cm0/cu4/ct1/cs0/ca0/co1/cr0/ss0/cac01508c/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac6a6c6f/tpc6a6c6f/iso2016-06-10T21:00:00" allowTransparency="true" frameborder="0" width="136" height="32"></iframe>'
-            case 2:
-                // 2. round ticker    
-                return '<iframe src="https://freesecure.timeanddate.com/countdown/i58fl2g4/n242/cf11/cm0/cu4/ct1/cs0/ca0/co1/cr0/ss0/cac01508c/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac6a6c6f/tpc6a6c6f/iso2016-06-15T15:00:00" allowTransparency="true" frameborder="0" width="136" height="32"></iframe>'
-            case 3:
-                // 3. round ticker
-                return '<iframe src="https://freesecure.timeanddate.com/countdown/i58fl2g4/n242/cf11/cm0/cu4/ct1/cs0/ca0/co1/cr0/ss0/cac01508c/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac6a6c6f/tpc6a6c6f/iso2016-06-19T21:00:00" allowTransparency="true" frameborder="0" width="136" height="32"></iframe>'
-            case 4:
-                // 4. round ticker
-                return '<iframe src="https://freesecure.timeanddate.com/countdown/i58fl2g4/n242/cf11/cm0/cu4/ct1/cs0/ca0/co1/cr0/ss0/cac01508c/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac6a6c6f/tpc6a6c6f/iso2016-06-25T15:00:00" allowTransparency="true" frameborder="0" width="136" height="32"></iframe>'
-            case 5:
-                // 5. round ticker
-                return '<iframe src="https://freesecure.timeanddate.com/countdown/i58fl2g4/n242/cf11/cm0/cu4/ct1/cs0/ca0/co1/cr0/ss0/cac01508c/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac6a6c6f/tpc6a6c6f/iso2016-06-30T21:00:00" allowTransparency="true" frameborder="0" width="136" height="32"></iframe>'
-            case 6:
-                // 6. round ticker
-                return '<iframe src="https://freesecure.timeanddate.com/countdown/i58fl2g4/n242/cf11/cm0/cu4/ct1/cs0/ca0/co1/cr0/ss0/cac01508c/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac6a6c6f/tpc6a6c6f/iso2016-07-06T21:00:00" allowTransparency="true" frameborder="0" width="136" height="32"></iframe>'
-            case 7:
-                // 7. round ticker
-                return '<iframe src="https://freesecure.timeanddate.com/countdown/i58fl2g4/n242/cf11/cm0/cu4/ct1/cs0/ca0/co1/cr0/ss0/cac01508c/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac6a6c6f/tpc6a6c6f/iso2016-07-10T21:00:00" allowTransparency="true" frameborder="0" width="136" height="32"></iframe>'
-            default:
-                break;
-        }            
+                    
     }
 });
 

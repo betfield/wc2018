@@ -64,7 +64,7 @@ export default class PortalPage extends Component {
     
         // FIXED NAVBAR
 
-        if(Meteor.settings.public.env === "Sandbox") {
+        if(Meteor.settings.public.env === "Preview") {
             $('body').addClass('fixed-navbar hide-sidebar');
         } else {
             $('body').addClass('fixed-navbar');
@@ -72,7 +72,7 @@ export default class PortalPage extends Component {
     }
 
     getPortalLink() {
-        if(Meteor.settings.public.env === "Sandbox") {
+        if(Meteor.settings.public.env === "Preview") {
             return null
         } else {
             return <Navigation currentUser={this.props.currentUser}/>

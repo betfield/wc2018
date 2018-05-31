@@ -26,7 +26,7 @@ const LogoutPage = (props) => {
 }
 
 getRoutes = () => {
-    if (Meteor.settings.public.env === "Sandbox") {
+    if (Meteor.settings.public.env === "Preview") {
         return (
             <Router>
                 <Switch>
