@@ -115,7 +115,7 @@ export default class Rules extends Component {
                                         Lisaks lõplikule paremusjärjestusele on võimalik saada ka "eriauhind" järgnevate voorude võitude eest: I, II, III ning (IV - VII summa). Lahti seletades tähendab see, et selgitame välja 4 eriauhinda, üks iga alagrupivooru ning üks finaalmängude parima ennustaja jaoks, mille väärtuseks on ennustusmängu sisseostu summa. Üks mängija võib saada ka mitu eriauhinda. 
                                     </li>
                                     <li>
-                                        Peale eriauhindade ja korralduskulude mahaarvestamist toimub ülejäänud auhinnafondi jagamine ennustusmängu paremate vahel vastavalt laialt levinud turniiripokkeri väljamakse skeemile, mille leiab <a href="http://www.wsop.com/how-to-play-poker/mtt-tournament-payouts/">siit</a>.
+                                        Peale eriauhindade ja korralduskulude mahaarvestamist toimub ülejäänud auhinnafondi jagamine ennustusmängu paremate vahel vastavalt laialt levinud turniiripokkeri väljamakse skeemile, mille leiab <a href="http://www.wsop.com/how-to-play-poker/mtt-tournament-payouts/" target="_blank">siit</a>.
                                     </li>
                                     <li>
                                         Näide: 31-40 osaleja puhul jaguneks auhinnafond antud tabeli järgi järgmiselt: 
