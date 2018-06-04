@@ -65,6 +65,7 @@ export default class PredictionList extends Component {
                 awayTeam: e.away_team.name,
                 group: e.group,
                 round: e.roundRoman,
+                locked: e.locked
             }
 
             //If administrator, use fixture object's result to set the actual match result
@@ -105,7 +106,7 @@ export default class PredictionList extends Component {
             let awayScore = result[2].value;
 
             //TODO: Make function update all predictions at once
-            Meteor.call( "updateUserPredictions", fixture, homeScore, awayScore, userId, function( error, response ) {
+            Meteor.call( "updateUserPredictions", fixture, homeScore, awayScore, function( error, response ) {
                 if ( error ) {
                     const msg = "Ennustuste uuendamine ebaõnnestus!";
                     Bert.alert( msg, "danger" );
@@ -128,14 +129,22 @@ export default class PredictionList extends Component {
     }
 
     resultFormatter = (cell, row) => {
-        return (
-            <span className="bf-table-score">
-                <input id="fixture-id" type="hidden" value={cell.id}/>
-                <NumericInput id="home-score" min={0} max={99} value={cell.homeGoals} className="input-no-spinner" size={2}/>
-                <span> : </span>
-                <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2}/>
-            </span>
-        );
+        if (!row.locked) {
+            return (
+                <span className="bf-table-score">
+                    <input id="fixture-id" type="hidden" value={cell.id}/>
+                    <NumericInput id="home-score" min={0} max={99} value={cell.homeGoals} className="input-no-spinner" size={2}/>
+                    <span> : </span>
+                    <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2}/>
+                </span>
+            );
+        } else {
+            return (
+                <span className="bf-table-score">
+                    {cell.homeGoals} : {cell.awayGoals}
+                </span>
+            );
+        }
     }
 
     render() {

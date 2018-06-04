@@ -1,9 +1,10 @@
 Meteor.methods({
-	updateUserPredictions: function(fixture,homeScore,awayScore,userId) {
+	updateUserPredictions: function(fixture,homeScore,awayScore) {
 		check( fixture, String );
 		check( homeScore, String );
 		check( awayScore, String );
-		check( userId, String );
+		
+		const userId = this.userId;
 		
 		// Check if logged in as admin and update the actual fixture result if so
 		if (Roles.userIsInRole(userId, ['Administraator'])) {
