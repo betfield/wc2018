@@ -1,17 +1,4 @@
 Meteor.methods({
-	createUserPredictions: function( userId ) {
-		check( userId, String );
-		
-		var fixtures = Fixtures.find({}, {fields: {"_id": 1}}).fetch();
-		
-		return fixtures.forEach(function(fixture) {
-			fixture["userPoints"] = 0;
-			fixture["result"] = { home_goals: "", away_goals: "" }
-
-			var prediction = {"userId": userId, "fixture": fixture};
-			Predictions.insert( prediction );
-		});
-	},
 	updateUserPredictions: function(fixture,homeScore,awayScore,userId) {
 		check( fixture, String );
 		check( homeScore, String );

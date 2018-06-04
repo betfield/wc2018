@@ -7,7 +7,8 @@ export default class Navigation extends Component {
         super(props);
         this.state = {  
             date: new Date(),
-            ticker: this.getTicker()
+            ticker: this.getTicker(),
+            fixtureLink: this.getFixturesLink()
         };
     }
 
@@ -28,60 +29,62 @@ export default class Navigation extends Component {
     }
 
     getTicker = () => {
-        Meteor.call('getFirstRoundFixtureDates', (error, result) => {
-            if (error) {
-                Meteor.call("clientError", "Failed to get fixture dates for first matches of the rounds!", error);
-            } else if (result) {
-                const firstRoundFixtureDates = result;
-                let currentDate = this.state.date;
+        if (Meteor.userId()) {
+            Meteor.call('getFirstRoundFixtureDates', (error, result) => {
+                if (error) {
+                    Meteor.call("clientError", "Failed to get fixture dates for first matches of the rounds!", error);
+                } else if (result) {
+                    const firstRoundFixtureDates = result;
+                    let currentDate = this.state.date;
 
-                //Allow setting a fake date for testing purposes
-                if (Meteor.settings.public.env === "Sandbox" && Meteor.settings.public.INVALID_TEST_TIME) {
-                    currentDate = new Date(Meteor.settings.public.INVALID_TEST_TIME);
-                } 
+                    //Allow setting a fake date for testing purposes
+                    if (Meteor.settings.public.env === "Sandbox" && Meteor.settings.public.INVALID_TEST_TIME) {
+                        currentDate = new Date(Meteor.settings.public.INVALID_TEST_TIME);
+                    } 
 
-                let roundElem = {};
+                    let roundElem = {};
 
-                firstRoundFixtureDates.some(elem => {
-                    roundElem = elem;
-                    return currentDate.toISOString() < elem.ts
-                });
-
-                let roundDate = new Date(roundElem.ts);
-
-                let diff = roundDate.getTime() - currentDate.getTime();
-                let prevRoundElem = this.getPreviousRound(roundElem, firstRoundFixtureDates);
-                let prevDiff = 0;
-            
-                if (prevRoundElem) {
-                    prevRoundDate = new Date(prevRoundElem.ts);
-                    prevDiff = currentDate.getTime() - prevRoundDate.getTime();
-                }
-
-                //Show ticker if there is less than 24h left until round end
-                if (diff > 0 && diff < (24*60*60*1000)) {
-                    let url = "https://freesecure.timeanddate.com/countdown/i58fl2g4/cf11/cm0/cu4/ct1/cs0/ca0/co1/cr0/ss0/cac8d0808/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac966c6f/tpc966c6f/iso" + roundElem.ts;
-                    this.setState({
-                        ticker: <iframe src={url} frameBorder="0" width="136" height="32"/>
+                    firstRoundFixtureDates.some(elem => {
+                        roundElem = elem;
+                        return currentDate.toISOString() < elem.ts
                     });
+
+                    let roundDate = new Date(roundElem.ts);
+
+                    let diff = roundDate.getTime() - currentDate.getTime();
+                    let prevRoundElem = this.getPreviousRound(roundElem, firstRoundFixtureDates);
+                    let prevDiff = 0;
                 
-                //Show round closed during 1h after the deadline
-                } else if (prevDiff > 0 && prevDiff < (1*60*60*1000)) {
-                    this.setState({
-                        ticker: <span>{prevRoundElem.round}. voor suletud!</span>
-                    });
-                //If last round then use current diff value
-                } else if (roundElem.round === firstRoundFixtureDates.length && Math.abs(diff) < (1*60*60*1000)) {
-                    this.setState({
-                        ticker: <span>{roundElem.round}. voor suletud!</span>
-                    });
-                } else {
-                    this.setState({
-                        ticker: null
-                    });
+                    if (prevRoundElem) {
+                        prevRoundDate = new Date(prevRoundElem.ts);
+                        prevDiff = currentDate.getTime() - prevRoundDate.getTime();
+                    }
+
+                    //Show ticker if there is less than 24h left until round end
+                    if (diff > 0 && diff < (24*60*60*1000)) {
+                        let url = "https://freesecure.timeanddate.com/countdown/i58fl2g4/cf11/cm0/cu4/ct1/cs0/ca0/co1/cr0/ss0/cac8d0808/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac966c6f/tpc966c6f/iso" + roundElem.ts;
+                        this.setState({
+                            ticker: <iframe src={url} frameBorder="0" width="136" height="32"/>
+                        });
+                    
+                    //Show round closed during 1h after the deadline
+                    } else if (prevDiff > 0 && prevDiff < (1*60*60*1000)) {
+                        this.setState({
+                            ticker: <span>{prevRoundElem.round}. voor suletud!</span>
+                        });
+                    //If last round then use current diff value
+                    } else if (roundElem.round === firstRoundFixtureDates.length && Math.abs(diff) < (1*60*60*1000)) {
+                        this.setState({
+                            ticker: <span>{roundElem.round}. voor suletud!</span>
+                        });
+                    } else {
+                        this.setState({
+                            ticker: null
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     getDropDownUserRole = (currentUser) => {
@@ -180,6 +183,18 @@ export default class Navigation extends Component {
         } 
     }
 
+    getFixturesLink = () => {
+        Meteor.call("getActiveMatchday", (error, result) => {
+            if (error) {
+                Meteor.call("clientError", "Failed to get active matchday!", error);
+            } else if (result > 1) {
+                this.setState({
+                    fixtureLink: <li className=""><Link to="/fixtures">Tulemused</Link></li>
+                })
+            }
+        })
+    }
+
     render() {
         return (
             <aside id="menu">
@@ -195,7 +210,7 @@ export default class Navigation extends Component {
                         <li className=""><Link to="/predictions">Ennustused</Link></li>
                         <li className=""><Link to="/table">Edetabel</Link></li>
                         <li className=""><Link to="/calendar">Kalender</Link></li>
-                        <li className=""><Link to="/fixtures">Tulemused</Link></li>
+                        {this.state.fixtureLink}
                         <li className=""><Link to="/rules">Reeglid</Link></li>
                         { this.getActivateLink(this.props.currentUser) }
                     </ul>

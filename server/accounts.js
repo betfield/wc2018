@@ -14,18 +14,17 @@ UserRoles = {
 	2) A new collection Meteor.roles contains a global list of defined role names. ††
 	3) The currently logged-in user's roles field is automatically published to the client.
 */
-Meteor.users.after.insert(function (userId, doc) {
+Meteor.users.after.insert((userId, doc) => {
 	try {
 		if (doc.userProfile.email == Meteor.settings.private.BF_EMAIL) {
 			Roles.addUsersToRoles(doc._id, [UserRoles.admin]);
+			Log.info("Admin user created with id:" + doc._id);
 		} else {
 			Roles.addUsersToRoles(doc._id, UserRoles.regular);
+			Log.info("Regular user created with id:" + doc._id);
 		}
-		
-		console.log("User created with id:" + doc._id + "AND with role(s): " + Roles.getRolesForUser(doc._id));
-		
 	} catch (e) {
-		console.log("Error adding roles to user: ", e.message);
+		Log.error("Error adding roles to user: " + userId, e);
 	}
 	
 });
@@ -61,9 +60,29 @@ Accounts.onCreateUser(function (options, user) {
 	user.userProfile = userProfile;
 	
 	if (user.userProfile.email != Meteor.settings.private.BF_EMAIL) {
-		Meteor.call("createUserPredictions", user._id);
-		console.log("Regular user prediction data added");
+		// Create prediction fields for new user
+		createUserPredictions(user._id);
+		Log.info("Prediction data added for user: " + user._id);
 	}
 	
 	return user;
 });
+
+createUserPredictions = ( userId ) => {
+	let fixtures = Fixtures.find({}, {fields: {"_id": 1}}).fetch();
+	
+	return fixtures.forEach(fixture => {
+		fixture["userPoints"] = 0;
+		fixture["result"] = { 
+			home_goals: "", 
+			away_goals: "" 
+		}
+
+		const prediction = {
+			"userId": userId, 
+			"fixture": fixture
+		};
+		
+		Predictions.insert( prediction );
+	});
+}

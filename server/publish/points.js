@@ -1,36 +1,51 @@
-Meteor.publish('points', function(filter) {
+// Publish all users' points
+Meteor.publish('points', function () {
 	let self = this;
+	let userId = this.userId;
 	
-	let subHandle = Points.find(filter || {}).observeChanges({
-		added: function(id, fields) {
-			self.added("points", id, fields);
-		},
-		changed: function(id, fields) {
-			self.changed("points", id, fields);
-		},
-		removed: function(id) {
-			self.removed("points", id);
-		}
-	});
-		
+	if (userId) {
+		let subHandle = Points.find({}).observeChanges({
+			added: function(id, fields) {
+				self.added("points", id, fields);
+			},
+			changed: function(id, fields) {
+				self.changed("points", id, fields);
+			},
+			removed: function(id) {
+				self.removed("points", id);
+			}
+		});
+
+		self.onStop(function () {
+			subHandle.stop();
+		});
+	}
+
 	self.ready();
-	
-	self.onStop(function () {
-		subHandle.stop();
-	});
 });
 
-Meteor.publish('userPoints', function(user) {
-	check(user, String);
+// Publish all current user's points
+Meteor.publish('userPoints', function () {
+	let self = this;
+	let userId = this.userId;
+	
+	if (userId) {
+		let subHandle = Points.find({"user._id": userId}).observeChanges({
+			added: function(id, fields) {
+				self.added("points", id, fields);
+			},
+			changed: function(id, fields) {
+				self.changed("points", id, fields);
+			},
+			removed: function(id) {
+				self.removed("points", id);
+			}
+		});
 
-	let data = [Points.find({"user._id": user})
-				//TODO: Cannot publish full predictions table --- design needs to be revisited 
-				//Predictions.find({"userId": user})
-				];
+		self.onStop(function () {
+			subHandle.stop();
+		});
+	}
 
-	if ( data ) {
-   		return data;
-  	}
-
-  	return this.ready();
+	self.ready();
 });
