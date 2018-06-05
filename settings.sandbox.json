@@ -2,7 +2,7 @@
 	"public" : {
 		"env": "Sandbox",
 		"FOLDER_FLAGS": "/teams/flags/",
-		"INVALID_TEST_TIME": "2018-06-14T13:00:01Z"
+		"INVALID_TEST_TIME": ""
 	},
 	"private": {
 		"BF_EMAIL": "betfieldou@gmail.com",
