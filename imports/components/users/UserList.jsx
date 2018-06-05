@@ -12,7 +12,6 @@ export default class UserList extends Component {
 
                 Bert.alert( msg , 'danger' );
                 Meteor.call("clientError", msg, error )
-                console.log(error);
              } else {
                 Bert.alert( 'Kasutajate punktide uuendamine õnnestus', 'success' );
              }

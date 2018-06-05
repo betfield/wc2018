@@ -6,22 +6,38 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 
 export default class FixturesPredictions extends Component {
 
-    formatPredictionsData = (data) => {
+    formatPredictionsData = (data, users) => {
         let predictionsData = [];
 
         data.forEach((e) => {
-            let prediction = {
-                result: {
-                    homeGoals: e.fixture.result.home_goals,
-                    awayGoals: e.fixture.result.away_goals,
-                    userPoints: e.fixture.result.userPoints,
-                    user: e.userId
+            let user = {};
+
+            // Find user with id
+            users.some(u => {
+                if (u._id === e.userId) {
+                    user = u;
+                    return true;
+                }   
+            });
+
+            // Check if user is activated and add prediction to the array
+            if (Roles.userIsInRole(user._id, ["Aktiveeritud"])) {
+
+                let prediction = {
+                    result: {
+                        homeGoals: e.fixture.result.home_goals,
+                        awayGoals: e.fixture.result.away_goals,
+                        userPoints: e.fixture.result.userPoints
+                    },
+                    user: {
+                        id: user._id,
+                        name: user.userProfile.team,
+                        image: user.userProfile.picture
+                    }
                 }
+
+                predictionsData.push(prediction);  
             }
-
-            console.log(prediction);
-
-            predictionsData.push(prediction);
         })
 
         return predictionsData;
@@ -29,7 +45,10 @@ export default class FixturesPredictions extends Component {
 
     getFixtureDetails = (f) => {
         if (this.props.fixturesReady) {
-            console.log(f);
+
+            if (!f.locked) {
+                Bert.alert( 'Ennustusvoor veel avatud. Kasutajate ennustused pole kättesaadavad', 'danger' );
+            }
 
             let homeTeamCode = String(f.home_team.code).toLowerCase();
             let awayTeamCode = String(f.away_team.code).toLowerCase();
@@ -47,8 +66,6 @@ export default class FixturesPredictions extends Component {
             if (f.result.home_goals || f.result.away_goals) {
                 fixture.result = f.result.home_goals + ":" + f.result.away_goals;
             }
-
-            console.log(fixture);
 
             return (
                 <table className="bf-table table table-striped table-hover table-bordered table-condensed">
@@ -90,11 +107,9 @@ export default class FixturesPredictions extends Component {
         }
     }
 
-    userFormatter = (cell, row) => {
+    imageFormatter = (cell, row) => {
         return (
-            <span className="bf-table-user">
-                <span>{cell}</span>
-            </span>
+            <img src={cell}/>
         );
     }
 
@@ -103,6 +118,8 @@ export default class FixturesPredictions extends Component {
     
         if (cell.homeGoals || cell.awayGoals) {
             result = cell.homeGoals + ":" + cell.awayGoals;
+        } else {
+            result = "-";
         }
             
         return (
@@ -117,6 +134,8 @@ export default class FixturesPredictions extends Component {
     
         if (cell) {
             points = cell + "p";
+        } else {
+            points = "-";
         }
             
         return (
@@ -128,14 +147,19 @@ export default class FixturesPredictions extends Component {
 
     render() {
 
-        const data = this.formatPredictionsData(this.props.predictions);
+        const data = this.formatPredictionsData(this.props.predictions, this.props.users);
         const columnHeaders = [
             {
+                text: '',
+                dataField: 'user.image',
+                headerAlign: 'center',
+                formatter: this.imageFormatter
+            }, 
+            {
                 text: 'Kasutaja',
-                dataField: 'result.user',
+                dataField: 'user.name',
                 sort: true,
                 headerAlign: 'center',
-                formatter: this.userFormatter
             }, 
             {
                 text: 'Ennustus',
@@ -153,7 +177,7 @@ export default class FixturesPredictions extends Component {
             }
         ];
             
-        const keyField='result.user' 
+        const keyField='user.id' 
     
         const options = {
             hidePageListOnlyOnePage: true

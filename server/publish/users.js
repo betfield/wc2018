@@ -46,7 +46,8 @@ Meteor.publish('registeredUsers', function () {
             { 
                 fields: {  
                     "userProfile.team": 1,
-                    "userProfile.picture": 1
+                    "userProfile.picture": 1,
+                    "roles": 1
                 }
             } 
         ).observeChanges({
@@ -79,7 +80,8 @@ Meteor.publish('allUsers', function () {
                 fields: {  
                     "userProfile.team": 1,
                     "userProfile.picture": 1,
-                    "userProfile.name": 1
+                    "userProfile.name": 1,
+                    "roles": 1
                 }
             } 
         ).observeChanges({

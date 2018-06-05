@@ -8,8 +8,6 @@ export default class UserPointsTable extends Component {
     getUserPointsData = (points) => {
         let data = [];
 
-        console.log(points);
-
         points.forEach(e => {
             data.push({
                 id: e.user._id,
