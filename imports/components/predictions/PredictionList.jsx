@@ -70,6 +70,7 @@ export default class PredictionList extends Component {
 
             //If administrator, use fixture object's result to set the actual match result
             if (Roles.userIsInRole(Meteor.user(),'Administraator')) {
+                prediction.locked = false;
                 prediction.result = {
                     id: e._id,
                     homeGoals: e.result.home_goals,
@@ -100,19 +101,22 @@ export default class PredictionList extends Component {
 
         scores.forEach((score, i) => {
             let result = score.getElementsByTagName("input");
-            
-            let fixture = result[0].value;
-            let homeScore = result[1].value;
-            let awayScore = result[2].value;
 
-            //TODO: Make function update all predictions at once
-            Meteor.call( "updateUserPredictions", fixture, homeScore, awayScore, function( error, response ) {
-                if ( error ) {
-                    const msg = "Ennustuste uuendamine ebaõnnestus!";
-                    Bert.alert( msg, "danger" );
-                    Meteor.call("clientError", msg, error )
-                }
-            });
+            if (result.length > 2) {
+            
+                let fixture = result[0].value;
+                let homeScore = result[1].value;
+                let awayScore = result[2].value;
+
+                //TODO: Make function update all predictions at once
+                Meteor.call( "updateUserPredictions", fixture, homeScore, awayScore, function( error, response ) {
+                    if ( error ) {
+                        const msg = "Ennustuste uuendamine ebaõnnestus!";
+                        Bert.alert( msg, "danger" );
+                        Meteor.call("clientError", msg, error )
+                    }
+                });
+            }
         });
 
         Bert.alert( "Ennustused uuendatud!", "success" );

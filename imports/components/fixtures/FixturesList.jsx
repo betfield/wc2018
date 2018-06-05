@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
 
 export default class FixturesList extends Component {
 
     formatFixtureData = (data) => {
         let fixturesData = [];
-
-        console.log(data);
+        const fixtureId = this.props.fixtureId;
+        let fixture = {};
 
         data.forEach((e) => {
 
             let homeTeamCode = String(e.home_team.code).toLowerCase();
             let awayTeamCode = String(e.away_team.code).toLowerCase();
 
-            if (e.status === "FT") {
+            if (e.locked) {
                 let fixture = {
                     time: e.date + " " + e.time,
                     vs: {
+                        id: e._id,
                         homeFlag: Meteor.settings.public.FOLDER_FLAGS + homeTeamCode + ".png",
                         awayFlag: Meteor.settings.public.FOLDER_FLAGS + awayTeamCode + ".png"
                     },
@@ -31,7 +31,6 @@ export default class FixturesList extends Component {
                         homeGoals: e.result.home_goals,
                         awayGoals: e.result.away_goals
                     },
-                    id: e._id
                 }
 
                 fixturesData.push(fixture);
@@ -50,33 +49,24 @@ export default class FixturesList extends Component {
             </span>
         );
     }
-
+    
     resultFormatter = (cell, row) => {
+        let result = "";
+    
+        if (cell.homeGoals || cell.awayGoals) {
+            result = cell.homeGoals + ":" + cell.awayGoals;
+        }
+            
         return (
             <span className="bf-table-score">
-                <span>{cell.homeGoals} : {cell.awayGoals}</span>
+                <span>{result}</span>
             </span>
         );
     }
 
     render() {
-
-        if (this.props.fixtureId) {
-            console.log(this.props.predictions);
-        }
-
-        const options = {
-            hidePageListOnlyOnePage: true
-        }
-
+        const data = this.formatFixtureData(this.props.fixtures);
         const columnHeaders = [
-            {
-                text: 'Id',
-                dataField: 'id',
-                sort: false,
-                headerAlign: 'center',
-                hidden: true
-            },
             {
                 text: 'Aeg',
                 dataField: 'time',
@@ -86,8 +76,7 @@ export default class FixturesList extends Component {
             {
                 text: 'Kodu',
                 dataField: 'homeTeam',
-                headerAlign: 'center',
-                formatter: this.teamFormatter
+                headerAlign: 'center'
             }, 
             {
                 text: '',
@@ -109,7 +98,6 @@ export default class FixturesList extends Component {
             {
                 text: 'Voor',
                 dataField: 'round',
-                sort: true,
                 headerAlign: 'center'
             }, 
             {
@@ -119,19 +107,31 @@ export default class FixturesList extends Component {
                 headerAlign: 'center',
                 formatter: this.resultFormatter
             }
-        ]
+        ];
+
+        const rowEvents = {
+            onClick: (e, row, rowIndex) => {
+                window.location = "/fixtures/" + row.vs.id;
+            }
+        };
+
+        const keyField='vs.id'; 
+
+        const options = {
+            hidePageListOnlyOnePage: true
+        }
 
         return (
             <div className='bf-table'>
                 <BootstrapTable 
-                    keyField='id' 
-                    data={ this.formatFixtureData(this.props.fixtures) } 
+                    keyField= {keyField} 
+                    data={ data } 
+                    rowEvents = {rowEvents}
                     columns={ columnHeaders }
                     bordered={ true }
                     striped
                     hover
                     condensed
-                    pagination={ paginationFactory( options ) }
                 />
             </div>
         )

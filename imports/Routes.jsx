@@ -7,6 +7,7 @@ import PortalPage from './ui/pages/PortalPage';
 import RulesPage from './ui/pages/RulesPage';
 import PredictionsPage from './ui/pages/PredictionsPage';
 import FixturesPage from './ui/pages/FixturesPage';
+import FixturePredictionsPage from './ui/pages/FixturePredictionsPage';
 import CalendarPage from './ui/pages/CalendarPage';
 import TablePage from './ui/pages/TablePage';
 import LoginPage from './ui/pages/LoginPage';
@@ -52,7 +53,7 @@ getRoutes = () => {
                     <Route exact path="/activate" component={ActivatePage}/>
                     <Route exact path="/profile" component={ProfilePage}/>
                     <Route exact path="/users" component={UsersPage}/>
-                    <Route path="/fixtures/:fixtureId" component={FixturesPage}/>
+                    <Route path="/fixtures/:fixtureId" component={FixturePredictionsPage}/>
                 </Switch>
             </Router>
         )
