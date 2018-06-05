@@ -7,6 +7,155 @@ import NumericInput from 'react-numeric-input';
 
 export default class PredictionList extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            columnHeaders: this.getTableHeaders()
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.resizeTable);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resizeTable);
+    }
+
+    resizeTable = () => {
+
+        console.log(this.getTableHeaders());
+        this.setState({
+            columnHeaders: this.getTableHeaders()
+        });
+    }
+
+    getTableHeaders = () => {
+        let columnHeaders = [];
+        
+        if ($(window).width() < 640) {
+            columnHeaders = [ 
+                {
+                    text: '',
+                    dataField: 'vs',
+                    headerAlign: 'center',
+                    formatter: this.vsFormatter
+                }, 
+                {
+                    text: 'Tulemus',
+                    dataField: 'result',
+                    sort: false,
+                    headerAlign: 'center',
+                    formatter: this.resultFormatter
+                }
+            ];
+        } else if ($(window).width() < 1024) {
+            columnHeaders = [
+                {
+                    text: 'Aeg',
+                    dataField: 'time',
+                    sort: false,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: '',
+                    dataField: 'vs',
+                    headerAlign: 'center',
+                    formatter: this.vsFormatter
+                }, 
+                {
+                    text: 'Tulemus',
+                    dataField: 'result',
+                    sort: false,
+                    headerAlign: 'center',
+                    formatter: this.resultFormatter
+                }
+            ];
+        } else if ($(window).width() < 1281) {
+            columnHeaders = [
+                {
+                    text: 'Aeg',
+                    dataField: 'time',
+                    sort: false,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: '',
+                    dataField: 'vs',
+                    headerAlign: 'center',
+                    formatter: this.vsFormatter
+                }, 
+                {
+                    text: 'Grupp',
+                    dataField: 'group',
+                    sort: false,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Voor',
+                    dataField: 'round',
+                    sort: false,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Tulemus',
+                    dataField: 'result',
+                    sort: false,
+                    headerAlign: 'center',
+                    formatter: this.resultFormatter
+                }
+            ];
+        } else {
+            columnHeaders = [
+                {
+                    text: 'Aeg',
+                    dataField: 'time',
+                    sort: false,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Kodu',
+                    dataField: 'homeTeam',
+                    headerAlign: 'center',
+                    formatter: this.teamFormatter
+                }, 
+                {
+                    text: '',
+                    dataField: 'vs',
+                    headerAlign: 'center',
+                    formatter: this.vsFormatter
+                }, 
+                {
+                    text: 'Võõrsil',
+                    dataField: 'awayTeam',
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Grupp',
+                    dataField: 'group',
+                    sort: false,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Voor',
+                    dataField: 'round',
+                    sort: false,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Tulemus',
+                    dataField: 'result',
+                    sort: false,
+                    headerAlign: 'center',
+                    formatter: this.resultFormatter
+                }
+            ];
+        }
+
+        return columnHeaders;
+    }
+
     getPredictionsData = (group, user) => {
         let filteredPredictions = [];
 
@@ -157,58 +306,13 @@ export default class PredictionList extends Component {
 
     render() {
 
-        const columnHeaders = [
-            {
-                text: 'Aeg',
-                dataField: 'time',
-                sort: false,
-                headerAlign: 'center'
-            }, 
-            {
-                text: 'Kodu',
-                dataField: 'homeTeam',
-                headerAlign: 'center',
-                formatter: this.teamFormatter
-            }, 
-            {
-                text: '',
-                dataField: 'vs',
-                headerAlign: 'center',
-                formatter: this.vsFormatter
-            }, 
-            {
-                text: 'Võõrsil',
-                dataField: 'awayTeam',
-                headerAlign: 'center'
-            }, 
-            {
-                text: 'Grupp',
-                dataField: 'group',
-                sort: false,
-                headerAlign: 'center'
-            }, 
-            {
-                text: 'Voor',
-                dataField: 'round',
-                sort: false,
-                headerAlign: 'center'
-            }, 
-            {
-                text: 'Tulemus',
-                dataField: 'result',
-                sort: false,
-                headerAlign: 'center',
-                formatter: this.resultFormatter
-            }
-        ]
-
         return (
             <div className='bf-table'>
                 <form id="predictions-form" onSubmit={this.handleSubmit}>
                     <BootstrapTable 
                         keyField='result.id' 
                         data={ this.formatPredictionData(this.getPredictionsData(this.props.groupSelected, this.props.currentUser)) } 
-                        columns={ columnHeaders }
+                        columns={ this.state.columnHeaders }
                         bordered={ true }
                         striped
                         hover
