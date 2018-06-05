@@ -13,7 +13,9 @@ export default class UserList extends Component {
                 Bert.alert( msg , 'danger' );
                 Meteor.call("clientError", msg, error )
              } else {
-                Bert.alert( 'Kasutajate punktide uuendamine õnnestus', 'success' );
+                const msg = 'Kasutajate punktide uuendamine õnnestus';
+                Bert.alert( msg, 'success' );
+                Meteor.call("clientLog", msg )
              }
         });
     }
@@ -53,9 +55,10 @@ export default class UserList extends Component {
                     </tfoot>
                 </table>
             )
-        } else {
+        } else if (this.props.ready) {
             Bert.alert( 'Kasutajate vaatamiseks pead olema administraatori õigustega', 'danger' );
-            return null;
         }
+
+        return null;
     }
 }

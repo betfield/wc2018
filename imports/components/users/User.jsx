@@ -13,9 +13,17 @@ export default class User extends Component {
         event.preventDefault();
         const value = this.props.user._id;
 
-		Meteor.call("updateUserToRegistered", value);
-
-        Bert.alert( 'Kasutaja ' + this.props.user.userProfile.name + ' aktiveeritud', 'success' );
+		Meteor.call("updateUserToRegistered", value, (error, response) => {
+            if (error) {
+                const msg = 'Kasutajat ' + this.props.user.userProfile.name + ' ei saanud aktiveerida!';
+                Meteor.call("clientError", msg, error);
+                Bert.alert( msg, 'danger' );
+            } else {
+                const msg = 'Kasutaja ' + this.props.user.userProfile.name + ' aktiveeritud';
+                Meteor.call("clientlog", msg);
+                Bert.alert( msg, 'success' );
+            }
+        });
     }
 
     render() {

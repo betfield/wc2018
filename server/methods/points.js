@@ -78,11 +78,14 @@ Meteor.methods({
 		Roles.removeUsersFromRoles(userId, 'Aktiveerimata');
 
 		let user = Meteor.users.findOne({"_id": userId});
-		console.log(user);
 
-		Meteor.call("createUserPoints", user);
-
-		console.log("Updated to registered: ", user.userProfile.name);
+		Meteor.call("createUserPoints", user, (error,result) => {
+			if (error) {
+				throw new Meteor.Error("create-points-failed", "Cannot create points for user " + userId);
+			} else {
+				Log.info("Updated to registered: " + userId);
+			}
+		});
 	}
 });	
 

@@ -9,13 +9,12 @@ Meteor.methods({
 		// Check if logged in as admin and update the actual fixture result if so
 		if (Roles.userIsInRole(userId, ['Administraator'])) {
 
-			console.log(isNaN(parseInt(homeScore)));
-
 			if (!isNaN(parseInt(homeScore)) && !isNaN(parseInt(awayScore))) {
 				Fixtures.update({"_id": fixture}, {$set: {"result.home_goals": homeScore, "result.away_goals": awayScore, "status": "FT"}});
 				return Meteor.call("updateAllUsersPredictionPoints", fixture, function(error, result){
 					if (error) {
-						console.log("Update of points failed for user: " + userId);
+						Log.err("Update of points failed for user: " + userId, error);
+						throw new Meteor.Error("update-points-failed", "Update of points failed for user: " + userId);
 					} 
 				});
 			}
@@ -28,8 +27,7 @@ Meteor.methods({
 			if (!locked) {
 				return Predictions.update({"userId": userId, "fixture._id": fixture}, {$set: {"fixture.result.home_goals": homeScore, "fixture.result.away_goals": awayScore}});
 			} else {
-				console.log("Fixture " + fixture + " locked! Cannot update prediction for user " + userId);
-				return;
+				throw new Meteor.Error("fixture-locked", "Fixture " + fixture + " locked! Cannot update prediction for user " + userId);
 			}
 		}
 	},

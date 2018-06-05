@@ -6,7 +6,6 @@ export default class Profile extends Component {
 
         return (
             <div className='bf-table'>
-                {Meteor.user()._id}
             </div>
         )
     }

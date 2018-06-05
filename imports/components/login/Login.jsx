@@ -11,7 +11,7 @@ export default class Login extends Component {
                 Meteor.call("clientError", "Facebook login failed", err );
                 throw new Meteor.Error("Facebook login failed");
             } else {
-                Meteor.call("clientLog", "Facebook login succeeded");
+                Meteor.call("clientLog", "Facebook login succeeded for user: " + Meteor.userId());
                 history.push('/portal');
             }
         });
@@ -26,7 +26,7 @@ export default class Login extends Component {
                 Meteor.call("clientError", "Google login failed", err );
                 throw new Meteor.Error("Google login failed");
             } else {
-                Meteor.call("clientLog", "Google login succeeded");
+                Meteor.call("clientLog", "Google login succeeded for user:" + Meteor.userId());
                 history.push('/portal');
             }
         });
@@ -41,7 +41,7 @@ export default class Login extends Component {
                 Meteor.call("clientError", "Twitter login failed", err);
                 throw new Meteor.Error("Twitter login failed");
             } else {
-                Meteor.call("clientLog", "Twitter login succeeded");
+                Meteor.call("clientLog", "Twitter login succeeded for user: " + Meteor.userId());
                 history.push('/portal');
             }
         });

@@ -103,10 +103,12 @@ export default class PredictionList extends Component {
             let result = score.getElementsByTagName("input");
 
             if (result.length > 2) {
-            
+                
                 let fixture = result[0].value;
                 let homeScore = result[1].value;
                 let awayScore = result[2].value;
+
+                Meteor.call("clientLog", "Submitting predictions for user: " + userId + " with values: " + fixture + ", " + homeScore + ", " + awayScore);
 
                 //TODO: Make function update all predictions at once
                 Meteor.call( "updateUserPredictions", fixture, homeScore, awayScore, function( error, response ) {
@@ -114,6 +116,8 @@ export default class PredictionList extends Component {
                         const msg = "Ennustuste uuendamine ebaõnnestus!";
                         Bert.alert( msg, "danger" );
                         Meteor.call("clientError", msg, error )
+                    } else {
+                        Meteor.call("clientLog", "Submitting predictions for user: " + userId + " succeeded");
                     }
                 });
             }

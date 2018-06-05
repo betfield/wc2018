@@ -10,15 +10,21 @@ export default class LoginPage extends Component {
         //Check if user is logged in
         if (Meteor.userId()) {
 
+            const id = Meteor.userId();
+
             //If user logged in and logout parameter exists, proceed with user logout
             if (this.props.logout) {
                 Meteor.logout(err => {
                     if (err) {
-                        Bert.alert( 'Väljalogimine ebaõnnestus', 'danger' );
-                        throw new Meteor.Error("Logout failed");
+                        const msg = 'Väljalogimine ebaõnnestus';
+                        Bert.alert( msg , 'danger' );
+                        Meteor.call("clientError", msg + ", user: " + id, err);
+                    } else {
+                        const msg = 'Oled edukalt välja logitud';
+                        Bert.alert( msg , 'success' );
+                        Meteor.call("clientLog", msg + ", user: " + id);
                     }
                 });
-                Bert.alert('Oled edukalt välja logitud', 'success');
             } 
             //If user exist but no logout parameter then redirect to main page
             else {
