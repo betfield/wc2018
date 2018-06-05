@@ -20,7 +20,7 @@ export default class User extends Component {
                 Bert.alert( msg, 'danger' );
             } else {
                 const msg = 'Kasutaja ' + this.props.user.userProfile.name + ' aktiveeritud';
-                Meteor.call("clientlog", msg);
+                Meteor.call("clientLog", msg);
                 Bert.alert( msg, 'success' );
             }
         });

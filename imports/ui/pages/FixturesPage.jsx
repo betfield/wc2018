@@ -8,7 +8,7 @@ export default class FixturesPage extends Component {
     render() {
 
         return (
-            <PortalPage title="Tulemused">
+            <PortalPage title="Vooru tulemused">
                 <FixturesContainer fixtureId={this.props.match.params.fixtureId}/>
             </PortalPage>
         )
