@@ -115,7 +115,7 @@ export default class Navigation extends Component {
     }
 
     getLastPredictions = (currentUser) => {
-        if (Roles.userIsInRole(currentUser,'Aktiveeritud')) {
+        /*if (Roles.userIsInRole(currentUser,'Aktiveeritud')) {
             return (
                 <div>
                     <h4 className="font-extra-bold m-b-xs">
@@ -125,7 +125,7 @@ export default class Navigation extends Component {
                     <div id="sparkline1" className="small-chart m-t-sm"></div>
                 </div>
             )       
-        }     
+        } */    
     }
                                 
     getLoggedInUserData = (currentUser) => {
