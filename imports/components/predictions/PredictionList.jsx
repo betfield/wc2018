@@ -24,8 +24,6 @@ export default class PredictionList extends Component {
     }
 
     resizeTable = () => {
-
-        console.log(this.getTableHeaders());
         this.setState({
             columnHeaders: this.getTableHeaders()
         });
@@ -37,10 +35,44 @@ export default class PredictionList extends Component {
         if ($(window).width() < 640) {
             columnHeaders = [ 
                 {
+                    text: 'Aeg',
+                    dataField: 'time',
+                    sort: false,
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Kodu',
+                    dataField: 'homeTeam',
+                    headerAlign: 'center',
+                    formatter: this.teamFormatter,
+                    hidden: true
+                }, 
+                {
                     text: '',
                     dataField: 'vs',
                     headerAlign: 'center',
                     formatter: this.vsFormatter
+                }, 
+                {
+                    text: 'Võõrsil',
+                    dataField: 'awayTeam',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Grupp',
+                    dataField: 'group',
+                    sort: false,
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Voor',
+                    dataField: 'round',
+                    sort: false,
+                    headerAlign: 'center',
+                    hidden: true
                 }, 
                 {
                     text: 'Tulemus',
@@ -59,10 +91,37 @@ export default class PredictionList extends Component {
                     headerAlign: 'center'
                 }, 
                 {
+                    text: 'Kodu',
+                    dataField: 'homeTeam',
+                    headerAlign: 'center',
+                    formatter: this.teamFormatter,
+                    hidden: true
+                }, 
+                {
                     text: '',
                     dataField: 'vs',
                     headerAlign: 'center',
                     formatter: this.vsFormatter
+                }, 
+                {
+                    text: 'Võõrsil',
+                    dataField: 'awayTeam',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Grupp',
+                    dataField: 'group',
+                    sort: false,
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Voor',
+                    dataField: 'round',
+                    sort: false,
+                    headerAlign: 'center',
+                    hidden: true
                 }, 
                 {
                     text: 'Tulemus',
@@ -81,10 +140,23 @@ export default class PredictionList extends Component {
                     headerAlign: 'center'
                 }, 
                 {
+                    text: 'Kodu',
+                    dataField: 'homeTeam',
+                    headerAlign: 'center',
+                    formatter: this.teamFormatter,
+                    hidden: true
+                }, 
+                {
                     text: '',
                     dataField: 'vs',
                     headerAlign: 'center',
                     formatter: this.vsFormatter
+                }, 
+                {
+                    text: 'Võõrsil',
+                    dataField: 'awayTeam',
+                    headerAlign: 'center',
+                    hidden: true
                 }, 
                 {
                     text: 'Grupp',
