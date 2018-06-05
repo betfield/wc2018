@@ -4,34 +4,63 @@ import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
 
-    hideMenu = (e) => {
-        e.preventDefault();
-
+    componentDidMount() {
         if ($(window).width() < 769) {
-            $("body").toggleClass("show-sidebar");
+            $("body").addClass("hide-sidebar"); 
         } else {
-            $("body").toggleClass("hide-sidebar");
+            $("body").removeClass("hide-sidebar");
         }
     }
 
-    _getUserNavBar = () => {
-        if (Meteor.userId()) {    
+    hideMenu = (e) => {
+        e.preventDefault();
+        $("body").toggleClass("hide-sidebar");
+    }
+
+    //TODO: Combine the navigation links of Header and Navigation components
+    getFixturesLink = () => {
+        Meteor.call("getActiveMatchday", (error, result) => {
+            if (error) {
+                Meteor.call("clientError", "Failed to get active matchday!", error);
+            } else if (result > 1) {
+                this.setState({
+                    fixtureLink: <li><Link to="/fixtures">Tulemused</Link></li>
+                })
+            }
+        })
+    }
+
+    getUserNavBar = () => {
+
+        if (Meteor.userId()) {
+
+            let activate = null;
+
+            if (Roles.userIsInRole(Meteor.userId(),'Aktiveerimata')) {
+                activate = <li><Link to="/activate">Aktiveeri ennustus</Link></li>
+            }
+
             return (
                 <ul className="nav navbar-nav">
-                    <li>
-                        <Link className="" to="/">Pealeht</Link>
-                    </li>
-                    <li>
-                        <Link className="" to="/logout">Logi välja</Link>
-                    </li>
+                    <li><Link to="/portal">Pealeht</Link></li>
+                    <li><Link to="/profile">Minu profiil</Link></li>
+                    {activate}
+                    <li><Link to="/predictions">Ennustused</Link></li>
+                    <li><Link to="/table">Edetabel</Link></li>
+                    <li><Link to="/calendar">Kalender</Link></li>
+                    {this.getFixturesLink()}
+                    <li className=""><Link to="/rules">Reeglid</Link></li>
+                    <li><Link className="" to="/logout">Logi välja</Link></li>
                 </ul>
             )
         } else {
-            <ul className="nav navbar-nav">
-                <li>
-                    <Link className="" to="/login">Logi sisse</Link>
-                </li>
-            </ul>
+            return (
+                <ul className="nav navbar-nav">
+                    <li>
+                        <Link className="" to="/login">Logi sisse</Link>
+                    </li>
+                </ul>
+            )
         }
     }
 
@@ -52,7 +81,7 @@ export default class Header extends Component {
                             <i className="fa fa-chevron-down"></i>
                         </button>
                         <div className="collapse mobile-navbar" id="mobile-collapse">
-                            {this._getUserNavBar()}
+                            {this.getUserNavBar()}
                         </div>
                     </div>
                     <div className="navbar-right">

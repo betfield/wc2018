@@ -20,8 +20,8 @@ export default class Calendar extends Component {
 				let title;
 				let score;
 				
-				if (fixture.result && fixture.result.homeGoals && fixture.result.awayGoals) {
-					score = " " + fixture.result.homeGoals + ":" + fixture.result.awayGoals;
+				if (fixture.result && fixture.result.home_goals && fixture.result.away_goals) {
+					score = " (" + fixture.result.home_goals + ":" + fixture.result.away_goals + ")";
 				} else {
 					score = "";
 				}
@@ -57,6 +57,12 @@ export default class Calendar extends Component {
 
 	componentDidUpdate() {
 		const calendar_fixtures = this.getCalendarFixtures();
+		let defaultView = 'agendaWeek';
+
+		if ($(window).width() < 769) {
+            defaultView = 'agendaDay';
+        }
+
 
 		$('#calendar').fullCalendar({
 			schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
@@ -89,6 +95,7 @@ export default class Calendar extends Component {
 			timezone: 'local',
 			firstDay: 1,
 			defaultDate: this.getFirstFixtureDate(calendar_fixtures[0].start),
+			defaultView: defaultView,
 			monthNames: [
 					TAPi18n.__('month_jan'),
 					TAPi18n.__('month_feb'),

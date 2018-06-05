@@ -23,6 +23,7 @@ export default class LoginPage extends Component {
                         const msg = 'Oled edukalt välja logitud';
                         Bert.alert( msg , 'success' );
                         Meteor.call("clientLog", msg + ", user: " + id);
+                        this.props.history.push('/login');
                     }
                 });
             } 

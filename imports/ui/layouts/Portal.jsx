@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import HeaderContainer from './portal/header/HeaderContainer';
+import Header from './portal/header/Header';
 import Footer from './portal/Footer';
-import Navigation from './portal/navigation/NavigationContainer';
+import NavigationContainer from './portal/navigation/NavigationContainer';
 import View from './portal/View';
 
 import Splash from '../../components/loading/Splash';
@@ -71,11 +71,11 @@ export default class PortalPage extends Component {
         }
     }
 
-    getPortalLink() {
+    getNavigation() {
         if(Meteor.settings.public.env === "Preview") {
             return null
         } else {
-            return <Navigation currentUser={this.props.currentUser}/>
+            return <NavigationContainer/>
         }
     }
 
@@ -83,8 +83,8 @@ export default class PortalPage extends Component {
 
         return (
             <div id="portal">
-                <HeaderContainer/>
-                {this.getPortalLink()}
+                <Header/>
+                {this.getNavigation()}
                 <div id="wrapper">
                     <View title={this.props.title} filter={this.props.filter}>    
                         {this.props.children}                    

@@ -9,7 +9,9 @@ export default class Activate extends Component {
                     <div className="hpanel">
                         <div className="panel-body login-panel">
                             <div className="col-md-4 text-center">
-                                <img src="images/mascot.jpg"/>    
+                                <div className="activate-image">
+                                    <img src="images/mascot.jpg"/>    
+                                </div>
                             </div>
                             <div className="col-md-6 text-left">
                                 <div>

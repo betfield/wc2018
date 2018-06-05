@@ -107,11 +107,7 @@ export default class Navigation extends Component {
             return (
                 <li><Link to="/activate">Aktiveeri ennustus</Link></li>
             )
-        } else {
-            return (
-                <li><Link to="/portal">Pealeht</Link></li>
-            )
-        }
+        } 
     }
 
     getLastPredictions = (currentUser) => {
@@ -145,6 +141,7 @@ export default class Navigation extends Component {
                                 {this.getDropDownUserRole(currentUser)}
                             </Link>
                             <ul className="dropdown-menu animated flipInX m-t-xs">
+                                <li><Link to="/portal">Pealeht</Link></li>
                                 {this.getDropDownData(currentUser)}
                                 <li><Link to="/profile">Minu profiil</Link></li>
                             <li className="divider"></li>
