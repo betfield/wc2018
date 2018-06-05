@@ -1,6 +1,6 @@
 //The table below has all fixture 1h earlier than the actual fixture start (in UTC)
 let firstRoundFixtureDates = [
-    {"ts": "2018-05-14T14:00:00Z", "round": 1},
+    {"ts": "2018-06-14T14:00:00Z", "round": 1},
     {"ts": "2018-06-19T17:00:00Z", "round": 2},
     {"ts": "2018-06-25T13:00:00Z", "round": 3},
     {"ts": "2018-06-30T13:00:00Z", "round": 4},
