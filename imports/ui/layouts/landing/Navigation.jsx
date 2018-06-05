@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Navigation extends Component {
 
     getNavbarBrand() {
-        if(Meteor.settings.public.env === "Preview") {
+        if(!Meteor.settings.public.env === "Production") {
             return <a className="navbar-brand" href="#page-top">MM 2018 ENNUSTUSMÄNG</a>
         } else {
             return <a className="navbar-brand" href="#page-top">Registreerunuid: {this.props.userCount}</a>
