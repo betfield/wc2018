@@ -20,6 +20,8 @@ export default class Filter extends Component {
                     <button id="D" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>D</button>
                     <button id="E" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>E</button>
                     <button id="F" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>F</button>
+                    <button id="G" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>G</button>
+                    <button id="H" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>H</button>
                     <button id="I" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>I</button>
                     <button id="II" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>II</button>
                     <button id="III" type="button" className="fc-button fc-state-default fc-corner-right" onClick={this.groupSelect}>III</button>

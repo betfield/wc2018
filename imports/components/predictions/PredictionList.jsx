@@ -290,7 +290,7 @@ export default class PredictionList extends Component {
 
             if (['I','II','III'].indexOf(group) > -1) {
                 filteredPredictions = fixtures.filter(fixture => fixture.roundRoman === group);
-            } else if (['A','B','C','D','E','F'].indexOf(group) > -1) {
+            } else if (['A','B','C','D','E','F','G','H'].indexOf(group) > -1) {
                 filteredPredictions = fixtures.filter(fixture => fixture.group === group);
             }
 
@@ -420,10 +420,16 @@ export default class PredictionList extends Component {
                     <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2}/>
                 </span>
             );
-        } else {
+        } else if (cell.homeGoals || cell.awayGoals) {
             return (
                 <span className="bf-table-score">
                     {cell.homeGoals} : {cell.awayGoals} ({cell.userPoints}p)
+                </span>
+            );
+        } else {
+            return (
+                <span className="bf-table-score">
+                    - 
                 </span>
             );
         }
