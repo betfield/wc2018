@@ -11,8 +11,9 @@ export default class UserPointsTable extends Component {
         points.forEach(e => {
             data.push({
                 id: e.user._id,
-                pos: e.pos,
+                pos: e.user.pos,
                 user: e.user.team,
+                pic: e.user.picture,
                 round1: e.round1,
                 round2: e.round2,
                 round3: e.round3,
@@ -27,6 +28,17 @@ export default class UserPointsTable extends Component {
         return data;
     }
   
+    userFormatter = (cell, row) => {
+        return (
+            <div className="bf-table-points-user">
+                <span>
+                    <img className="img-circle m-b" src={row.pic}/>
+                    {cell}
+                </span>
+            </div>
+        )
+    }
+
     render() {
 
         const options = {
@@ -50,7 +62,8 @@ export default class UserPointsTable extends Component {
                 text: 'Kasutaja',
                 dataField: 'user',
                 sort: true,
-                headerAlign: 'center'
+                headerAlign: 'center',
+                formatter: this.userFormatter
             }, {
                 text: 'I',
                 dataField: 'round1',

@@ -4,7 +4,7 @@ Meteor.publish('points', function () {
 	let userId = this.userId;
 	
 	if (userId) {
-		let subHandle = Points.find({}).observeChanges({
+		let subHandle = Points.find({}, {fields: {"user.email": 0, "user.name": 0}}).observeChanges({
 			added: function(id, fields) {
 				self.added("points", id, fields);
 			},
