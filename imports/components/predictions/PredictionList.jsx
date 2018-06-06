@@ -32,7 +32,57 @@ export default class PredictionList extends Component {
     getTableHeaders = () => {
         let columnHeaders = [];
         
-        if ($(window).width() < 640) {
+        if ($(window).width() < 501) {
+            columnHeaders = [ 
+                {
+                    text: 'Aeg',
+                    dataField: 'time',
+                    sort: false,
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Kodu',
+                    dataField: 'homeTeam',
+                    headerAlign: 'center',
+                    formatter: this.teamFormatter,
+                    hidden: true
+                }, 
+                {
+                    text: '',
+                    dataField: 'vs',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Võõrsil',
+                    dataField: 'awayTeam',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Grupp',
+                    dataField: 'group',
+                    sort: false,
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Voor',
+                    dataField: 'round',
+                    sort: false,
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Tulemus',
+                    dataField: 'result',
+                    sort: false,
+                    headerAlign: 'center',
+                    formatter: this.resultFormatterSmall
+                }
+            ];
+        } else if ($(window).width() < 640) {
             columnHeaders = [ 
                 {
                     text: 'Aeg',
@@ -365,6 +415,36 @@ export default class PredictionList extends Component {
                     <NumericInput id="home-score" min={0} max={99} value={cell.homeGoals} className="input-no-spinner" size={2}/>
                     <span> : </span>
                     <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2}/>
+                </span>
+            );
+        } else {
+            return (
+                <span className="bf-table-score">
+                    {cell.homeGoals} : {cell.awayGoals}
+                </span>
+            );
+        }
+    }
+
+    resultFormatterSmall = (cell, row) => {
+        if (!row.locked) {
+            let vs = {};
+
+            if (row.vs) {
+                vs = row.vs
+            }
+
+            return (
+                <span className="bf-table-score">
+                    <input id="fixture-id" type="hidden" value={cell.id}/>
+                    <div className="bf-table-small">
+                        <img src={vs.homeFlag}/>
+                        <NumericInput id="home-score" min={0} max={99} value={cell.homeGoals} className="input-no-spinner" size={2}/>
+                    </div>
+                    <div className="bf-table-small">
+                        <img src={vs.awayFlag}/>
+                        <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2}/>
+                    </div>    
                 </span>
             );
         } else {
