@@ -301,7 +301,8 @@ export default class PredictionList extends Component {
                     const obj = predictions.find(prediction => prediction.fixture._id === f._id);
                     if (obj && obj.fixture) {
                         filteredPredictions[i].prediction = { 
-                            result: obj.fixture.result
+                            result: obj.fixture.result,
+                            userPoints: obj.fixture.userPoints
                         };
                     } else {
                         Meteor.call("clientError", "Prediction object does not exist for fixture", f )
@@ -310,7 +311,8 @@ export default class PredictionList extends Component {
                             result: {
                                 home_goals: "N/A",
                                 away_goals: "N/A"
-                            }
+                            },
+                            userPoints: 0
                         };
                     }
     
@@ -352,7 +354,8 @@ export default class PredictionList extends Component {
                 prediction.result = {
                     id: e._id,
                     homeGoals: e.prediction.result.home_goals,
-                    awayGoals: e.prediction.result.away_goals
+                    awayGoals: e.prediction.result.away_goals,
+                    userPoints: e.prediction.userPoints
                 }
             }
 
@@ -420,38 +423,47 @@ export default class PredictionList extends Component {
         } else {
             return (
                 <span className="bf-table-score">
-                    {cell.homeGoals} : {cell.awayGoals}
+                    {cell.homeGoals} : {cell.awayGoals} ({cell.userPoints}p)
                 </span>
             );
         }
     }
 
     resultFormatterSmall = (cell, row) => {
+        let vs = {};
+
+        if (row.vs) {
+            vs = row.vs
+        }
+        
         if (!row.locked) {
-            let vs = {};
-
-            if (row.vs) {
-                vs = row.vs
-            }
-
             return (
-                <span className="bf-table-score">
-                    <input id="fixture-id" type="hidden" value={cell.id}/>
-                    <div className="bf-table-small">
-                        <img src={vs.homeFlag}/>
-                        <NumericInput id="home-score" min={0} max={99} value={cell.homeGoals} className="input-no-spinner" size={2}/>
-                    </div>
-                    <div className="bf-table-small">
-                        <img src={vs.awayFlag}/>
-                        <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2}/>
-                    </div>    
-                </span>
+                <div className="bf-table-score container">
+                    <div className="row">
+                        <input id="fixture-id" type="hidden" value={cell.id}/>
+                        <div className="bf-table-small col-xs-6">
+                            <img src={vs.homeFlag}/>
+                            <NumericInput id="home-score" min={0} max={99} value={cell.homeGoals} className="input-no-spinner form-control" size={2}/>
+                        </div>
+                        <div className="bf-table-small col-xs-6">
+                            <img src={vs.awayFlag}/>
+                            <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner form-control" size={2}/>
+                        </div>
+                    </div>     
+                </div>
             );
         } else {
             return (
-                <span className="bf-table-score">
-                    {cell.homeGoals} : {cell.awayGoals}
-                </span>
+                <div className="bf-table-score">
+                    <input id="fixture-id" type="hidden" value={cell.id}/>
+                    <div className="bf-table-small">
+                        <img src={vs.homeFlag}/>
+                        <span className="bf-table-score">
+                            {cell.homeGoals} : {cell.awayGoals} ({cell.userPoints}p)
+                        </span>
+                        <img src={vs.awayFlag}/>
+                    </div>     
+                </div>
             );
         }
     }
