@@ -5,6 +5,207 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 
 export default class UserPointsTable extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            columnHeaders: this.getTableHeaders()
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.resizeTable);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resizeTable);
+    }
+
+    resizeTable = () => {
+        this.setState({
+            columnHeaders: this.getTableHeaders()
+        });
+    }
+
+    getTableHeaders = () => {
+        let columnHeaders = [];
+        
+        if ($(window).width() < 769) {
+            columnHeaders = [
+                {
+                    text: 'Id',
+                    dataField: 'id',
+                    headerAlign: 'center',
+                    hidden: true
+                },
+                {
+                    text: 'Pos',
+                    dataField: 'pos',
+                    headerAlign: 'center'
+                }, {
+                    text: 'Kasutaja',
+                    dataField: 'user',
+                    headerAlign: 'center',
+                    formatter: this.userFormatter
+                }, {
+                    text: 'I',
+                    dataField: 'round1',
+                    headerAlign: 'center',
+                    hidden: true
+                }, {
+                    text: 'II',
+                    dataField: 'round2',
+                    headerAlign: 'center',
+                    hidden: true
+                }, {
+                    text: 'III',
+                    dataField: 'round3',
+                    headerAlign: 'center',
+                    hidden: true
+                }, {
+                    text: 'IV',
+                    dataField: 'round4',
+                    headerAlign: 'center',
+                    hidden: true
+                }, {
+                    text: 'V',
+                    dataField: 'round5',
+                    headerAlign: 'center',
+                    hidden: true
+                }, {
+                    text: 'VI',
+                    dataField: 'round6',
+                    headerAlign: 'center',
+                    hidden: true
+                }, {
+                    text: 'VII',
+                    dataField: 'round7',
+                    headerAlign: 'center',
+                    hidden: true
+                }, {
+                    text: 'Kokku',
+                    dataField: 'total',
+                    headerAlign: 'center'
+                }
+            ];
+        } else if ($(window).width() < 1281) {
+            columnHeaders = [
+                {
+                    text: 'Id',
+                    dataField: 'id',
+                    headerAlign: 'center',
+                    hidden: true
+                },
+                {
+                    text: 'Pos',
+                    dataField: 'pos',
+                    headerAlign: 'center'
+                }, {
+                    text: 'Kasutaja',
+                    dataField: 'user',
+                    headerAlign: 'center',
+                    formatter: this.userFormatterSlim
+                }, {
+                    text: 'I',
+                    dataField: 'round1',
+                    headerAlign: 'center'
+                }, {
+                    text: 'II',
+                    dataField: 'round2',
+                    headerAlign: 'center'
+                }, {
+                    text: 'III',
+                    dataField: 'round3',
+                    headerAlign: 'center'
+                }, {
+                    text: 'IV',
+                    dataField: 'round4',
+                    headerAlign: 'center'
+                }, {
+                    text: 'V',
+                    dataField: 'round5',
+                    headerAlign: 'center'
+                }, {
+                    text: 'VI',
+                    dataField: 'round6',
+                    headerAlign: 'center'
+                }, {
+                    text: 'VII',
+                    dataField: 'round7',
+                    headerAlign: 'center'
+                }, {
+                    text: 'Kokku',
+                    dataField: 'total',
+                    headerAlign: 'center'
+                }
+            ];
+        } else {
+            columnHeaders = [
+                {
+                    text: 'Id',
+                    dataField: 'id',
+                    sort: false,
+                    headerAlign: 'center',
+                    hidden: true
+                },
+                {
+                    text: 'Pos',
+                    dataField: 'pos',
+                    sort: true,
+                    headerAlign: 'center'
+                }, {
+                    text: 'Kasutaja',
+                    dataField: 'user',
+                    sort: true,
+                    headerAlign: 'center',
+                    formatter: this.userFormatter
+                }, {
+                    text: 'I',
+                    dataField: 'round1',
+                    sort: true,
+                    headerAlign: 'center'
+                }, {
+                    text: 'II',
+                    dataField: 'round2',
+                    sort: true,
+                    headerAlign: 'center'
+                }, {
+                    text: 'III',
+                    dataField: 'round3',
+                    sort: true,
+                    headerAlign: 'center'
+                }, {
+                    text: 'IV',
+                    dataField: 'round4',
+                    sort: true,
+                    headerAlign: 'center'
+                }, {
+                    text: 'V',
+                    dataField: 'round5',
+                    sort: true,
+                    headerAlign: 'center'
+                }, {
+                    text: 'VI',
+                    dataField: 'round6',
+                    sort: true,
+                    headerAlign: 'center'
+                }, {
+                    text: 'VII',
+                    dataField: 'round7',
+                    sort: true,
+                    headerAlign: 'center'
+                }, {
+                    text: 'Kokku',
+                    dataField: 'total',
+                    sort: true,
+                    headerAlign: 'center'
+                }
+            ];
+        }
+
+        return columnHeaders;
+    }
+
     getUserPointsData = (points) => {
         let data = [];
 
@@ -32,9 +233,17 @@ export default class UserPointsTable extends Component {
         return (
             <div className="bf-table-points-user">
                 <span>
-                    <img className="img-circle m-b" src={row.pic}/>
+                    <img className="img-circle m-b" src={row.pic} title={cell}/>
                     {cell}
                 </span>
+            </div>
+        )
+    }
+
+    userFormatterSlim = (cell, row) => {
+        return (
+            <div className="bf-table-points-user">
+                <img className="img-circle m-b" src={row.pic} title={cell}/>
             </div>
         )
     }
@@ -45,67 +254,7 @@ export default class UserPointsTable extends Component {
             hidePageListOnlyOnePage: true
         }
 
-        const columns = [
-            {
-                text: 'Id',
-                dataField: 'id',
-                sort: false,
-                headerAlign: 'center',
-                hidden: true
-            },
-            {
-                text: 'Pos',
-                dataField: 'pos',
-                sort: true,
-                headerAlign: 'center'
-            }, {
-                text: 'Kasutaja',
-                dataField: 'user',
-                sort: true,
-                headerAlign: 'center',
-                formatter: this.userFormatter
-            }, {
-                text: 'I',
-                dataField: 'round1',
-                sort: true,
-                headerAlign: 'center'
-            }, {
-                text: 'II',
-                dataField: 'round2',
-                sort: true,
-                headerAlign: 'center'
-            }, {
-                text: 'III',
-                dataField: 'round3',
-                sort: true,
-                headerAlign: 'center'
-            }, {
-                text: 'IV',
-                dataField: 'round4',
-                sort: true,
-                headerAlign: 'center'
-            }, {
-                text: 'V',
-                dataField: 'round5',
-                sort: true,
-                headerAlign: 'center'
-            }, {
-                text: 'VI',
-                dataField: 'round6',
-                sort: true,
-                headerAlign: 'center'
-            }, {
-                text: 'VII',
-                dataField: 'round7',
-                sort: true,
-                headerAlign: 'center'
-            }, {
-                text: 'Kokku',
-                dataField: 'total',
-                sort: true,
-                headerAlign: 'center'
-            }
-        ]
+        const columns = this.state.columnHeaders;
 
         return (
           <div className='bf-table'>
