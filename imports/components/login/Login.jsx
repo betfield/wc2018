@@ -8,10 +8,17 @@ export default class Login extends Component {
 
         Meteor.loginWithFacebook({}, function(err){
             if (err) {
-                Meteor.call("clientError", "Facebook login failed", err );
-                throw new Meteor.Error("Facebook login failed");
+                let msg = "Sisselogimine ebaõnnestus!";
+                Meteor.call("clientError", "Facebook: " + msg, err );
+
+                if (err.error === "register-ended") {
+                    msg = msg + " " + err.reason;
+                }
+
+                Bert.alert( msg, "danger" );
             } else {
-                Meteor.call("clientLog", "Facebook login succeeded for user: " + Meteor.userId());
+                Meteor.call("clientLog", "Facebook sisselogimine õnnestus: " + Meteor.userId());
+                Bert.alert( "Tere tulemast, " + Meteor.user().userProfile.name, "success" );
                 history.push('/portal');
             }
         });
@@ -23,10 +30,17 @@ export default class Login extends Component {
 
         Meteor.loginWithGoogle({}, function(err){
             if (err) {
-                Meteor.call("clientError", "Google login failed", err );
-                throw new Meteor.Error("Google login failed");
+                let msg = "Sisselogimine ebaõnnestus!";
+                Meteor.call("clientError", "Google: " + msg, err );
+
+                if (err.error === "register-ended") {
+                    msg = msg + " " + err.reason;
+                }
+
+                Bert.alert( msg, "danger" );
             } else {
-                Meteor.call("clientLog", "Google login succeeded for user:" + Meteor.userId());
+                Meteor.call("clientLog", "Google sisselogimine õnnestus: " + Meteor.userId());
+                Bert.alert( "Tere tulemast, " + Meteor.user().userProfile.name, "success" );
                 history.push('/portal');
             }
         });
@@ -38,16 +52,22 @@ export default class Login extends Component {
 
         Meteor.loginWithTwitter({}, function(err){
             if (err) {
-                Meteor.call("clientError", "Twitter login failed", err);
-                throw new Meteor.Error("Twitter login failed");
+                let msg = "Sisselogimine ebaõnnestus!";
+                Meteor.call("clientError", "Twitter: " + msg, err );
+
+                if (err.error === "register-ended") {
+                    msg = msg + " " + err.reason;
+                }
+                
+                Bert.alert( msg, "danger" );
             } else {
-                Meteor.call("clientLog", "Twitter login succeeded for user: " + Meteor.userId());
+                Meteor.call("clientLog", "Twitter sisselogimine õnnestus: " + Meteor.userId());
+                Bert.alert( "Tere tulemast, " + Meteor.user().userProfile.name, "success" );
                 history.push('/portal');
             }
         });
     }
     
-
     render() {
 
         return (

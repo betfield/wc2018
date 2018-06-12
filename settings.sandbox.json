@@ -7,7 +7,7 @@
 	"private": {
 		"BF_EMAIL": "betfieldou@gmail.com",
 		"TZ_HOURS": 4,
-		
+		"REGISTER_END": "2018-06-13T21:00:00Z",
 		"MAIL_URL": "smtps://postmaster%40sandbox1038697df0464bc4a649b509bb2754ae.mailgun.org:438d361774c064645df07208c8b95d17-db1f97ba-42666fe5@smtp.mailgun.org:465"
 	},
 	"loggly": {

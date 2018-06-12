@@ -27,6 +27,7 @@ export default class UserPointsTable extends Component {
         });
     }
 
+    //TODO: Use better logic to hide/show columns
     getTableHeaders = () => {
         let columnHeaders = [];
         

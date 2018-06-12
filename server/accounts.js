@@ -1,3 +1,5 @@
+import {isRegisterEnd} from './helpers/fixtures'
+
 UserRoles = {
 	admin: 'Administraator',
 	regular: 'Aktiveerimata',
@@ -33,7 +35,10 @@ Accounts.onCreateUser(function (options, user) {
 	var service = user.services;
 	var userProfile;
 	
-	if (service.facebook) {
+	if (isRegisterEnd()) {
+		throw new Meteor.Error("register-ended", "Registreerimine lõppenud");
+	}
+	else if (service.facebook) {
 		userProfile = {
 			picture: "https://graph.facebook.com/" + service.facebook.id + "/picture",
 			email: service.facebook.email,

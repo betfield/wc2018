@@ -38,3 +38,5 @@ meteor add matb33:collection-hooks
 meteor npm install react-numeric-input --save
 meteor npm install --save moment
 meteor npm shrinkwrap
+
+meteor add chfritz:easycron

@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { logger } from './helpers/logger';
+import { getTimeToRegister } from './helpers/fixtures';
 
 // Run this when the meteor app is started
 Meteor.startup(function () {
@@ -22,13 +23,12 @@ Meteor.startup(function () {
 	
 	/*
 	Meteor.call("updateFixtureStatuses");
-	
-	var everyHour = new Cron(function() {
-		console.log("Running Fixture status update:");
-		Meteor.call("updateFixtureStatuses");
-	}, {
-		minute: 0
-	});
 	*/
+
+	let everyHour = new Cron(function() {
+		Meteor.call("updateFixtureLockedStatuses");
+	}, {
+		minute: 15
+	});
 });
 
