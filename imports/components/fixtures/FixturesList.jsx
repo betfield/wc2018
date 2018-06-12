@@ -51,7 +51,7 @@ export default class FixturesList extends Component {
     }
     
     resultFormatter = (cell, row) => {
-        let result = "";
+        let result = "-";
     
         if (cell.homeGoals || cell.awayGoals) {
             result = cell.homeGoals + ":" + cell.awayGoals;

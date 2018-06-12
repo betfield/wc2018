@@ -52,19 +52,5 @@ Meteor.methods({
 		}
 		
 		return (firstRoundFixtureDate < currentDate.toISOString());
-	},
-	
-	removeRegularUserRoundPredictions: function(round) {
-		var regularUsers = Meteor.users.find({"roles": "regular-user"}).fetch();
-		var i = 0;
-
-		regularUsers.forEach(function(user){
-			console.log("Update for user: " + user._id + ", round: " + round);
-			var regularUserPredictions = Predictions.update({"userId": user._id, "fixture.round": round}, {$set: {"fixture.result.homeGoals": "", "fixture.result.awayGoals": ""}}, {multi: true});
-			
-			i++;
-		});
-		  
-		console.log("Regular user predictions removed. Count: ", i);
-	}			
+	}
 });	

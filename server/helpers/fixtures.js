@@ -1,13 +1,5 @@
-//The table below has all fixture 1h earlier than the actual fixture start (in UTC)
-const firstRoundFixtureDates = [
-    {"ts": "2018-06-14T14:00:00Z", "round": 1},
-    {"ts": "2018-06-19T17:00:00Z", "round": 2},
-    {"ts": "2018-06-25T13:00:00Z", "round": 3},
-    {"ts": "2018-06-30T13:00:00Z", "round": 4},
-    {"ts": "2018-07-06T13:00:00Z", "round": 5},
-    {"ts": "2018-07-10T17:00:00Z", "round": 6},
-    {"ts": "2018-07-14T13:00:00Z", "round": 7}
-];
+// Round end dates, e.g. dates for first fixture of each round -1h (in UTC)
+const firstRoundFixtureDates = Meteor.settings.private.ROUND_END_DATES;
 
 //Register end date (in UTC)
 const registerEnd = Meteor.settings.private.REGISTER_END;

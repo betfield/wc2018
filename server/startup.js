@@ -21,14 +21,10 @@ Meteor.startup(function () {
 		return user;
 	}
 	
-	/*
-	Meteor.call("updateFixtureStatuses");
-	*/
-
-	let everyHour = new Cron(function() {
+	let everyMinute = new Cron(function() {
 		Meteor.call("updateFixtureLockedStatuses");
 	}, {
-		minute: 15
+		
 	});
 });
 

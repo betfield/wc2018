@@ -32,6 +32,7 @@ Meteor.publish('fixturePredictions', function (fixtureId) {
 	check(fixtureId, String);
 
 	// Return result only if user is logged in and fixture is locked for editing
+	// TODO: Remove unregistered (inactive) user results
 	if (userId && fixtureIsLocked(fixtureId)) {
 		let subHandle = Predictions.find({"fixture._id": fixtureId}).observeChanges({
 			added: function(id, fields) {

@@ -6,8 +6,16 @@
 	},
 	"private": {
 		"BF_EMAIL": "betfieldou@gmail.com",
-		"TZ_HOURS": 4,
 		"REGISTER_END": "2018-06-13T21:00:00Z",
+		"ROUND_END_DATES": [
+			{"ts": "2018-06-14T13:59:59Z", "round": 1},
+			{"ts": "2018-06-19T16:59:59Z", "round": 2},
+			{"ts": "2018-06-25T12:59:59Z", "round": 3},
+			{"ts": "2018-06-30T12:59:59Z", "round": 4},
+			{"ts": "2018-07-06T12:59:59Z", "round": 5},
+			{"ts": "2018-07-10T16:59:59Z", "round": 6},
+			{"ts": "2018-07-14T12:59:59Z", "round": 7}
+		],
 		"MAIL_URL": "smtps://postmaster%40sandbox1038697df0464bc4a649b509bb2754ae.mailgun.org:438d361774c064645df07208c8b95d17-db1f97ba-42666fe5@smtp.mailgun.org:465"
 	},
 	"loggly": {

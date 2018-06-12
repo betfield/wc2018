@@ -27,7 +27,7 @@ export default class FixturesPredictions extends Component {
                     result: {
                         homeGoals: e.fixture.result.home_goals,
                         awayGoals: e.fixture.result.away_goals,
-                        userPoints: e.fixture.result.userPoints
+                        userPoints: e.fixture.userPoints
                     },
                     user: {
                         id: user._id,
@@ -65,6 +65,8 @@ export default class FixturesPredictions extends Component {
 
             if (f.result.home_goals || f.result.away_goals) {
                 fixture.result = f.result.home_goals + ":" + f.result.away_goals;
+            } else {
+                fixture.result = "-";
             }
 
             return (
@@ -114,13 +116,7 @@ export default class FixturesPredictions extends Component {
     }
 
     resultFormatter = (cell, row) => {
-        let result = "";
-    
-        if (cell.homeGoals || cell.awayGoals) {
-            result = cell.homeGoals + ":" + cell.awayGoals;
-        } else {
-            result = "-";
-        }
+        let result = cell.homeGoals + ":" + cell.awayGoals;
             
         return (
             <span className="bf-table-score">
@@ -132,10 +128,12 @@ export default class FixturesPredictions extends Component {
     pointsFormatter = (cell, row) => {
         let points = "";
     
-        if (cell) {
-            points = cell + "p";
-        } else {
-            points = "-";
+        if (this.props.fixturesReady) {
+            if (this.props.fixture.status === "FT") {
+                points = cell + "p";
+            } else {
+                points = "-";
+            }
         }
             
         return (

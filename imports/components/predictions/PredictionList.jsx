@@ -338,7 +338,8 @@ export default class PredictionList extends Component {
                 awayTeam: e.away_team.name,
                 group: e.group,
                 round: e.roundRoman,
-                locked: e.locked
+                locked: e.locked,
+                status: e.status
             }
 
             //If administrator, use fixture object's result to set the actual match result
@@ -420,16 +421,10 @@ export default class PredictionList extends Component {
                     <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2}/>
                 </span>
             );
-        } else if (cell.homeGoals || cell.awayGoals) {
-            return (
-                <span className="bf-table-score">
-                    {cell.homeGoals} : {cell.awayGoals} ({cell.userPoints}p)
-                </span>
-            );
         } else {
             return (
                 <span className="bf-table-score">
-                    - 
+                    {cell.homeGoals} : {cell.awayGoals} {"(" + (row.status==="FT" ? cell.userPoints + "p" : "-") + ")"}
                 </span>
             );
         }
@@ -465,7 +460,7 @@ export default class PredictionList extends Component {
                     <div className="bf-table-small">
                         <img src={vs.homeFlag}/>
                         <span className="bf-table-score">
-                            {cell.homeGoals} : {cell.awayGoals} ({cell.userPoints}p)
+                            {cell.homeGoals} : {cell.awayGoals} {"(" + (row.status==="FT" ? cell.userPoints + "p" : "-") + ")"}
                         </span>
                         <img src={vs.awayFlag}/>
                     </div>     

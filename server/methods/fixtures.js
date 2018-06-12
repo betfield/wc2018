@@ -8,42 +8,23 @@ Meteor.methods({
         return getActiveMatchday().round;
 	},
     updateFixtureLockedStatuses: function() {
-		let rounds = 7;
+		const md = getActiveMatchday();
+		
+		let currentDate = new Date();
 		let roundFixtures = [];
-		
-        let currentDate = new Date();
         
-        
-
-		// adjust current date -1h in ET timezone
-		currentDate.setTime(currentDate.getTime() + (Meteor.settings.private.TZ_HOURS*60*60*1000));
-		
-		if (Meteor.settings.private.TEST_TIME) {
+		if (Meteor.settings.env === "Sandbox" && Meteor.settings.private.TEST_TIME) {
 			currentDate = new Date(Meteor.settings.private.TEST_TIME);
 		}
 
-		console.log("Current: ", currentDate.toISOString());
+		console.log("Current date: ", currentDate.toISOString());
+		console.log("Current matchday: ", md.round);
 
-        /*
-
-		for (i = 0; i < rounds; i++) {
-			let round = i+1; 
-			roundFixtures[i] = Fixtures.find({"round": round}).fetch();
-			
-			let firstRoundFixtureDate = orderByDate(roundFixtures[i], "ts")[0].ts;
-			
-			console.log("Round start: ", firstRoundFixtureDate);
-			
-			if (firstRoundFixtureDate > currentDate.toISOString()) {
-				console.log("Predictions enabled");
-				Fixtures.update({"round": round}, {$set: {"status": "enabled"}}, {multi: true});
-			} else {
-				console.log("Predictions disabled");
-				Fixtures.update({"round": round}, {$set: {"status": "disabled"}}, {multi: true});
-				Meteor.call("removeRegularUserRoundPredictions", round, function(){});
+		firstRoundFixtureDates.forEach(fd => {
+			if (fd.round < md.round) {
+				console.log("Running fixture lock update for round: ", fd.round);
+				Fixtures.update({"round": fd.round}, {$set: {"locked": true}}, {multi: true});
 			}
-        }
-        
-        */
-	},
+		})
+	}
 });
