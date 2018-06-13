@@ -129,7 +129,7 @@ export default class Navigation extends Component {
 
             return (
                 <div className="profile-picture">
-                    <Link to="/profile">
+                    <Link to="/portal">
                         <img src={currentUser.userProfile.picture} 
                             alt={currentUser.userProfile.name} className="img-circle m-b"/>
                     </Link>
@@ -143,7 +143,6 @@ export default class Navigation extends Component {
                             <ul className="dropdown-menu animated flipInX m-t-xs">
                                 <li><Link to="/portal">Pealeht</Link></li>
                                 {this.getDropDownData(currentUser)}
-                                <li><Link to="/profile">Minu profiil</Link></li>
                             <li className="divider"></li>
                                 <li><Link to="/logout">Logi välja</Link></li>
                             </ul>
@@ -184,7 +183,7 @@ export default class Navigation extends Component {
         Meteor.call("getActiveMatchday", (error, result) => {
             if (error) {
                 Meteor.call("clientError", "Failed to get active matchday!", error);
-            } else if (result > 1) {
+            } else if (result && result.md > 1) {
                 this.setState({
                     fixtureLink: <li className=""><Link to="/fixtures">Tulemused</Link></li>
                 })

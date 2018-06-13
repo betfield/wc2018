@@ -24,6 +24,40 @@ Meteor.methods({
 		} 
 	},
 
+	updateUserToRegistered: function(userId) {
+		check(userId, String);
+
+		if (Roles.userIsInRole(userId, ['Aktiveerimata'])) {
+
+			Roles.addUsersToRoles(userId, ['Aktiveeritud']);
+			Roles.removeUsersFromRoles(userId, 'Aktiveerimata');
+
+			let user = Meteor.users.findOne({"_id": userId});
+
+			Meteor.call("createUserPoints", user, (error,result) => {
+				if (error) {
+					throw new Meteor.Error("create-points-failed", "Cannot create points for user " + userId);
+				} else {
+					Log.info("Updated to registered: " + userId);
+				}
+			});
+		}
+	},
+
+	updateUserToDeleted: function(userId) {
+		check(userId, String);
+
+		if (Roles.userIsInRole(userId, ['Aktiveerimata'])) {
+
+			Roles.addUsersToRoles(userId, ['Kustutatud']);
+			Roles.removeUsersFromRoles(userId, 'Aktiveerimata');
+
+			Predictions.remove({"userId": userId});
+			Log.info("Predictions removed for user: " + userId);
+		}
+	},
+
+	/*
 	updateUserPoints: function(user) {
 		check( user, String );
 		
@@ -71,24 +105,10 @@ Meteor.methods({
 
 	},
 
-	updateUserToRegistered: function(userId) {
-		check(userId, String);
-
-		Roles.addUsersToRoles(userId, ['Aktiveeritud']);
-		Roles.removeUsersFromRoles(userId, 'Aktiveerimata');
-
-		let user = Meteor.users.findOne({"_id": userId});
-
-		Meteor.call("createUserPoints", user, (error,result) => {
-			if (error) {
-				throw new Meteor.Error("create-points-failed", "Cannot create points for user " + userId);
-			} else {
-				Log.info("Updated to registered: " + userId);
-			}
-		});
-	}
+	*/
 });	
 
+/*
 function updateTablePositions() {
 	let users = Meteor.users.find({"roles": "Aktiveeritud"});
 	let points = [];
@@ -166,3 +186,5 @@ function userFixturePoints(userResult, fixtureResult) {
 
 	return points;
 }
+
+*/

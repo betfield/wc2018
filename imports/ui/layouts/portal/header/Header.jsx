@@ -22,7 +22,7 @@ export default class Header extends Component {
         Meteor.call("getActiveMatchday", (error, result) => {
             if (error) {
                 Meteor.call("clientError", "Failed to get active matchday!", error);
-            } else if (result > 1) {
+            } else if (result && result.md > 1) {
                 this.setState({
                     fixtureLink: <li><Link to="/fixtures">Tulemused</Link></li>
                 })
@@ -43,7 +43,6 @@ export default class Header extends Component {
             return (
                 <ul className="nav navbar-nav">
                     <li><Link to="/portal">Pealeht</Link></li>
-                    <li><Link to="/profile">Minu profiil</Link></li>
                     {activate}
                     <li><Link to="/predictions">Ennustused</Link></li>
                     <li><Link to="/table">Edetabel</Link></li>

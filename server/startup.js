@@ -10,21 +10,13 @@ Meteor.startup(function () {
 	Log = logger;
 	Log.info("Mongo url: " + process.env.MONGO_URL);
 	Log.info("MAIL url: " + process.env.MAIL_URL);
-
-	function getUserId() {
-		var user = Meteor.userId();
-				
-		if (user == null || typeof user == 'undefined') {
-			user = 'anonymous';
-		}
-		
-		return user;
-	}
 	
-	let everyMinute = new Cron(function() {
-		Meteor.call("updateFixtureLockedStatuses");
-	}, {
-		
-	});
+	//Define array for storing matchday locked statuses
+	FixturesLocked = [];
+
+	Meteor.setInterval(() => {
+		Meteor.call("updateFixtureLockedStatuses")
+	}, 60 * 1000);
+
 });
 

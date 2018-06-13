@@ -45,7 +45,12 @@ const logger = {
     },
     data: (message, tag, obj) => {
         try {
-            console.log(tag + ": " + message);
+            let msg = tag + ": " + message;
+            
+            if (obj) {
+                msg = msg + "| Reason: " + obj.message
+            }
+            console.log(msg);
             Logger.trace({
                 "message": message, 
                 "object": obj

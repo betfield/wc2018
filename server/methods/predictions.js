@@ -30,27 +30,5 @@ Meteor.methods({
 				throw new Meteor.Error("fixture-locked", "Fixture " + fixture + " locked! Cannot update prediction for user " + userId);
 			}
 		}
-	},
-	checkRoundEnabled: function(fixture) {
-		check( fixture, String );
-		
-		var roundFixtures = Fixtures.find({"round": Fixtures.findOne({"_id": fixture}).round}).fetch();
-		
-		function orderByDate(arr, dateProp) {
-			return arr.slice().sort(function (a, b) {
-				return a[dateProp] < b[dateProp] ? -1 : 1;
-			});
-		}
-		
-		var firstRoundFixtureDate = orderByDate(roundFixtures, "ts")[0].ts;
-		var currentDate = new Date();
-		// adjust current date to ET timezone
-		currentDate.setTime(currentDate.getTime() + (Meteor.settings.private.TZ_HOURS*60*60*1000));
-		
-		if (Meteor.settings.private.TEST_TIME) {
-			currentDate = new Date(Meteor.settings.private.TEST_TIME);
-		}
-		
-		return (firstRoundFixtureDate < currentDate.toISOString());
 	}
 });	
