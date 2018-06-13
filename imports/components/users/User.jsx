@@ -23,8 +23,6 @@ export default class User extends Component {
     }
 
     submitButton = (user) => {
-        console.log(this.state.registerEnd);
-
         if (Roles.userIsInRole(user,'Aktiveerimata')) {
             let title = "Aktiveeri";
             
