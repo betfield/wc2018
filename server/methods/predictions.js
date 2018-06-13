@@ -7,13 +7,14 @@ Meteor.methods({
 		const userId = this.userId;
 		
 		// Check if logged in as admin and update the actual fixture result if so
+		// TODO: Is the error on updateAllUsersPredictionPoints reaching somewhere meaningful?
 		if (Roles.userIsInRole(userId, ['Administraator'])) {
 
 			if (!isNaN(parseInt(homeScore)) && !isNaN(parseInt(awayScore))) {
 				Fixtures.update({"_id": fixture}, {$set: {"result.home_goals": homeScore, "result.away_goals": awayScore, "status": "FT"}});
 				return Meteor.call("updateAllUsersPredictionPoints", fixture, function(error, result){
 					if (error) {
-						Log.err("Update of points failed for user: " + userId, error);
+						Log.error("Update of points failed for user: " + userId, error);
 						throw new Meteor.Error("update-points-failed", "Update of points failed for user: " + userId);
 					} 
 				});

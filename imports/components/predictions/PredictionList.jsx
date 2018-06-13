@@ -383,7 +383,7 @@ export default class PredictionList extends Component {
                 let homeScore = result[1].value;
                 let awayScore = result[2].value;
 
-                Meteor.call("clientLog", "Submitting predictions for user: " + userId + " with values: " + fixture + ", " + homeScore + ", " + awayScore);
+                Meteor.call("clientLog", "Submitting predictions for user: " + userId + ", fixture: " + fixture + ", prediction: " + homeScore + ":" + awayScore);
 
                 //TODO: Make function update all predictions at once
                 Meteor.call( "updateUserPredictions", fixture, homeScore, awayScore, function( error, response ) {

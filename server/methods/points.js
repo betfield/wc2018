@@ -57,115 +57,43 @@ Meteor.methods({
 		}
 	},
 
-	/*
-	updateUserPoints: function(user) {
-		check( user, String );
-		
-		let predictions = Predictions.find({"userId": user}).fetch(); 
-		let points = [0,0,0,0,0,0,0];
-
-		predictions.forEach(function(prediction){
-			let i = parseInt(prediction.fixture.round,10);
-			points[i-1] += parseInt(prediction.fixture.userPoints,10);
-		})
-		
-		let total = 0;
-
-		points.forEach(function(p) {
-			total += p;
-		});
-
-		Points.update({"user._id": user}, {$set: {"round1": points[0], "round2": points[1], "round3": points[2], "round4": points[3], "round5": points[4], "round6": points[5], "round7": points[6], "total": total}});
-	},
 	updateAllUsersPredictionPoints: function(fixtureId) {
 		check(fixtureId, String );
 		
 		let predictions = Predictions.find({"fixture._id": fixtureId}).fetch();
 		let fixture = Fixtures.findOne({"_id": fixtureId});
-		console.log("Fixture: ", fixture);
 
-		predictions.forEach(function(prediction) {
-			console.log("Updating prediction points for user: " + prediction.userId + " on fixture: " + prediction.fixture._id + " with result: " + prediction.fixture.result.homeGoals + ":" + prediction.fixture.result.awayGoals + ". Actual: ", fixture.result);
-			
+		Log.info("Updating points on fixture: " + fixtureId + ". Result: " + fixture.result.home_goals + ":" + fixture.result.away_goals);
+
+		predictions.forEach(prediction => {
 			let points = userFixturePoints(prediction.fixture.result, fixture.result);
-			console.log(points);
+			
+			Log.info("Updating prediction points for user: " + prediction.userId + ", prediction: " + 
+						prediction.fixture.result.home_goals + ":" + prediction.fixture.result.away_goals + ", points: " + points);
 
 			Predictions.update({"_id": prediction._id}, {$set: {"fixture.userPoints": points}});
-			Meteor.call("updateUserPoints", prediction.userId);
+
+			// TODO: Update points for only this particular ficture
+			updateUserPoints(prediction.userId);
+
+			Log.info("Prediction points updated")
 		});
 
 		// Calculate table position changes
-		try {
-			updateTablePositions();
-		} catch (err) {
-			console.log(err.stack);
-		}
+		Log.info("Updating table positions")
+		updateTablePositions();
 
-		console.log("User points updated for fixture: " + fixtureId);
-
+		Log.info("Points updated for fixture: " + fixtureId);
 	},
-
-	*/
 });	
 
-/*
-function updateTablePositions() {
-	let users = Meteor.users.find({"roles": "Aktiveeritud"});
-	let points = [];
-
-	users.forEach(function(user){
-		points.push(Points.findOne({"user._id": user._id}));	
-	});
+userFixturePoints = (userResult, fixtureResult) => {
 	
-	console.log("Points initial: ", points);
+	let home = parseInt(userResult.home_goals, 10);
+	let away = parseInt(userResult.away_goals, 10);
 
-	points.sort(function (points1, points2) {
-		if (points1.total == points2.total) {
-
-			let correctScoresUser1 = Predictions.find({"userId": points1.user._id, "fixture.userPoints": 5}).count();
-			let correctScoresUser2 = Predictions.find({"userId": points2.user._id, "fixture.userPoints": 5}).count();
-
-			console.log("User1: " + correctScoresUser1 + " User2: " + correctScoresUser2);
-
-			if (correctScoresUser1 == correctScoresUser2) {
-				let correctGoalDifferenceUser1 = Predictions.find({"userId": points1.user._id, "fixture.userPoints": 3}).count();
-				let correctGoalDifferenceUser2 = Predictions.find({"userId": points2.user._id, "fixture.userPoints": 3}).count();
-
-				console.log("User1: ", correctGoalDifferenceUser1, "User2: ", correctGoalDifferenceUser2);
-
-				if (correctGoalDifferenceUser1 == correctGoalDifferenceUser2) {
-					let groupScoreUser1 = points1.round1 + points1.round2 + points1.round3;
-					let groupScoreUser2 = points2.round1 + points2.round2 + points2.round3;
-
-					console.log("User1: ", groupScoreUser1, "User2: ", groupScoreUser2);
-
-					return groupScoreUser2 - groupScoreUser1;			
-				} return correctGoalDifferenceUser2 - correctGoalDifferenceUser1;
-			}
-			else return correctScoresUser2 - correctScoresUser1;
-		} else { 
-			console.log("Points1: " + points1.total + " Points2: " + points2.total);
-			return points2.total - points1.total;
-		}
-	});
-
-	console.log("Points after: ", points);
-
-	let pos = 1;
-
-	points.forEach(function(item) {
-		Points.update({"user._id": item.user._id}, {$set: {"position": pos}});
-		pos++;
-	});
-}
-
-function userFixturePoints(userResult, fixtureResult) {
-	
-	let home = parseInt(userResult.homeGoals, 10);
-	let away = parseInt(userResult.awayGoals, 10);
-
-	let fh = parseInt(fixtureResult.homeGoals, 10);
-	let fa = parseInt(fixtureResult.awayGoals, 10);
+	let fh = parseInt(fixtureResult.home_goals, 10);
+	let fa = parseInt(fixtureResult.away_goals, 10);
 	
 	console.log("User: " + home + ":" + away + ", Actual: " + fh + ":" + fa );
 	let points = 0;
@@ -187,4 +115,71 @@ function userFixturePoints(userResult, fixtureResult) {
 	return points;
 }
 
-*/
+updateUserPoints = (userId) => {
+	check( userId, String );
+	
+	Log.info("Updating round totals for user: " + userId)
+
+	let predictions = Predictions.find({"userId": userId}, {fields: {"fixture._id": 1, "fixture.userPoints": 1}}).fetch(); 
+	let fixtures = Fixtures.find({}, {fields: {"_id": 1, "round": 1}}).fetch(); 
+
+	let points = [0,0,0,0,0,0,0];
+
+	fixtures.forEach(fixture => {
+		let i = parseInt(fixture.round,10);
+		let p = predictions.find(function(pred) {
+			return pred.fixture._id == fixture._id;
+		});
+
+		points[i-1] += parseInt(p.fixture.userPoints,10);
+	})
+	
+	let total = 0;
+
+	points.forEach(function(p) {
+		total += p;
+	});
+
+	Log.info("Total points for user: " + userId + ", values: " + points)
+	Points.update({"user._id": userId}, {$set: {"round1": points[0], "round2": points[1], "round3": points[2], "round4": points[3], "round5": points[4], "round6": points[5], "round7": points[6], "total": total}});
+}
+
+updateTablePositions = () => {
+	let users = Meteor.users.find({"roles": "Aktiveeritud"});
+	let points = [];
+
+	users.forEach(function(user){
+		points.push(Points.findOne({"user._id": user._id}));	
+	});
+	
+	points.sort(function (points1, points2) {
+		if (points1.total == points2.total) {
+
+			let correctScoresUser1 = Predictions.find({"userId": points1.user._id, "fixture.userPoints": 5}).count();
+			let correctScoresUser2 = Predictions.find({"userId": points2.user._id, "fixture.userPoints": 5}).count();
+
+			if (correctScoresUser1 == correctScoresUser2) {
+				let correctGoalDifferenceUser1 = Predictions.find({"userId": points1.user._id, "fixture.userPoints": 3}).count();
+				let correctGoalDifferenceUser2 = Predictions.find({"userId": points2.user._id, "fixture.userPoints": 3}).count();
+
+				if (correctGoalDifferenceUser1 == correctGoalDifferenceUser2) {
+					let groupScoreUser1 = points1.round1 + points1.round2 + points1.round3;
+					let groupScoreUser2 = points2.round1 + points2.round2 + points2.round3;
+
+					return groupScoreUser2 - groupScoreUser1;			
+				} return correctGoalDifferenceUser2 - correctGoalDifferenceUser1;
+			}
+			else return correctScoresUser2 - correctScoresUser1;
+		} else { 
+			return points2.total - points1.total;
+		}
+	});
+
+	let pos = 1;
+
+	points.forEach(function(item) {
+		Log.info("User: " +  item.user._id + ", points: " + item.total + ", pos: " + pos);
+		Points.update({"user._id": item.user._id}, {$set: {"user.pos": pos}});
+		pos++;
+	});
+}
