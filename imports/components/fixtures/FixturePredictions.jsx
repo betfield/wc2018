@@ -114,7 +114,6 @@ export default class FixturesPredictions extends Component {
             <div className="bf-table-points-user">
                 <span>
                     <img className="img-circle m-b" src={cell.image} title={cell.name}/>
-                    {cell.name}
                 </span>
             </div>
         );
