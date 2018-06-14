@@ -111,7 +111,12 @@ export default class FixturesPredictions extends Component {
 
     imageFormatter = (cell, row) => {
         return (
-            <img src={cell}/>
+            <div className="bf-table-points-user">
+                <span>
+                    <img className="img-circle m-b" src={cell.image} title={cell.name}/>
+                    {cell.name}
+                </span>
+            </div>
         );
     }
 
@@ -149,7 +154,7 @@ export default class FixturesPredictions extends Component {
         const columnHeaders = [
             {
                 text: '',
-                dataField: 'user.image',
+                dataField: 'user',
                 headerAlign: 'center',
                 formatter: this.imageFormatter
             }, 
@@ -162,7 +167,7 @@ export default class FixturesPredictions extends Component {
             {
                 text: 'Ennustus',
                 dataField: 'result',
-                sort: true,
+                sort: false,
                 headerAlign: 'center',
                 formatter: this.resultFormatter
             },
