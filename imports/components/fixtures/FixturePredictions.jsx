@@ -162,7 +162,7 @@ export default class FixturesPredictions extends Component {
             {
                 text: 'Ennustus',
                 dataField: 'result',
-                sort: false,
+                sort: true,
                 headerAlign: 'center',
                 formatter: this.resultFormatter
             },

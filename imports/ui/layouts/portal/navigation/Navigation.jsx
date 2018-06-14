@@ -183,7 +183,7 @@ export default class Navigation extends Component {
         Meteor.call("getActiveMatchday", (error, result) => {
             if (error) {
                 Meteor.call("clientError", "Failed to get active matchday!", error);
-            } else if (result && result.md && result.md.round > 1) {
+            } else if (result && result.round > 1) {
                 this.setState({
                     fixtureLink: <li className=""><Link to="/fixtures">Tulemused</Link></li>
                 })

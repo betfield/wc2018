@@ -34,7 +34,7 @@ Meteor.publish('currentMatchdayFixtures', function () {
 
 	if (userId) {
 		// Get all fixtures with locked status and round number from previous matchday
-		var subHandle = Fixtures.find({"locked": true, "round": md-1}).observeChanges({
+		var subHandle = Fixtures.find({"locked": true, "round": md.round-1}).observeChanges({
 			added: function(id, fields) {
 				self.added("fixtures", id, fields);
 			},
