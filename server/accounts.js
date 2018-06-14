@@ -73,6 +73,18 @@ Accounts.onCreateUser(function (options, user) {
 	return user;
 });
 
+// Disable login of new and deleted users after register end
+Accounts.validateLoginAttempt(function (options) {
+	if (isRegisterEnd()) {
+		const user = options.user;
+
+		if (!user || user.roles.includes('Kustutatud')) {
+			throw new Meteor.Error("register-ended", "Registreerimine lõppenud");
+		}
+	}
+	return true;
+});
+
 createUserPredictions = ( userId ) => {
 	let fixtures = Fixtures.find({}, {fields: {"_id": 1}}).fetch();
 	
