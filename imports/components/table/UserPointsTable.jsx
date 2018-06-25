@@ -227,6 +227,10 @@ export default class UserPointsTable extends Component {
             });  
         });
 
+        data.sort(function (a, b) {
+            return a.pos - b.pos;
+        });
+
         return data;
     }
   
