@@ -62,7 +62,7 @@ export default class Navigation extends Component {
 
                     //Show ticker if there is less than 24h left until round end
                     if (diff > 0 && diff < (24*60*60*1000)) {
-                        let url = "https://freesecure.timeanddate.com/countdown/i58fl2g4/cf11/cm0/cu4/ct1/cs0/ca0/co1/cr0/ss0/cac8d0808/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac966c6f/tpc966c6f/iso" + roundElem.ts;
+                        let url = "https://freesecure.timeanddate.com/countdown/i58fl2g4/cf11/cm0/cu4/ct1/cs1/ca0/co1/cr0/ss0/cac8d0808/cpcc0392b/pcfff/tcfff/fs100/szw256/szh108/tatVooru%20sulgemiseni%3A/tac966c6f/tpc966c6f/iso" + roundElem.ts;
                         this.setState({
                             ticker: <iframe src={url} frameBorder="0" width="136" height="32"/>
                         });
@@ -111,7 +111,10 @@ export default class Navigation extends Component {
     }
 
     getLastPredictions = (currentUser) => {
-        /*if (Roles.userIsInRole(currentUser,'Aktiveeritud')) {
+        /*
+        if (Roles.userIsInRole(currentUser,'Aktiveeritud')) {
+            console.log(currentUser);
+
             return (
                 <div>
                     <h4 className="font-extra-bold m-b-xs">
@@ -121,7 +124,7 @@ export default class Navigation extends Component {
                     <div id="sparkline1" className="small-chart m-t-sm"></div>
                 </div>
             )       
-        } */    
+        }    */
     }
                                 
     getLoggedInUserData = (currentUser) => {
