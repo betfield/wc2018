@@ -5,10 +5,15 @@ import Navigation from './Navigation';
 export default NavigationContainer = withTracker(() => {
   const usersHandle = Meteor.subscribe('currentUser');
   const ready = usersHandle.ready();
+
+  const pointsHandle = Meteor.subscribe('userPoints');
+  const pointsReady = pointsHandle.ready();
+
   const currentUser = Meteor.user();
-  
+
   return {
     ready,
-    currentUser
+    currentUser,
+    pointsReady
   };
 })(Navigation);

@@ -111,20 +111,17 @@ export default class Navigation extends Component {
     }
 
     getLastPredictions = (currentUser) => {
-        /*
         if (Roles.userIsInRole(currentUser,'Aktiveeritud')) {
-            console.log(currentUser);
-
+            const userPoints = Points.findOne({"user._id": Meteor.userId()});
+            
             return (
                 <div>
                     <h4 className="font-extra-bold m-b-xs">
-                        <span className="color-blue">{currentUser.position}. koht</span> ({currentUser.total}p)
+                        <span className="color-blue">{userPoints.user ? userPoints.user.pos : "??"}. koht</span> ({userPoints.total}p)
                     </h4>
-                    <small className="text-muted">Sinu viimased ennustused</small>
-                    <div id="sparkline1" className="small-chart m-t-sm"></div>
                 </div>
             )       
-        }    */
+        }
     }
                                 
     getLoggedInUserData = (currentUser) => {
@@ -218,108 +215,3 @@ export default class Navigation extends Component {
         )
     }
 }
-
-
-/*
-
-Template.navigation.onCreated(function() {
-    var instance = this;
-    instance.userPoints = new ReactiveVar();
-    instance.pointsArray = new ReactiveVar();
-    
-    instance.autorun(function () {
-        if(Meteor.userId()) {
-            var subscription = instance.subscribe('userPoints', Meteor.userId());
-        } 
-
-        if (subscription && subscription.ready()) {
-            instance.userPoints.set(Points.findOne({"user._id": Meteor.userId()}));
-
-            var userFixturePointsCursor = Predictions.find({"userId": Meteor.userId()}, {fields: {"fixture.ts": 1, "fixture.userPoints": 1}});
-            
-            if (userFixturePointsCursor.count() > 0) {
-                var userFixturePoints = userFixturePointsCursor.fetch();
-                //console.log(userFixturePoints);
-                instance.pointsArray.set(getLast15Points(userFixturePoints));
-
-                //console.log(instance.pointsArray.get());
-
-                // Sparkline bar chart data and options used under Profile image on navigation
-                $("#sparkline1").sparkline(instance.pointsArray.get(), {
-                    type: 'bar',
-                    barWidth: 7,
-                    height: '30px',
-                    barColor: '#0190fe',
-                    negBarColor: '#0173cb'
-                });
-            }
-        }
-    });
-});
-
-Template.navigation.events({
-
-    // Colapse menu in mobile mode after click on element
-    'click #side-menu a:not([href$="\\#"])': function(){
-        if ($(window).width() < 769) {
-            $("body").toggleClass("show-sidebar");
-        }
-    }
-
-});
-
-Template.navigation.helpers({
-    userRoleName: function() {
-        var userId = Meteor.userId();
-        
-        if (Roles.userIsInRole(userId, ['administrator'])) {
-            return "Administraator";
-        } else if (Roles.userIsInRole(userId, ['registered-user'])) {
-            return "Aktiveeritud";
-        } else {
-            return "Mitteaktiivne";
-        }
-
-    },
-    userPoints: function() {
-        return Template.instance().userPoints.get();
-    },
-    getTicker: function() {
-                    
-    }
-});
-
-function getLast15Points(userFixturePoints) {
-    // Sort array based on fixture TS
-    userFixturePoints.sort(function(first,second) {
-        var a = first.fixture.ts;
-        var b = second.fixture.ts;
-
-        if (a < b) {
-            return 1;
-        } else if (a < b) {
-            return -1;
-        } else {
-            return 0;
-        }   
-    });
-    
-    var currentDate = new Date();
-    // adjust current date to -2h from now so it would only show after normal time end for current fixture
-    // TODO: This should be changed based on fixture status
-    currentDate.setTime(currentDate.getTime() - (2*60*60*1000)); 
-    var userFixturePointsArray = [];
-    var count = 0;
-
-    // Remove fixtures not occurred yet and construct simple object array with only relevant data included
-    userFixturePoints.forEach(function(element) {
-        // Only add elements to array that have fixture TS earlier to now
-        if (element.fixture.ts < currentDate.toISOString() && count < 15) {
-            userFixturePointsArray.push(element.fixture.userPoints);
-            count++;
-        }
-    });
-
-    return userFixturePointsArray.reverse();
-}
-*/
