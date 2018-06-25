@@ -48,10 +48,12 @@ export default class Calendar extends Component {
 	}
 	
 	getFirstFixtureDate = (date) => {
-		if (date) {
+		const today = new Date();
+		
+		if (date && date > today) {
 			return date;
 		} else {
-			return new Date();
+			return today;
 		}
 	}
 
