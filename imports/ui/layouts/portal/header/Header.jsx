@@ -3,6 +3,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {  
+            fixtureLink: this.getFixturesLink()
+        };
+    }
 
     componentDidMount() {
         if ($(window).width() < 769) {
@@ -24,7 +30,7 @@ export default class Header extends Component {
                 Meteor.call("clientError", "Failed to get active matchday!", error);
             } else if (result && result.round > 1) {
                 this.setState({
-                    fixtureLink: <li><Link to="/fixtures">Tulemused</Link></li>
+                    fixtureLink: <li className=""><Link to="/fixtures">Tulemused</Link></li>
                 })
             }
         })
@@ -47,7 +53,7 @@ export default class Header extends Component {
                     <li><Link to="/predictions">Ennustused</Link></li>
                     <li><Link to="/table">Edetabel</Link></li>
                     <li><Link to="/calendar">Kalender</Link></li>
-                    {this.getFixturesLink()}
+                    {this.state.fixtureLink}
                     <li className=""><Link to="/rules">Reeglid</Link></li>
                     <li><Link className="" to="/logout">Logi välja</Link></li>
                 </ul>
