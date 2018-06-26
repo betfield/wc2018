@@ -1,10 +1,30 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
 
 export default class FixturesPredictions extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            columnHeaders: this.getTableHeaders()
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.resizeTable);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resizeTable);
+    }
+
+    resizeTable = () => {
+        this.setState({
+            columnHeaders: this.getTableHeaders()
+        });
+    }
 
     formatPredictionsData = (data, users) => {
         let predictionsData = [];
@@ -68,24 +88,17 @@ export default class FixturesPredictions extends Component {
             } else {
                 fixture.result = "-";
             }
-
+            
             return (
                 <table className="bf-table table table-striped table-hover table-bordered table-condensed">
                     <thead>
                         <tr>
-                            <th>Aeg</th>
-                            <th>Kodu</th>
-                            <th></th>
-                            <th>Võõrsil</th>
-                            <th>Grupp</th>
-                            <th>Voor</th>
+                            <th>Mäng</th>
                             <th>Tulemus</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{fixture.time}</td>
-                            <td>{fixture.homeTeam}</td>
                             <td>
                                 <span className="bf-table-vs">
                                     <img src={fixture.homeFlag}/>
@@ -93,13 +106,18 @@ export default class FixturesPredictions extends Component {
                                     <img src={fixture.awayFlag}/>
                                 </span>
                             </td>
-                            <td>{fixture.awayTeam}</td>
-                            <td>{fixture.group}</td>
-                            <td>{fixture.round}</td>
                             <td>
                                 <span className="bf-table-score">
                                 <span>{fixture.result}</span>
                             </span></td>
+                        </tr>
+                        <tr>
+                            <th>Aeg</th>
+                            <th>Voor</th>
+                        </tr>
+                        <tr>
+                            <td>{fixture.time}</td>
+                            <td>{fixture.round}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -147,44 +165,78 @@ export default class FixturesPredictions extends Component {
         );
     }
 
+    getTableHeaders = () => {
+        let columnHeaders = [];
+        
+        if ($(window).width() < 501) {
+            columnHeaders = [
+                {
+                    text: '',
+                    dataField: 'user',
+                    headerAlign: 'center',
+                    formatter: this.imageFormatter
+                }, 
+                {
+                    text: 'Kasutaja',
+                    dataField: 'user.name',
+                    sort: true,
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Ennustus',
+                    dataField: 'result',
+                    sort: false,
+                    headerAlign: 'center',
+                    formatter: this.resultFormatter
+                },
+                {
+                    text: 'Punktid',
+                    dataField: 'result.userPoints',
+                    sort: true,
+                    headerAlign: 'center',
+                    formatter: this.pointsFormatter
+                }
+            ];
+        } else {
+            columnHeaders = [
+                {
+                    text: '',
+                    dataField: 'user',
+                    headerAlign: 'center',
+                    formatter: this.imageFormatter
+                }, 
+                {
+                    text: 'Kasutaja',
+                    dataField: 'user.name',
+                    sort: true,
+                    headerAlign: 'center',
+                }, 
+                {
+                    text: 'Ennustus',
+                    dataField: 'result',
+                    sort: false,
+                    headerAlign: 'center',
+                    formatter: this.resultFormatter
+                },
+                {
+                    text: 'Punktid',
+                    dataField: 'result.userPoints',
+                    sort: true,
+                    headerAlign: 'center',
+                    formatter: this.pointsFormatter
+                }
+            ];
+        }
+
+        return columnHeaders;
+    }
+
     render() {
 
         const data = this.formatPredictionsData(this.props.predictions, this.props.users);
-        const columnHeaders = [
-            {
-                text: '',
-                dataField: 'user',
-                headerAlign: 'center',
-                formatter: this.imageFormatter
-            }, 
-            {
-                text: 'Kasutaja',
-                dataField: 'user.name',
-                sort: true,
-                headerAlign: 'center',
-            }, 
-            {
-                text: 'Ennustus',
-                dataField: 'result',
-                sort: false,
-                headerAlign: 'center',
-                formatter: this.resultFormatter
-            },
-            {
-                text: 'Punktid',
-                dataField: 'result.userPoints',
-                sort: true,
-                headerAlign: 'center',
-                formatter: this.pointsFormatter
-            }
-        ];
-            
         const keyField='user.id' 
     
-        const options = {
-            hidePageListOnlyOnePage: true
-        }
-
         return (
             <div>
                 { this.getFixtureDetails(this.props.fixture) }
@@ -194,12 +246,11 @@ export default class FixturesPredictions extends Component {
                     <BootstrapTable 
                         keyField= {keyField} 
                         data={ data } 
-                        columns={ columnHeaders }
+                        columns={ this.state.columnHeaders }
                         bordered={ true }
                         striped
                         hover
                         condensed
-                        pagination={ paginationFactory( options ) }
                     />
                 </div>
             </div>

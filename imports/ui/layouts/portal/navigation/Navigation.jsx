@@ -117,7 +117,7 @@ export default class Navigation extends Component {
             return (
                 <div>
                     <h4 className="font-extra-bold m-b-xs">
-                        <span className="color-blue">{userPoints.user ? userPoints.user.pos : "??"}. koht</span> ({userPoints.total}p)
+                        <span className="color-blue">{userPoints ? userPoints.user.pos : " "}. koht</span> ({userPoints ? userPoints.total : " "}p)
                     </h4>
                 </div>
             )       
