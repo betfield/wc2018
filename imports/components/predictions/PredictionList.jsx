@@ -45,7 +45,6 @@ export default class PredictionList extends Component {
                     text: 'Kodu',
                     dataField: 'homeTeam',
                     headerAlign: 'center',
-                    formatter: this.teamFormatter,
                     hidden: true
                 }, 
                 {
@@ -95,7 +94,6 @@ export default class PredictionList extends Component {
                     text: 'Kodu',
                     dataField: 'homeTeam',
                     headerAlign: 'center',
-                    formatter: this.teamFormatter,
                     hidden: true
                 }, 
                 {
@@ -144,7 +142,6 @@ export default class PredictionList extends Component {
                     text: 'Kodu',
                     dataField: 'homeTeam',
                     headerAlign: 'center',
-                    formatter: this.teamFormatter,
                     hidden: true
                 }, 
                 {
@@ -193,7 +190,6 @@ export default class PredictionList extends Component {
                     text: 'Kodu',
                     dataField: 'homeTeam',
                     headerAlign: 'center',
-                    formatter: this.teamFormatter,
                     hidden: true
                 }, 
                 {
@@ -240,7 +236,6 @@ export default class PredictionList extends Component {
                     text: 'Kodu',
                     dataField: 'homeTeam',
                     headerAlign: 'center',
-                    formatter: this.teamFormatter
                 }, 
                 {
                     text: '',

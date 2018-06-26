@@ -1,9 +1,220 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 
 import BootstrapTable from 'react-bootstrap-table-next';
 
 export default class FixturesList extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            columnHeaders: this.getTableHeaders()
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.resizeTable);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resizeTable);
+    }
+
+    resizeTable = () => {
+        this.setState({
+            columnHeaders: this.getTableHeaders()
+        });
+    }
+
+    getTableHeaders = () => {
+        let columnHeaders = [];
+        
+        if ($(window).width() < 501) {
+            columnHeaders = [
+                {
+                    text: 'Aeg',
+                    dataField: 'time',
+                    sort: false,
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Kodu',
+                    dataField: 'homeTeam',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: '',
+                    dataField: 'vs',
+                    headerAlign: 'center',
+                    formatter: this.vsFormatter
+                }, 
+                {
+                    text: 'Võõrsil',
+                    dataField: 'awayTeam',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Grupp',
+                    dataField: 'group',
+                    sort: true,
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Voor',
+                    dataField: 'round',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Tulemus',
+                    dataField: 'result',
+                    sort: false,
+                    headerAlign: 'center',
+                    formatter: this.resultFormatter
+                }
+            ];
+        } else if ($(window).width() < 1024) {
+            columnHeaders = [
+                {
+                    text: 'Aeg',
+                    dataField: 'time',
+                    sort: false,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Kodu',
+                    dataField: 'homeTeam',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: '',
+                    dataField: 'vs',
+                    headerAlign: 'center',
+                    formatter: this.vsFormatter
+                }, 
+                {
+                    text: 'Võõrsil',
+                    dataField: 'awayTeam',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Grupp',
+                    dataField: 'group',
+                    sort: true,
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Voor',
+                    dataField: 'round',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Tulemus',
+                    dataField: 'result',
+                    sort: false,
+                    headerAlign: 'center',
+                    formatter: this.resultFormatter
+                }
+            ];
+        } else if ($(window).width() < 1281) {
+            columnHeaders = [
+                {
+                    text: 'Aeg',
+                    dataField: 'time',
+                    sort: false,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Kodu',
+                    dataField: 'homeTeam',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: '',
+                    dataField: 'vs',
+                    headerAlign: 'center',
+                    formatter: this.vsFormatter
+                }, 
+                {
+                    text: 'Võõrsil',
+                    dataField: 'awayTeam',
+                    headerAlign: 'center',
+                    hidden: true
+                }, 
+                {
+                    text: 'Grupp',
+                    dataField: 'group',
+                    sort: true,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Voor',
+                    dataField: 'round',
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Tulemus',
+                    dataField: 'result',
+                    sort: false,
+                    headerAlign: 'center',
+                    formatter: this.resultFormatter
+                }
+            ];
+        } else {
+            columnHeaders = [
+                {
+                    text: 'Aeg',
+                    dataField: 'time',
+                    sort: false,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Kodu',
+                    dataField: 'homeTeam',
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: '',
+                    dataField: 'vs',
+                    headerAlign: 'center',
+                    formatter: this.vsFormatter
+                }, 
+                {
+                    text: 'Võõrsil',
+                    dataField: 'awayTeam',
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Grupp',
+                    dataField: 'group',
+                    sort: true,
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Voor',
+                    dataField: 'round',
+                    headerAlign: 'center'
+                }, 
+                {
+                    text: 'Tulemus',
+                    dataField: 'result',
+                    sort: false,
+                    headerAlign: 'center',
+                    formatter: this.resultFormatter
+                }
+            ];
+        }
+
+        return columnHeaders;
+    }
 
     formatFixtureData = (data) => {
         let fixturesData = [];
@@ -66,48 +277,6 @@ export default class FixturesList extends Component {
 
     render() {
         const data = this.formatFixtureData(this.props.fixtures);
-        const columnHeaders = [
-            {
-                text: 'Aeg',
-                dataField: 'time',
-                sort: false,
-                headerAlign: 'center'
-            }, 
-            {
-                text: 'Kodu',
-                dataField: 'homeTeam',
-                headerAlign: 'center'
-            }, 
-            {
-                text: '',
-                dataField: 'vs',
-                headerAlign: 'center',
-                formatter: this.vsFormatter
-            }, 
-            {
-                text: 'Võõrsil',
-                dataField: 'awayTeam',
-                headerAlign: 'center'
-            }, 
-            {
-                text: 'Grupp',
-                dataField: 'group',
-                sort: true,
-                headerAlign: 'center'
-            }, 
-            {
-                text: 'Voor',
-                dataField: 'round',
-                headerAlign: 'center'
-            }, 
-            {
-                text: 'Tulemus',
-                dataField: 'result',
-                sort: false,
-                headerAlign: 'center',
-                formatter: this.resultFormatter
-            }
-        ];
 
         const rowEvents = {
             onClick: (e, row, rowIndex) => {
@@ -117,17 +286,13 @@ export default class FixturesList extends Component {
 
         const keyField='vs.id'; 
 
-        const options = {
-            hidePageListOnlyOnePage: true
-        }
-
         return (
             <div className='bf-table'>
                 <BootstrapTable 
                     keyField= {keyField} 
                     data={ data } 
                     rowEvents = {rowEvents}
-                    columns={ columnHeaders }
+                    columns={ this.state.columnHeaders }
                     bordered={ true }
                     striped
                     hover
