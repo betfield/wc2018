@@ -30,11 +30,14 @@ export default class Filter extends Component {
         } else if (this.props.filter === "finals") {
             return (
                 <div className="group-select fc-button-group">
-                    <button id="Last 16" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>1/8</button>
+                    <button id="L16" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>1/8</button>
                     <button id="QF" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>1/4</button>
                     <button id="SF" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>PF</button>
                     <button id="FI" type="button" className="fc-button fc-state-default fc-corner-right" onClick={this.groupSelect}>F</button>
-                    <button id="ALL" type="button" className="fc-button fc-state-default fc-corner-right" onClick={this.groupSelect}>Kõik</button>
+                    <button id="I" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>I</button>
+                    <button id="II" type="button" className="fc-button fc-state-default" onClick={this.groupSelect}>II</button>
+                    <button id="III" type="button" className="fc-button fc-state-default fc-corner-right" onClick={this.groupSelect}>III</button>
+                    <button id="All" type="button" className="fc-button fc-state-default fc-corner-right" onClick={this.groupSelect}>IV-VII</button>
                 </div>
             )
         } else {

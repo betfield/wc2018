@@ -103,6 +103,7 @@ var fixtures = [{"competition":"WC2018","group":"A","round":1,"day":"N","date":"
 	
 });
 
+//TODO: ImgSrc to be updated automatically on KO teams
 getFlagImage = (teamCode) => {
 	return Meteor.settings.public.FOLDER_FLAGS + String(teamCode).toLowerCase() + ".png";
 }

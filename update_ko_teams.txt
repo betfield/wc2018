@@ -1,0 +1,79 @@
+// Last 16
+
+{"competition":"WC2018","group":"L16","round":4,"day":"L","date":"30.juuni","time":"17:00","ts":"2018-06-30T15:00:00","city":"Kazan","stadium":"","home_team":"C1","away_team":"D2"},
+{"competition":"WC2018","group":"L16","round":4,"day":"L","date":"30.juuni","time":"21:00","ts":"2018-06-30T19:00:00","city":"Sochi","stadium":"","home_team":"A1","away_team":"B2"},
+{"competition":"WC2018","group":"L16","round":4,"day":"P","date":"01.juuli","time":"17:00","ts":"2018-07-01T15:00:00","city":"Moscow","stadium":"","home_team":"B1","away_team":"A2"},
+{"competition":"WC2018","group":"L16","round":4,"day":"P","date":"01.juuli","time":"21:00","ts":"2018-07-01T19:00:00","city":"Nizhny Novgorod","stadium":"","home_team":"D1","away_team":"C2"},
+{"competition":"WC2018","group":"L16","round":4,"day":"E","date":"02.juuli","time":"17:00","ts":"2018-07-02T15:00:00","city":"Samara","stadium":"","home_team":"E1","away_team":"F2"},
+{"competition":"WC2018","group":"L16","round":4,"day":"E","date":"02.juuli","time":"21:00","ts":"2018-07-02T19:00:00","city":"Rostov-on-Don","stadium":"","home_team":"G1","away_team":"H2"},
+{"competition":"WC2018","group":"L16","round":4,"day":"T","date":"03.juuli","time":"17:00","ts":"2018-07-03T15:00:00","city":"Saint Petersburg","stadium":"","home_team":"F1","away_team":"E2"},
+{"competition":"WC2018","group":"L16","round":4,"day":"T","date":"03.juuli","time":"21:00","ts":"2018-07-03T19:00:00","city":"Moscow","stadium":"","home_team":"H1","away_team":"G2"},
+
+"A1":{"name_eng":"Uruguay","name":"Uruguai","code":"uru","group":"A","imgSrc":"/teams/flags/uru.png"}
+"A2":{"name_eng":"Russia","name":"Venemaa","code":"rus","group":"A","imgSrc":"/teams/flags/rus.png"}
+"B1":{"name_eng":"Spain","name":"Hispaania","code":"esp","group":"B","imgSrc":"/teams/flags/esp.png"}
+"B2":{"name_eng":"Portugal","name":"Portugal","code":"por","group":"B","imgSrc":"/teams/flags/por.png"}
+"C1":{"name_eng":"France","name":"Prantsusmaa","code":"fra","group":"C","imgSrc":"/teams/flags/fra.png"}
+"C2":{"name_eng":"Denmark","name":"Taani","code":"den","group":"C","imgSrc":"/teams/flags/den.png"}
+"D1":{"name_eng":"Croatia","name":"Horvaatia","code":"cro","group":"D","imgSrc":"/teams/flags/cro.png"}
+"D2":{"name_eng":"Argentina","name":"Argentiina","code":"arg","group":"D","imgSrc":"/teams/flags/arg.png"}
+"E1":
+"E2":
+"F1":
+"F2":
+"G1":
+"G2":
+"H1":
+"H2":
+
+db.fixtures.update({"group":"L16", "home_team":"A1"}, {$set: {"home_team": {"name_eng":"Uruguay","name":"Uruguai","code":"uru","group":"A","imgSrc":"/teams/flags/uru.png"}}})
+db.fixtures.update({"group":"L16", "away_team":"B2"}, {$set: {"away_team": {"name_eng":"Portugal","name":"Portugal","code":"por","group":"B","imgSrc":"/teams/flags/por.png"}}})
+
+db.fixtures.update({"group":"L16", "home_team":"B1"}, {$set: {"home_team": {"name_eng":"Spain","name":"Hispaania","code":"esp","group":"B","imgSrc":"/teams/flags/esp.png"}}})
+db.fixtures.update({"group":"L16", "away_team":"A2"}, {$set: {"away_team": {"name_eng":"Russia","name":"Venemaa","code":"rus","group":"A","imgSrc":"/teams/flags/rus.png"}}})
+
+db.fixtures.update({"group":"L16", "home_team":"C1"}, {$set: {"home_team": {"name_eng":"France","name":"Prantsusmaa","code":"fra","group":"C","imgSrc":"/teams/flags/fra.png"}}})
+db.fixtures.update({"group":"L16", "away_team":"D2"}, {$set: {"away_team": {"name_eng":"Argentina","name":"Argentiina","code":"arg","group":"D","imgSrc":"/teams/flags/arg.png"}}})
+
+db.fixtures.update({"group":"L16", "home_team":"D1"}, {$set: {"home_team": {"name_eng":"Croatia","name":"Horvaatia","code":"cro","group":"D","imgSrc":"/teams/flags/cro.png"}}})
+db.fixtures.update({"group":"L16", "away_team":"C2"}, {$set: {"away_team": {"name_eng":"Denmark","name":"Taani","code":"den","group":"C","imgSrc":"/teams/flags/den.png"}}})
+
+db.fixtures.update({"group":"L16", "home_team":"E1"}, {$set: {"home_team":   }})
+db.fixtures.update({"group":"L16", "away_team":"F2"}, {$set: {"away_team":   }})
+
+db.fixtures.update({"group":"L16", "home_team":"F1"}, {$set: {"home_team":   }})
+db.fixtures.update({"group":"L16", "away_team":"E2"}, {$set: {"away_team":   }})
+
+db.fixtures.update({"group":"L16", "home_team":"G1"}, {$set: {"home_team":   }})
+db.fixtures.update({"group":"L16", "away_team":"H2"}, {$set: {"away_team":   }})
+
+db.fixtures.update({"group":"L16", "home_team":"H1"}, {$set: {"home_team":   }})
+db.fixtures.update({"group":"L16", "away_team":"G2"}, {$set: {"away_team":   }})
+
+// Quarter finals
+
+"Q1":{}
+"Q2":{}
+"Q3":{}
+"Q4":{}
+"Q5":{}
+"Q6":{}
+"Q7":{}
+"Q8":{}
+
+// Semi finals
+
+"S1":{}
+"S2":{}
+"S3":{}
+"S4":{}
+
+// Final
+
+"W1":{}
+"W2":{}
+
+// 3rd place match
+
+"L1":{}
+"L2":{}

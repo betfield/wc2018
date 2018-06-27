@@ -285,8 +285,17 @@ export default class PredictionList extends Component {
 
             if (['I','II','III'].indexOf(group) > -1) {
                 filteredPredictions = fixtures.filter(fixture => fixture.roundRoman === group);
-            } else if (['A','B','C','D','E','F','G','H'].indexOf(group) > -1) {
+            } else if (['A','B','C','D','E','F','G','H', 'L16', 'QF', 'SF'].indexOf(group) > -1) {
                 filteredPredictions = fixtures.filter(fixture => fixture.group === group);
+            } else if (group === 'FI') {
+                    filteredPredictions = fixtures.filter(fixture => fixture.roundRoman === 'VII');
+            } else if (group === 'All') {
+                filteredPredictions = fixtures.filter(fixture => {
+                    return (
+                        fixture.roundRoman === 'IV' || fixture.roundRoman === 'V' ||
+                        fixture.roundRoman === 'VI' || fixture.roundRoman === 'VII'
+                    )
+                });
             }
 
             //If not Adminstrator then attach user's prediction to the Fixture
@@ -316,6 +325,11 @@ export default class PredictionList extends Component {
             }
         }
         
+        // Order by date
+        filteredPredictions.sort(function(a,b){
+            return new Date(a.ts) - new Date(b.ts);
+        });
+
         return filteredPredictions;
     }
 
@@ -439,11 +453,11 @@ export default class PredictionList extends Component {
                         <input id="fixture-id" type="hidden" value={cell.id}/>
                         <div className="bf-table-small col-xs-6">
                             <img src={vs.homeFlag}/>
-                            <NumericInput id="home-score" min={0} max={99} value={cell.homeGoals} className="input-no-spinner form-control" size={2}/>
+                            <NumericInput id="home-score" min={0} max={99} value={cell.homeGoals} className="input-no-spinner" size={2}/>
                         </div>
                         <div className="bf-table-small col-xs-6">
                             <img src={vs.awayFlag}/>
-                            <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner form-control" size={2}/>
+                            <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2}/>
                         </div>
                     </div>     
                 </div>

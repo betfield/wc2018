@@ -10,7 +10,7 @@ export default class PredictionsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            groupSelected: 'A'
+            groupSelected: 'All'
         };
         this.domNode = document.createElement('div');
     }
@@ -21,7 +21,7 @@ export default class PredictionsPage extends Component {
 
     renderFilter() {
         return ReactDOM.createPortal(
-            <Filter filter="group" selectGroup={this.selectGroup}/>,
+            <Filter filter="finals" selectGroup={this.selectGroup}/>,
             this.domNode
         )
     }
