@@ -10,7 +10,7 @@ export default class PredictionsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            groupSelected: 'All'
+            groupSelected: 'III'
         };
         this.domNode = document.createElement('div');
     }
