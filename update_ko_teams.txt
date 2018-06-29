@@ -17,14 +17,14 @@
 "C2":{"name_eng":"Denmark","name":"Taani","code":"den","group":"C","imgSrc":"/teams/flags/den.png"}
 "D1":{"name_eng":"Croatia","name":"Horvaatia","code":"cro","group":"D","imgSrc":"/teams/flags/cro.png"}
 "D2":{"name_eng":"Argentina","name":"Argentiina","code":"arg","group":"D","imgSrc":"/teams/flags/arg.png"}
-"E1":
-"E2":
-"F1":
-"F2":
-"G1":
-"G2":
-"H1":
-"H2":
+"E1":{"name_eng":"Brazil","name":"Brasiilia","code":"bra","group":"E","imgSrc":"/teams/flags/bra.png"}
+"E2":{"name_eng":"Switzerland","name":"Šveits","code":"sui","group":"E","imgSrc":"/teams/flags/sui.png"}
+"F1":{"name_eng":"Sweden","name":"Rootsi","code":"swe","group":"F","imgSrc":"/teams/flags/swe.png"}
+"F2":{"name_eng":"Mexico","name":"Mehhiko","code":"mex","group":"F","imgSrc":"/teams/flags/mex.png"}
+"G1":{"name_eng":"Belgium","name":"Belgia","code":"bel","group":"G","imgSrc":"/teams/flags/bel.png"}
+"G2":{"name_eng":"England","name":"Inglismaa","code":"eng","group":"G","imgSrc":"/teams/flags/eng.png"}
+"H1":{"name_eng":"Colombia","name":"Kolumbia","code":"col","group":"H","imgSrc":"/teams/flags/col.png"}
+"H2":{"name_eng":"Japan","name":"Jaapan","code":"jpn","group":"H","imgSrc":"/teams/flags/jpn.png"}
 
 db.fixtures.update({"group":"L16", "home_team":"A1"}, {$set: {"home_team": {"name_eng":"Uruguay","name":"Uruguai","code":"uru","group":"A","imgSrc":"/teams/flags/uru.png"}}})
 db.fixtures.update({"group":"L16", "away_team":"B2"}, {$set: {"away_team": {"name_eng":"Portugal","name":"Portugal","code":"por","group":"B","imgSrc":"/teams/flags/por.png"}}})
@@ -38,17 +38,17 @@ db.fixtures.update({"group":"L16", "away_team":"D2"}, {$set: {"away_team": {"nam
 db.fixtures.update({"group":"L16", "home_team":"D1"}, {$set: {"home_team": {"name_eng":"Croatia","name":"Horvaatia","code":"cro","group":"D","imgSrc":"/teams/flags/cro.png"}}})
 db.fixtures.update({"group":"L16", "away_team":"C2"}, {$set: {"away_team": {"name_eng":"Denmark","name":"Taani","code":"den","group":"C","imgSrc":"/teams/flags/den.png"}}})
 
-db.fixtures.update({"group":"L16", "home_team":"E1"}, {$set: {"home_team":   }})
-db.fixtures.update({"group":"L16", "away_team":"F2"}, {$set: {"away_team":   }})
+db.fixtures.update({"group":"L16", "home_team":"E1"}, {$set: {"home_team": {"name_eng":"Brazil","name":"Brasiilia","code":"bra","group":"E","imgSrc":"/teams/flags/bra.png"}}})
+db.fixtures.update({"group":"L16", "away_team":"F2"}, {$set: {"away_team": {"name_eng":"Mexico","name":"Mehhiko","code":"mex","group":"F","imgSrc":"/teams/flags/mex.png"}}})
 
-db.fixtures.update({"group":"L16", "home_team":"F1"}, {$set: {"home_team":   }})
-db.fixtures.update({"group":"L16", "away_team":"E2"}, {$set: {"away_team":   }})
+db.fixtures.update({"group":"L16", "home_team":"F1"}, {$set: {"home_team": {"name_eng":"Sweden","name":"Rootsi","code":"swe","group":"F","imgSrc":"/teams/flags/swe.png"}}})
+db.fixtures.update({"group":"L16", "away_team":"E2"}, {$set: {"away_team": {"name_eng":"Switzerland","name":"Šveits","code":"sui","group":"E","imgSrc":"/teams/flags/sui.png"}}})
 
-db.fixtures.update({"group":"L16", "home_team":"G1"}, {$set: {"home_team":   }})
-db.fixtures.update({"group":"L16", "away_team":"H2"}, {$set: {"away_team":   }})
+db.fixtures.update({"group":"L16", "home_team":"G1"}, {$set: {"home_team": {"name_eng":"Belgium","name":"Belgia","code":"bel","group":"G","imgSrc":"/teams/flags/bel.png"}}})
+db.fixtures.update({"group":"L16", "away_team":"H2"}, {$set: {"away_team": {"name_eng":"Japan","name":"Jaapan","code":"jpn","group":"H","imgSrc":"/teams/flags/jpn.png"}}})
 
-db.fixtures.update({"group":"L16", "home_team":"H1"}, {$set: {"home_team":   }})
-db.fixtures.update({"group":"L16", "away_team":"G2"}, {$set: {"away_team":   }})
+db.fixtures.update({"group":"L16", "home_team":"H1"}, {$set: {"home_team": {"name_eng":"Colombia","name":"Kolumbia","code":"col","group":"H","imgSrc":"/teams/flags/col.png"}}})
+db.fixtures.update({"group":"L16", "away_team":"G2"}, {$set: {"away_team": {"name_eng":"England","name":"Inglismaa","code":"eng","group":"G","imgSrc":"/teams/flags/eng.png"}}})
 
 // Quarter finals
 

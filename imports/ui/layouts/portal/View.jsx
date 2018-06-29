@@ -10,7 +10,7 @@ export default class View extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            groupSelected: 'A'
+            groupSelected: 'All'
         };
     }
 
