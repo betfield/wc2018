@@ -52,14 +52,26 @@ db.fixtures.update({"group":"L16", "away_team":"G2"}, {$set: {"away_team": {"nam
 
 // Quarter finals
 
-"Q1":{}
-"Q2":{}
+"Q1":{"name_eng":"Uruguay","name":"Uruguai","code":"uru","group":"A","imgSrc":"/teams/flags/uru.png"}
+"Q2":{"name_eng":"France","name":"Prantsusmaa","code":"fra","group":"C","imgSrc":"/teams/flags/fra.png"}
 "Q3":{}
 "Q4":{}
 "Q5":{}
 "Q6":{}
-"Q7":{}
-"Q8":{}
+"Q7":{"name_eng":"Russia","name":"Venemaa","code":"rus","group":"A","imgSrc":"/teams/flags/rus.png"}
+"Q8":{"name_eng":"Croatia","name":"Horvaatia","code":"cro","group":"D","imgSrc":"/teams/flags/cro.png"}
+
+db.fixtures.update({"group":"QF", "home_team":"Q1"}, {$set: {"home_team": {"name_eng":"Uruguay","name":"Uruguai","code":"uru","group":"A","imgSrc":"/teams/flags/uru.png"}}})
+db.fixtures.update({"group":"QF", "away_team":"Q2"}, {$set: {"away_team": {"name_eng":"France","name":"Prantsusmaa","code":"fra","group":"C","imgSrc":"/teams/flags/fra.png"}}})
+
+db.fixtures.update({"group":"QF", "home_team":"Q3"}, {$set: {"home_team": }})
+db.fixtures.update({"group":"QF", "away_team":"Q4"}, {$set: {"away_team": }})
+
+db.fixtures.update({"group":"QF", "home_team":"Q5"}, {$set: {"home_team": }})
+db.fixtures.update({"group":"QF", "away_team":"Q6"}, {$set: {"away_team": }})
+
+db.fixtures.update({"group":"QF", "home_team":"Q7"}, {$set: {"home_team": {"name_eng":"Russia","name":"Venemaa","code":"rus","group":"A","imgSrc":"/teams/flags/rus.png"}}})
+db.fixtures.update({"group":"QF", "away_team":"Q8"}, {$set: {"away_team": {"name_eng":"Croatia","name":"Horvaatia","code":"cro","group":"D","imgSrc":"/teams/flags/cro.png"}}})
 
 // Semi finals
 

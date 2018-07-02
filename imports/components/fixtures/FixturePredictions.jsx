@@ -1,30 +1,8 @@
 import React, { Component } from 'react';
 
-import BootstrapTable from 'react-bootstrap-table-next';
+import Table from '../../ui/layouts/portal/table/Table';
 
 export default class FixturesPredictions extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            columnHeaders: this.getTableHeaders()
-        }
-    }
-
-    componentDidMount() {
-        window.addEventListener("resize", this.resizeTable);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.resizeTable);
-    }
-
-    resizeTable = () => {
-        this.setState({
-            columnHeaders: this.getTableHeaders()
-        });
-    }
 
     formatPredictionsData = (data, users) => {
         let predictionsData = [];
@@ -166,93 +144,53 @@ export default class FixturesPredictions extends Component {
     }
 
     getTableHeaders = () => {
-        let columnHeaders = [];
+        let columnHeaders = [
+            {
+                text: '',
+                dataField: 'user',
+                headerAlign: 'center',
+                formatter: this.imageFormatter
+            }, 
+            {
+                text: 'Kasutaja',
+                dataField: 'user.name',
+                sort: true,
+                headerAlign: 'center',
+            }, 
+            {
+                text: 'Ennustus',
+                dataField: 'result',
+                sort: false,
+                headerAlign: 'center',
+                formatter: this.resultFormatter
+            },
+            {
+                text: 'Punktid',
+                dataField: 'result.userPoints',
+                sort: true,
+                headerAlign: 'center',
+                formatter: this.pointsFormatter
+            }
+        ];;
         
         if ($(window).width() < 501) {
-            columnHeaders = [
-                {
-                    text: '',
-                    dataField: 'user',
-                    headerAlign: 'center',
-                    formatter: this.imageFormatter
-                }, 
-                {
-                    text: 'Kasutaja',
-                    dataField: 'user.name',
-                    sort: true,
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Ennustus',
-                    dataField: 'result',
-                    sort: false,
-                    headerAlign: 'center',
-                    formatter: this.resultFormatter
-                },
-                {
-                    text: 'Punktid',
-                    dataField: 'result.userPoints',
-                    sort: true,
-                    headerAlign: 'center',
-                    formatter: this.pointsFormatter
-                }
-            ];
-        } else {
-            columnHeaders = [
-                {
-                    text: '',
-                    dataField: 'user',
-                    headerAlign: 'center',
-                    formatter: this.imageFormatter
-                }, 
-                {
-                    text: 'Kasutaja',
-                    dataField: 'user.name',
-                    sort: true,
-                    headerAlign: 'center',
-                }, 
-                {
-                    text: 'Ennustus',
-                    dataField: 'result',
-                    sort: false,
-                    headerAlign: 'center',
-                    formatter: this.resultFormatter
-                },
-                {
-                    text: 'Punktid',
-                    dataField: 'result.userPoints',
-                    sort: true,
-                    headerAlign: 'center',
-                    formatter: this.pointsFormatter
-                }
-            ];
-        }
+            columnHeaders[1].hidden = true; 
+        } 
 
         return columnHeaders;
     }
 
     render() {
 
-        const data = this.formatPredictionsData(this.props.predictions, this.props.users);
-        const keyField='user.id' 
-    
         return (
             <div>
                 { this.getFixtureDetails(this.props.fixture) }
                 <br/>
-                <div className='bf-table-header'></div>
-                <div className='bf-table'>
-                    <BootstrapTable 
-                        keyField= {keyField} 
-                        data={ data } 
-                        columns={ this.state.columnHeaders }
-                        bordered={ true }
-                        striped
-                        hover
-                        condensed
-                    />
-                </div>
+                <Table 
+                    data={this.formatPredictionsData(this.props.predictions, this.props.users)}
+                    keyField={'user.id'}
+                    getTableHeaders={this.getTableHeaders}
+                />
             </div>
         )
     }

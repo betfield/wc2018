@@ -1,274 +1,79 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 
-import BootstrapTable from 'react-bootstrap-table-next';
+import Table from '../../ui/layouts/portal/table/Table';
 
 import NumericInput from 'react-numeric-input';
 
 export default class PredictionList extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            columnHeaders: this.getTableHeaders()
-        }
-    }
-
-    componentDidMount() {
-        window.addEventListener("resize", this.resizeTable);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.resizeTable);
-    }
-
-    resizeTable = () => {
-        this.setState({
-            columnHeaders: this.getTableHeaders()
-        });
-    }
-
     getTableHeaders = () => {
-        let columnHeaders = [];
+        let columnHeaders = [
+            {
+                text: 'Aeg',
+                dataField: 'time',
+                sort: false,
+                headerAlign: 'center'
+            }, 
+            {
+                text: 'Kodu',
+                dataField: 'homeTeam',
+                headerAlign: 'center',
+            }, 
+            {
+                text: '',
+                dataField: 'vs',
+                headerAlign: 'center',
+                formatter: this.vsFormatter
+            }, 
+            {
+                text: 'Võõrsil',
+                dataField: 'awayTeam',
+                headerAlign: 'center'
+            }, 
+            {
+                text: 'Grupp',
+                dataField: 'group',
+                sort: false,
+                headerAlign: 'center'
+            }, 
+            {
+                text: 'Voor',
+                dataField: 'round',
+                sort: false,
+                headerAlign: 'center'
+            }, 
+            {
+                text: 'Tulemus',
+                dataField: 'result',
+                sort: false,
+                headerAlign: 'center',
+                formatter: this.resultFormatter
+            }
+        ];;
         
         if ($(window).width() < 501) {
-            columnHeaders = [ 
-                {
-                    text: 'Aeg',
-                    dataField: 'time',
-                    sort: false,
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Kodu',
-                    dataField: 'homeTeam',
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: '',
-                    dataField: 'vs',
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Võõrsil',
-                    dataField: 'awayTeam',
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Grupp',
-                    dataField: 'group',
-                    sort: false,
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Voor',
-                    dataField: 'round',
-                    sort: false,
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Tulemus',
-                    dataField: 'result',
-                    sort: false,
-                    headerAlign: 'center',
-                    formatter: this.resultFormatterSmall
-                }
-            ];
+            columnHeaders[0].hidden = true; 
+            columnHeaders[1].hidden = true; 
+            columnHeaders[2].hidden = true; 
+            columnHeaders[3].hidden = true; 
+            columnHeaders[4].hidden = true; 
+            columnHeaders[5].hidden = true; 
+            columnHeaders[6].formatter = this.resultFormatterSmall; 
         } else if ($(window).width() < 640) {
-            columnHeaders = [ 
-                {
-                    text: 'Aeg',
-                    dataField: 'time',
-                    sort: false,
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Kodu',
-                    dataField: 'homeTeam',
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: '',
-                    dataField: 'vs',
-                    headerAlign: 'center',
-                    formatter: this.vsFormatter
-                }, 
-                {
-                    text: 'Võõrsil',
-                    dataField: 'awayTeam',
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Grupp',
-                    dataField: 'group',
-                    sort: false,
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Voor',
-                    dataField: 'round',
-                    sort: false,
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Tulemus',
-                    dataField: 'result',
-                    sort: false,
-                    headerAlign: 'center',
-                    formatter: this.resultFormatter
-                }
-            ];
+            columnHeaders[0].hidden = true; 
+            columnHeaders[1].hidden = true; 
+            columnHeaders[3].hidden = true; 
+            columnHeaders[4].hidden = true; 
+            columnHeaders[5].hidden = true; 
         } else if ($(window).width() < 1024) {
-            columnHeaders = [
-                {
-                    text: 'Aeg',
-                    dataField: 'time',
-                    sort: false,
-                    headerAlign: 'center'
-                }, 
-                {
-                    text: 'Kodu',
-                    dataField: 'homeTeam',
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: '',
-                    dataField: 'vs',
-                    headerAlign: 'center',
-                    formatter: this.vsFormatter
-                }, 
-                {
-                    text: 'Võõrsil',
-                    dataField: 'awayTeam',
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Grupp',
-                    dataField: 'group',
-                    sort: false,
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Voor',
-                    dataField: 'round',
-                    sort: false,
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Tulemus',
-                    dataField: 'result',
-                    sort: false,
-                    headerAlign: 'center',
-                    formatter: this.resultFormatter
-                }
-            ];
+            columnHeaders[1].hidden = true; 
+            columnHeaders[3].hidden = true; 
+            columnHeaders[4].hidden = true; 
+            columnHeaders[5].hidden = true; 
         } else if ($(window).width() < 1281) {
-            columnHeaders = [
-                {
-                    text: 'Aeg',
-                    dataField: 'time',
-                    sort: false,
-                    headerAlign: 'center'
-                }, 
-                {
-                    text: 'Kodu',
-                    dataField: 'homeTeam',
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: '',
-                    dataField: 'vs',
-                    headerAlign: 'center',
-                    formatter: this.vsFormatter
-                }, 
-                {
-                    text: 'Võõrsil',
-                    dataField: 'awayTeam',
-                    headerAlign: 'center',
-                    hidden: true
-                }, 
-                {
-                    text: 'Grupp',
-                    dataField: 'group',
-                    sort: false,
-                    headerAlign: 'center'
-                }, 
-                {
-                    text: 'Voor',
-                    dataField: 'round',
-                    sort: false,
-                    headerAlign: 'center'
-                }, 
-                {
-                    text: 'Tulemus',
-                    dataField: 'result',
-                    sort: false,
-                    headerAlign: 'center',
-                    formatter: this.resultFormatter
-                }
-            ];
-        } else {
-            columnHeaders = [
-                {
-                    text: 'Aeg',
-                    dataField: 'time',
-                    sort: false,
-                    headerAlign: 'center'
-                }, 
-                {
-                    text: 'Kodu',
-                    dataField: 'homeTeam',
-                    headerAlign: 'center',
-                }, 
-                {
-                    text: '',
-                    dataField: 'vs',
-                    headerAlign: 'center',
-                    formatter: this.vsFormatter
-                }, 
-                {
-                    text: 'Võõrsil',
-                    dataField: 'awayTeam',
-                    headerAlign: 'center'
-                }, 
-                {
-                    text: 'Grupp',
-                    dataField: 'group',
-                    sort: false,
-                    headerAlign: 'center'
-                }, 
-                {
-                    text: 'Voor',
-                    dataField: 'round',
-                    sort: false,
-                    headerAlign: 'center'
-                }, 
-                {
-                    text: 'Tulemus',
-                    dataField: 'result',
-                    sort: false,
-                    headerAlign: 'center',
-                    formatter: this.resultFormatter
-                }
-            ];
-        }
+            columnHeaders[1].hidden = true; 
+            columnHeaders[3].hidden = true; 
+        } 
 
         return columnHeaders;
     }
@@ -483,14 +288,10 @@ export default class PredictionList extends Component {
         return (
             <div className='bf-table'>
                 <form id="predictions-form" onSubmit={this.handleSubmit}>
-                    <BootstrapTable 
-                        keyField='result.id' 
-                        data={ this.formatPredictionData(this.getPredictionsData(this.props.groupSelected, this.props.currentUser)) } 
-                        columns={ this.state.columnHeaders }
-                        bordered={ true }
-                        striped
-                        hover
-                        condensed
+                    <Table 
+                        data={this.formatPredictionData(this.getPredictionsData(this.props.groupSelected, this.props.currentUser))}
+                        keyField={'result.id'}
+                        getTableHeaders={this.getTableHeaders}
                     />
                     <div className='bf-right'>    
                         <button id="pred-submit" type="submit" className="btn btn-success bf-table-submit">Salvesta</button>
