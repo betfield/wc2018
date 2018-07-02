@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 import Table from '../../ui/layouts/portal/table/Table';
 
@@ -230,9 +231,9 @@ export default class PredictionList extends Component {
             return (
                 <span className="bf-table-score">
                     <input id="fixture-id" type="hidden" value={cell.id}/>
-                    <NumericInput id="home-score" min={0} max={99} value={cell.homeGoals} className="input-no-spinner" size={2}/>
+                    <NumericInput id={"home-score-"+cell.id} min={0} max={99} value={cell.homeGoals} className="input-no-spinner" size={2} onChange={this.scoreChange}/>
                     <span> : </span>
-                    <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2}/>
+                    <NumericInput id={"away-score-"+cell.id} min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2} onChange={this.scoreChange}/>
                 </span>
             );
         } else {
@@ -242,6 +243,16 @@ export default class PredictionList extends Component {
                 </span>
             );
         }
+    }
+
+    /*
+    onChange - Called with valueAsNumber, valueAsString and the input element. 
+    The valueAsNumber represents the internal numeric value while valueAsString 
+    is the same as the input value and might be completely different from the 
+    numeric one if custom formatting is used.
+    */
+    scoreChange = (valueAsNumber, valueAsString, input) => {
+        input.setValue(valueAsNumber);
     }
 
     resultFormatterSmall = (cell, row) => {
@@ -258,11 +269,11 @@ export default class PredictionList extends Component {
                         <input id="fixture-id" type="hidden" value={cell.id}/>
                         <div className="bf-table-small col-xs-6">
                             <img src={vs.homeFlag}/>
-                            <NumericInput id="home-score" min={0} max={99} value={cell.homeGoals} className="input-no-spinner" size={2}/>
+                            <NumericInput id={"home-score-"+cell.id} min={0} max={99} value={cell.homeGoals} className="input-no-spinner" size={2} onChange={this.scoreChange}/>
                         </div>
                         <div className="bf-table-small col-xs-6">
                             <img src={vs.awayFlag}/>
-                            <NumericInput id="away-score" min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2}/>
+                            <NumericInput id={"away-score-"+cell.id} min={0} max={99} value={cell.awayGoals} className="input-no-spinner" size={2} onChange={this.scoreChange}/>
                         </div>
                     </div>     
                 </div>
@@ -284,7 +295,6 @@ export default class PredictionList extends Component {
     }
 
     render() {
-
         return (
             <div className='bf-table'>
                 <form id="predictions-form" onSubmit={this.handleSubmit}>
