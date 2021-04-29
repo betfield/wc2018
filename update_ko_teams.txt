@@ -54,38 +54,55 @@ db.fixtures.update({"group":"L16", "away_team":"G2"}, {$set: {"away_team": {"nam
 
 "Q1":{"name_eng":"Uruguay","name":"Uruguai","code":"uru","group":"A","imgSrc":"/teams/flags/uru.png"}
 "Q2":{"name_eng":"France","name":"Prantsusmaa","code":"fra","group":"C","imgSrc":"/teams/flags/fra.png"}
-"Q3":{}
-"Q4":{}
-"Q5":{}
-"Q6":{}
+"Q3":{"name_eng":"Brazil","name":"Brasiilia","code":"bra","group":"E","imgSrc":"/teams/flags/bra.png"}
+"Q4":{"name_eng":"Belgium","name":"Belgia","code":"bel","group":"G","imgSrc":"/teams/flags/bel.png"}
+"Q5":{"name_eng":"Sweden","name":"Rootsi","code":"swe","group":"F","imgSrc":"/teams/flags/swe.png"}
+"Q6":{"name_eng":"England","name":"Inglismaa","code":"eng","group":"G","imgSrc":"/teams/flags/eng.png"}
 "Q7":{"name_eng":"Russia","name":"Venemaa","code":"rus","group":"A","imgSrc":"/teams/flags/rus.png"}
 "Q8":{"name_eng":"Croatia","name":"Horvaatia","code":"cro","group":"D","imgSrc":"/teams/flags/cro.png"}
 
 db.fixtures.update({"group":"QF", "home_team":"Q1"}, {$set: {"home_team": {"name_eng":"Uruguay","name":"Uruguai","code":"uru","group":"A","imgSrc":"/teams/flags/uru.png"}}})
 db.fixtures.update({"group":"QF", "away_team":"Q2"}, {$set: {"away_team": {"name_eng":"France","name":"Prantsusmaa","code":"fra","group":"C","imgSrc":"/teams/flags/fra.png"}}})
 
-db.fixtures.update({"group":"QF", "home_team":"Q3"}, {$set: {"home_team": }})
-db.fixtures.update({"group":"QF", "away_team":"Q4"}, {$set: {"away_team": }})
+db.fixtures.update({"group":"QF", "home_team":"Q3"}, {$set: {"home_team": {"name_eng":"Brazil","name":"Brasiilia","code":"bra","group":"E","imgSrc":"/teams/flags/bra.png"}}})
+db.fixtures.update({"group":"QF", "away_team":"Q4"}, {$set: {"away_team": {"name_eng":"Belgium","name":"Belgia","code":"bel","group":"G","imgSrc":"/teams/flags/bel.png"}}})
 
-db.fixtures.update({"group":"QF", "home_team":"Q5"}, {$set: {"home_team": }})
-db.fixtures.update({"group":"QF", "away_team":"Q6"}, {$set: {"away_team": }})
+db.fixtures.update({"group":"QF", "home_team":"Q5"}, {$set: {"home_team": {"name_eng":"Sweden","name":"Rootsi","code":"swe","group":"F","imgSrc":"/teams/flags/swe.png"}}})
+db.fixtures.update({"group":"QF", "away_team":"Q6"}, {$set: {"away_team": {"name_eng":"England","name":"Inglismaa","code":"eng","group":"G","imgSrc":"/teams/flags/eng.png"}}})
 
 db.fixtures.update({"group":"QF", "home_team":"Q7"}, {$set: {"home_team": {"name_eng":"Russia","name":"Venemaa","code":"rus","group":"A","imgSrc":"/teams/flags/rus.png"}}})
 db.fixtures.update({"group":"QF", "away_team":"Q8"}, {$set: {"away_team": {"name_eng":"Croatia","name":"Horvaatia","code":"cro","group":"D","imgSrc":"/teams/flags/cro.png"}}})
 
 // Semi finals
 
-"S1":{}
-"S2":{}
-"S3":{}
-"S4":{}
+"S1":{"name_eng":"France","name":"Prantsusmaa","code":"fra","group":"C","imgSrc":"/teams/flags/fra.png"}
+
+"S2":{"name_eng":"Belgium","name":"Belgia","code":"bel","group":"G","imgSrc":"/teams/flags/bel.png"}
+
+"S4":{"name_eng":"England","name":"Inglismaa","code":"eng","group":"G","imgSrc":"/teams/flags/eng.png"}
+
+"S3":{"name_eng":"Russia","name":"Venemaa","code":"rus","group":"A","imgSrc":"/teams/flags/rus.png"}
+"S3":{"name_eng":"Croatia","name":"Horvaatia","code":"cro","group":"D","imgSrc":"/teams/flags/cro.png"}
+
+db.fixtures.update({"group":"SF", "home_team":"S1"}, {$set: {"home_team": {"name_eng":"France","name":"Prantsusmaa","code":"fra","group":"C","imgSrc":"/teams/flags/fra.png"}}})
+db.fixtures.update({"group":"SF", "away_team":"S2"}, {$set: {"away_team": {"name_eng":"Belgium","name":"Belgia","code":"bel","group":"G","imgSrc":"/teams/flags/bel.png"}}})
+
+db.fixtures.update({"group":"SF", "home_team":"S3"}, {$set: {"home_team": {"name_eng":"Croatia","name":"Horvaatia","code":"cro","group":"D","imgSrc":"/teams/flags/cro.png"}}})
+db.fixtures.update({"group":"SF", "away_team":"S4"}, {$set: {"away_team": {"name_eng":"England","name":"Inglismaa","code":"eng","group":"G","imgSrc":"/teams/flags/eng.png"}}})
 
 // Final
 
-"W1":{}
-"W2":{}
+"W1":{"name_eng":"France","name":"Prantsusmaa","code":"fra","group":"C","imgSrc":"/teams/flags/fra.png"}
+"W1":{"name_eng":"Belgium","name":"Belgia","code":"bel","group":"G","imgSrc":"/teams/flags/bel.png"}
+
+"W2":{"name_eng":"Croatia","name":"Horvaatia","code":"cro","group":"D","imgSrc":"/teams/flags/cro.png"}
+"W2":{"name_eng":"England","name":"Inglismaa","code":"eng","group":"G","imgSrc":"/teams/flags/eng.png"}
+
+db.fixtures.update({"group":"FI", "home_team":"W1"}, {$set: {"home_team": }})
+db.fixtures.update({"group":"FI", "away_team":"W2"}, {$set: {"away_team": }})
 
 // 3rd place match
 
-"L1":{}
-"L2":{}
+db.fixtures.update({"group":"3RD", "home_team":"L1"}, {$set: {"home_team": }})
+db.fixtures.update({"group":"3RD", "away_team":"L2"}, {$set: {"away_team": }})
+
